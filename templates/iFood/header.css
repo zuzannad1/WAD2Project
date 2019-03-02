@@ -1,0 +1,105 @@
+			* {
+			  box-sizing: border-box;
+			}
+			
+			body {
+			  margin: 0;
+			}
+			
+			.header {
+			  background-color: #333;
+			  padding: 0px;
+			  text-align: center;
+			  font-size: 40px;
+			  overflow: hidden;
+			}
+			
+			.header a {
+			  float: right;
+			  display: block;
+			  color: #f2f2f2;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+			}
+			.header b {
+			  float: left;
+			  display: block;
+			  color: #f2f2f2;
+			  text-align: center;
+			  padding: 12px 14px;
+			  text-decoration: none;
+			}
+			
+			.footer {
+			  background-color: #f1f1f1;
+			  padding: 10px;
+			  text-align: left;
+			  font-size: 20px;
+			  overflow: hidden;
+			}
+			
+		    .footer a {
+			  float: left;
+			  text-align: center;
+			  padding: 14px 16px;
+			  text-decoration: none;
+
+			}
+			
+			.button {
+			  display: inline-block;
+			  border-radius: 4px;
+			  background-color: #FFEFD5;
+			  border: none;
+			  color: #000000;
+			  text-align: center;
+			  font-size: 20px;
+			  padding: 5px;
+			  width: 125px;
+			  transition: all 0.5s;
+			  cursor: pointer;
+			  margin: 5px;
+			}
+			
+			.button span {
+			  cursor: pointer;
+			  display: inline-block;
+			  position: relative;
+			  transition: 0.3s;
+			}
+			
+			.button span:after {
+			  content: '\00bb';
+			  position: absolute;
+			  opacity: 0;
+			  top: 0;
+			  right: -20px;
+			  transition: 0.5s;
+			}
+			
+			.button:hover span {
+			  padding-right: 15px;
+			}
+			
+			.button:hover span:after {
+			  opacity: 1;
+			  right: 0;
+			}
+			.column {
+			  float: left;
+			  width: 33.33%;
+			  padding: 335px;
+			}
+			
+			.row:after {
+			  content: "";
+			  display: table;
+			  clear: both;
+			}
+			
+			@media screen and (max-width:600px) {
+			  .column {
+			    width: 100%;
+			  }
+			}
