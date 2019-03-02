@@ -16,3 +16,7 @@ def about(request):
    context_dict = {'boldmessage' : "Welcome "}
    response = render(request, 'iFood/about.html',context = context_dict)
    return response
+   
+def signup(request):
+    response = render(request, 'iFood/signup.html',{})
+    return response
