@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date
+from django.conf import settings
+import datetime
+
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -10,15 +12,13 @@ class Restaurant(models.Model):
 	
 	
 class UserProfile(models.Model):
-        user = models.OneToOneField(User)
-        fullname = models.CharField(max_length = 50, unique = True, blank = False)
-        username = models.CharField(max_length = 30, unique = True, blank = False)
-        address = models.CharField(max_length = 128)
-        facebook = models.URLField(blank = True)
-        twitter = models.URLField(blank = True)
+        user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
+        address = models.CharField(max_length = 128, blank = True)
+        facebook = models.URLField(default ='', blank = True)
+        twitter = models.URLField(default = '', blank = True)
         def __str__(self):
-                return self.user.username	
-	
+                return self.user.username
+
 class Dishes(models.Model):
         name = models.CharField(max_length = 128, unique=True)
         restaurant  = models.ForeignKey(Restaurant, null=True, related_name='dishes')
@@ -34,7 +34,7 @@ class Dishes(models.Model):
 class Feedback(models.Model):
 	comment    = models.TextField(blank=True, null=True)
 	user       = models.ForeignKey(User, default=1)
-	created_at = models.DateField(default=date.today)
+	created_at = models.DateField(default=datetime.date.today())
 	restaurant = models.ForeignKey(Restaurant)
 	def __str__(self):
                 return self.name

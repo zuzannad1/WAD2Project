@@ -12,10 +12,12 @@ iFood
 		    {% else %}
 		        <h1>Register Here</h1>
 		        <h3>Just fill out the form.</h3>
-		        <form enctype="multipart/form-data" method="POST">
+                <form id="user_form" method="post" action="{% url 'signup' %}"
+                    16 enctype="multipart/form-data">
 		            {% csrf_token %}
-		            {{ form.as_p }}
-		            <input type="submit" name="" value="Register">
+		            {{ user_form.as_p }}
+                    {{profile_form.as_p}}
+		            <input type="submit" name="" value="Sign me up!">
 		        </form>
 	        {% endif %}
 	    </div>

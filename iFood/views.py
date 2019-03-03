@@ -1,15 +1,13 @@
 from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserProfiles, UpdateProfile
+from iFood.forms import UserForm, UserProfileForm
 from django.contrib import messages
 from django.shortcuts import render
-
 from django.shortcuts import render_to_response
 
 def index(request):
@@ -22,36 +20,35 @@ def about(request):
    response = render(request, 'iFood/about.html',context = context_dict)
    return response
 
-
 def signup(request):
-    registered = False
-    if request.method == 'POST':
-        form = UserProfiles(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.set_password(user.password)            
-            user.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            fullname = form.cleaned_data['fullname']
-            email = form.cleaned_data['email']
-            address = form.cleaned_data['address']
-            if request.user.is_authenticated():
-               instance.user.add(request.user)
-            # change it to redirect to login
-            # and authenticate when login template
-            # is ready
-            registered = True
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            HttpResponseRedirect(form.errors)
-    else:
-        form = UserProfiles()
+   registered = False
+   if request.method == 'POST':
+      user_form = UserForm(data=request.POST)
+      profile_form = UserProfileForm(data=request.POST)
+      if user_form.is_valid() and profile_form.is_valid():
+         user = user_form.save()
+         user.set_password(user.password)
+         user.save()
+         profile = profile_form.save(commit=False)
+         profile.user = user
+         profile.save()
+         registered = True
+      else:
+         print(user_form.errors, profile_form.errors)
 
-    context = {'form': form,'registered':registered}
+   else:
+      user_form = UserForm()
+      profile_form = UserProfileForm()
+      
+   return render(request, 'iFood/signup.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form,
+                   'registered': registered})
 
-    return render(request, 'iFood/signup.html', context)
-
+@login_required
+def view_foo(request):
+    url = request.user.profile.url
+    
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -108,6 +105,3 @@ def web_feedback(request):
 
 def contact(request):
     return render(request, 'iFood/contact.html',{})
-
-
-

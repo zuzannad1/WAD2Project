@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'iFood',
+    'reset_migrations',
 
 
 ]
@@ -116,6 +117,7 @@ PASSWORD_HASHERS = [
 
 REGISTRATION_OPEN=True
 LOGIN_REDIRECT_URL = '/iFood/'
+AUTH_PROFILE_MODULE = "iFood.UserProfile"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
