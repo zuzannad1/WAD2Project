@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'iFood',
-    'registration',
+
 ]
 
 MIDDLEWARE = [
@@ -115,6 +115,7 @@ PASSWORD_HASHERS = [
 
 REGISTRATION_OPEN=True
 LOGIN_REDIRECT_URL = '/iFood/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -140,6 +141,6 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'iFood/login/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
