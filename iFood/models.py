@@ -10,11 +10,9 @@ class Restaurant(models.Model):
 	
 	
 class UserProfile(models.Model):
-        user = models.OneToOneField(User, blank = False)
+        user = models.OneToOneField(User)
         fullname = models.CharField(max_length = 50, unique = True, blank = False)
         username = models.CharField(max_length = 30, unique = True, blank = False)
-        password = models.CharField(max_length = 20, unique = True, blank = False)
-        email = models.CharField(max_length = 128, unique = True)
         address = models.CharField(max_length = 128)
         facebook = models.URLField(blank = True)
         twitter = models.URLField(blank = True)

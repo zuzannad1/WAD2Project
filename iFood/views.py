@@ -24,26 +24,31 @@ def about(request):
 
 
 def signup(request):
+    registered = False
     if request.method == 'POST':
         form = UserProfiles(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.set_password(user.password)            
+            user.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             fullname = form.cleaned_data['fullname']
             email = form.cleaned_data['email']
             address = form.cleaned_data['address']
-            form.save()
             if request.user.is_authenticated():
                instance.user.add(request.user)
             # change it to redirect to login
             # and authenticate when login template
             # is ready
+            registered = True
             return HttpResponseRedirect(reverse('index'))
+        else:
+            HttpResponseRedirect(form.errors)
     else:
         form = UserProfiles()
 
-    context = {'form': form}
+    context = {'form': form,'registered':registered}
 
     return render(request, 'iFood/signup.html', context)
 
@@ -98,9 +103,11 @@ def delete_user(request, username):
 
 @login_required
 def web_feedback(request):
-   pass
+    return render(request, 'iFood/web-feedback.html',{})
+
 
 def contact(request):
-   pass
+    return render(request, 'iFood/contact.html',{})
+
 
 
