@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from iFood.forms import UserProfile
+from django.contrib import messages
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -57,8 +58,8 @@ def user_login(request):
             else:
                 return HttpResponse("Your account has been disabled!")
         else:
-            print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
+            messages.info(request,'Invalid login details supplied. Please try again or sign up.')
+            return HttpResponseRedirect(reverse('login'))
     else:
         return render(request, 'iFood/login.html', {})
 
@@ -67,4 +68,19 @@ def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
+@login_required     
+def web_feedback(request):
+   context_dict = {}
+   response = render(request, 'iFood/web-feedback.html',context = context_dict)
+   return response
+   
+def contact(request):
+   context_dict = {}
+   response = render(request, 'iFood/contact.html',context = context_dict)
+   return response
 
+@login_required     
+def account(request):
+   context_dict = {}
+   response = render(request, 'iFood/user-account.html',context = context_dict)
+   return response

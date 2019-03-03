@@ -6,18 +6,26 @@
 {% endblock %}
 
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Login here :</h1>
-      	
-<form id="login_form" method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-<label for="password">Password:</label>
-          <input type="password" name="password" placeholder="Password">
-<input type="submit" name="" value="Login">
-</form>
-</div>
-  </div>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Login here :</h1>
+			<form id="login_form" method="post" action="{% url 'login' %}">
+				{% csrf_token %}
+				<label for="username">Username:</label>
+				<input type="text" name="username" placeholder="Username">
+				<label for="password">Password:</label>
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" name="" value="Login">
+				{% if messages %}
+					<ul class="messages">
+						{% for message in messages %}
+							<li class="{{ message.tags }}">
+								{{ message }} 
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</form>
+		</div>
+	</div>
 {% endblock %}

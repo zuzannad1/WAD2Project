@@ -1,0 +1,17 @@
+{% extends 'ifood/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+Account Detail
+{% endblock %} 
+
+
+{%block body_block %}
+	<body>
+		<p>
+		Hello : 
+		<strong>{{ user.username }}</strong>
+		</p>
+	</body>
+{% endblock %} 
