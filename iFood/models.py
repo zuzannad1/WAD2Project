@@ -9,11 +9,11 @@ class Restaurant(models.Model):
 	type    = models.CharField(max_length = 128)
 	
 class UserProfile(models.Model):
-        user = models.OneToOneField(User)
+        user = models.OneToOneField(User, blank = False)
         fullname = models.CharField(max_length = 50, unique = True, blank = False)
-        username = models.CharField(max_length = 30, unique = True)
-        password = models.CharField(max_length = 20, unique = True)
-        email = models.CharField(max_length = 128, unique = True, blank = True)
+        username = models.CharField(max_length = 30, unique = True, blank = False)
+        password = models.CharField(max_length = 20, unique = True, blank = False)
+        email = models.CharField(max_length = 128, unique = True)
         address = models.CharField(max_length = 128)
         facebook = models.URLField(blank = True)
         twitter = models.URLField(blank = True)

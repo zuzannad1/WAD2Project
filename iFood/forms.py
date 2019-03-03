@@ -10,5 +10,7 @@ class UserProfile(forms.ModelForm):
     address = forms.CharField(label = ('Address'), max_length =128)
     
     class Meta:
-        model = UserProfile
+        model = User
         fields = ('username','fullname','password','email','address')
+        
+                      

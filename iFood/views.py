@@ -26,9 +26,16 @@ def signup(request):
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username= username, password=password)
-            login(request, user)
-            return redirect('index')
+            fullname = form.cleaned_data['fullname']
+            email = form.cleaned_data['email']
+            address = form.cleaned_data['address']
+            form.save()
+            if request.user.is_authenticated():
+               instance.user.add(request.user)
+            # change it to redirect to login
+            # and authenticate when login template
+            # is ready
+            return HttpResponseRedirect(reverse('index'))
     else:
         form = UserProfile()
 
