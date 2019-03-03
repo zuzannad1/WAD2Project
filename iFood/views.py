@@ -6,8 +6,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserProfile
+from iFood.forms import UserProfiles, UpdateProfile
 from django.contrib import messages
+from django.shortcuts import render
+
+from django.shortcuts import render_to_response
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -22,7 +25,7 @@ def about(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserProfile(request.POST)
+        form = UserProfiles(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -38,7 +41,7 @@ def signup(request):
             # is ready
             return HttpResponseRedirect(reverse('index'))
     else:
-        form = UserProfile()
+        form = UserProfiles()
 
     context = {'form': form}
 
@@ -68,19 +71,36 @@ def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
-@login_required     
-def web_feedback(request):
-   context_dict = {}
-   response = render(request, 'iFood/web-feedback.html',context = context_dict)
-   return response
-   
-def contact(request):
-   context_dict = {}
-   response = render(request, 'iFood/contact.html',context = context_dict)
-   return response
-
-@login_required     
+@login_required
 def account(request):
-   context_dict = {}
-   response = render(request, 'iFood/user-account.html',context = context_dict)
-   return response
+    if request.method == "POST":
+       form = UpdateProfile(data=request.POST, instance=request.user)
+       if form.is_valid():
+           form.save()
+    else:
+       form = UpdateProfile()
+
+    return render(request, "iFood/user-account.html", {'form':form})
+
+
+@login_required
+def delete_user(request, username):
+    context = {}
+    try:
+        user = User.object.get(username=username)
+        user.is_active = False
+        user.save()
+        context['msg'] = 'Profile successfully disabled.'
+    except Exception as e:
+        context['msg'] = e.message
+
+    return render(request, 'iFood/user-account.html',context=context)
+
+@login_required
+def web_feedback(request):
+   pass
+
+def contact(request):
+   pass
+
+

@@ -3,7 +3,7 @@
 
 
 {% block title_block %}
-Account Detail
+Account Details
 {% endblock %} 
 
 
@@ -12,6 +12,36 @@ Account Detail
 		<p>
 		Hello : 
 		<strong>{{ user.username }}</strong>
+        Edit your User details here!
 		</p>
+        <p>
+        This is your email address: {{user.email}}
+        </p>
+        <p>
+        This is your full name: {{user.fullname}}
+        </p>
+        <p>
+        This is your address: {{user.address}}
+        </p>
+        <p>
+        This is your facebook and twitter handle respectively {{user.facebook}} {{user.twitter}}
+        </p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="" value="Edit and Save">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            
+        </form>
+        
+                
 	</body>
 {% endblock %} 
