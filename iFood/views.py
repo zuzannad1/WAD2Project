@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserForm, UserProfileForm
+from iFood.forms import UserProfile
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -17,36 +17,24 @@ def about(request):
    context_dict = {'boldmessage' : "Welcome "}
    response = render(request, 'iFood/about.html',context = context_dict)
    return response
-   
+
 
 def signup(request):
-   registered = False
-   if request.method == 'POST':
-      user_form = UserForm(data=request.POST)
-      profile_form = UserProfileForm(data=request.POST)
+    if request.method == 'POST':
+        form = UserProfile(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username= username, password=password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserProfile()
 
-      if user_form.is_valid() and profile_form.is_valid():
-         user = user_form.save()
-         user.set_password(user.password)
-         user.save()
+    context = {'form': form}
 
-         profile = profile_form.save(commit=False)
-         profile.user = user
-
-         profile.save()
-
-         registered = True
-
-      else:
-
-         print(user_form.errors, profile_form.errors)
-   else:
-      user_form = UserForm()
-      profile_form = UserProfileForm()
-
-   return render(request,'iFood/signup.html', {'user_form': user_form,
-                   'profile_form': profile_form,
-                   'registered': registered})
+    return render(request, 'iFood/signup.html', context)
 
 def user_login(request):
    if request.method == 'POST':
@@ -67,6 +55,10 @@ def user_login(request):
 
    else:
       return render(request, 'iFood/login.html', {})
-      
+
+@login_required     
+def user_logout(request):
+   logout(request)
+   return HttpResponseRedirect(reverse('index'))
 
 
