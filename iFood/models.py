@@ -8,6 +8,7 @@ class Restaurant(models.Model):
 	address = models.CharField(max_length = 128, unique=True)
 	type    = models.CharField(max_length = 128)
 	
+	
 class UserProfile(models.Model):
         user = models.OneToOneField(User, blank = False)
         fullname = models.CharField(max_length = 50, unique = True, blank = False)
@@ -26,6 +27,9 @@ class Dishes(models.Model):
         mealtype    = models.CharField(max_length = 20, default="None")
         description = models.CharField(max_length = 300)
         price       = models.DecimalField('Pounds amount', max_digits=8, decimal_places=2, blank=True, null=True)
+        class Meta:
+                verbose_name_plural = 'Dishes'
+       
         def __str__(self):
                 return self.name
         
@@ -34,10 +38,19 @@ class Feedback(models.Model):
 	user       = models.ForeignKey(User, default=1)
 	created_at = models.DateField(default=date.today)
 	restaurant = models.ForeignKey(Restaurant)
+	def __str__(self):
+                return self.name
+	class Meta:
+                verbose_name_plural = 'Feedback'
 
 class Orders(models.Model):
 	ordered_dishes = models.CharField(max_length = 150)
 	restaurant     = models.CharField(max_length = 128)
 	user_ID        = models.IntegerField(default = 0)
+	def __str__(self):
+                return self.name
+	class Meta:
+                verbose_name_plural = 'Orders'
+        
 
 

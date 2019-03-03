@@ -126,24 +126,24 @@
     	    <a href="#">
     	    {{ user.username }}
     	    </a>
-    	    <a href="#">
+    	    <a href="{% url 'logout' %}">
     	   		<button class="button" style="vertical-align:middle">
-    	   			<span>Sign Out </span>
+    	   			<span>Sign Out</span>
     	   		</button>
 		  	</a> 
     	   {% else %}
-    	    <a href="/iFood/signup/">
+    	    <a href="{% url 'signup' %}">
     	   		<button class="button" style="vertical-align:middle">
     	   			<span>Sign Up</span>
     	   		</button>
 		  	</a> 
- 		 	<a href="/iFood/login/">
+ 		 	<a href="{% url 'login' %}">
     	   		<button class="button" style="vertical-align:middle">
     	   			<span>Sign In</span>
     	   		</button>
 		  	</a> 
+		  	 {% endif %}
 		  	 <a class="logo" href="{% url 'index' %}">iFood</a>
- 			{% endif %}
  		</div>
  		  <div class="column">
  		    {% block body_block %}
@@ -151,6 +151,6 @@
            </div>
  		</div>
 		<div class = "footer">	
-			<a href="/iFood/about/">About Us</a>			
+			<a href="{% url 'about' %}">About Us</a>			
 		</div>
 </html>
