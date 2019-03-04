@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserForm, UserProfileForm
+from iFood.forms import UserForm, UserProfileForm, UserEditForm
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -44,10 +44,20 @@ def signup(request):
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
-
 @login_required
-def view_foo(request):
-    url = request.user.profile.url
+def edit_profile(request):
+   if request.method == 'POST':
+      useredit = UserProfileForm(data = request.POST, instance = request.user)
+      if useredit.is_valid():
+         useredit.save()
+         messages.info(request, 'This is a debugging message. Saved??')
+         return HttpResponseRedirect(reverse('account'))
+      else:
+         messages.info(request, 'The new details you supplied are invalid. Please try again.')
+         return HttpResponseRedirect(reverse('account'))
+   else:
+      useredit = UserProfileForm(data = request.POST)
+   return render(request, "iFood/user-account.html", {'useredit':useredit})
     
 def user_login(request):
     if request.method == 'POST':
@@ -72,18 +82,6 @@ def user_login(request):
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
-
-@login_required
-def account(request):
-    if request.method == "POST":
-       form = UpdateProfile(data=request.POST, instance=request.user)
-       if form.is_valid():
-           form.save()
-    else:
-       form = UpdateProfile()
-
-    return render(request, "iFood/user-account.html", {'form':form})
-
 
 @login_required
 def delete_user(request, username):

@@ -12,7 +12,7 @@ class Restaurant(models.Model):
 	
 	
 class UserProfile(models.Model):
-        user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
+        user = models.OneToOneField(User)
         address = models.CharField(max_length = 128, blank = True)
         facebook = models.URLField(default ='', blank = True)
         twitter = models.URLField(default = '', blank = True)

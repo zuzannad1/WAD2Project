@@ -12,23 +12,23 @@ Account Details
 		<p>
 		Hello : 
 		<strong>{{ user.username }}</strong>
-        Edit your User details here!
+        Edit your user details here!
 		</p>
         <p>
         This is your email address: {{user.email}}
         </p>
         <p>
-        This is your full name: {{user.fullname}}
+        This is your full name: {{user.get_full_name}}
         </p>
         <p>
-        This is your address: {{user.address}}
+        This is your address: {{user.userprofile.address}}
         </p>
         <p>
-        This is your facebook and twitter handle respectively {{user.facebook}} {{user.twitter}}
+        This is your facebook and twitter handle respectively {{user.userprofile.facebook}} {{user.userprofile.twitter}}
         </p>
-        <form method="post" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'account' %}" class="" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{useredit.as_p}}
             <input type="submit" name="" value="Edit and Save">
                 {% if messages %}
                 <ul class="messages">
