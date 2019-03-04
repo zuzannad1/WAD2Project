@@ -1,14 +1,16 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserForm, UserProfileForm, UserEditForm
+from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm, UserDetailsForm
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
+
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -33,6 +35,7 @@ def signup(request):
          profile.user = user
          profile.save()
          registered = True
+         login(request,user)
       else:
          print(user_form.errors, profile_form.errors)
 
@@ -44,21 +47,27 @@ def signup(request):
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
+
 @login_required
 def edit_profile(request):
-   if request.method == 'POST':
-      useredit = UserProfileForm(data = request.POST, instance = request.user)
-      if useredit.is_valid():
-         useredit.save()
-         messages.info(request, 'This is a debugging message. Saved??')
-         return HttpResponseRedirect(reverse('account'))
-      else:
-         messages.info(request, 'The new details you supplied are invalid. Please try again.')
-         return HttpResponseRedirect(reverse('account'))
-   else:
-      useredit = UserProfileForm(data = request.POST)
-   return render(request, "iFood/user-account.html", {'useredit':useredit})
-    
+    user = request.user
+    form = UserDetailsForm(request.POST or None, instance=user)
+    prof = UserProfileEditForm(request.POST or None, instance=user.userprofile)
+    if request.method == 'POST':
+        if form.is_valid() and prof.is_valid():
+            # Save the changes but password
+            form.save()
+            prof.save()
+            # Change password
+            new_password = form.cleaned_data.get('password')
+            if new_password:
+                user.set_password(new_password)
+            messages.info(request, 'Your new details and password were saved!')
+            return HttpResponseRedirect(reverse('account'))
+    context = {"form": form, "prof":prof,}
+
+    return render(request, "iFood/user-account.html", context) 
+                 
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
