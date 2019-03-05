@@ -37,7 +37,7 @@ class Feedback(models.Model):
 	created_at = models.DateField(default=datetime.date.today())
 	restaurant = models.ForeignKey(Restaurant)
 	def __str__(self):
-                return self.name
+                return self.comment
 	class Meta:
                 verbose_name_plural = 'Feedback'
 
@@ -49,6 +49,13 @@ class Orders(models.Model):
                 return self.name
 	class Meta:
                 verbose_name_plural = 'Orders'
+
+class Comments(models.Model):
+        comment = models.TextField(blank=True, null=True)
+        created_at = models.DateField(default=datetime.date.today())
+        def __str__(self):
+                return str(self.created_at)
+        
         
 
 

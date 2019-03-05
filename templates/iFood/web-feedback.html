@@ -12,5 +12,20 @@
 		<p>
 			Gives us some feedback!
 		</p>
+        <form method="POST" action="{% url 'web-feedback' %}" class="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{feedback_form.as_p}}
+            <input type="submit" name="" value="Submit">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        </form>
+        
 	</body>
 {% endblock %} 

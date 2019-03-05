@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm, UserDetailsForm
+from iFood.forms import FeedbackForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
@@ -93,22 +94,18 @@ def user_logout(request):
    return HttpResponseRedirect(reverse('index'))
 
 @login_required
-def delete_user(request, username):
-    context = {}
-    try:
-        user = User.object.get(username=username)
-        user.is_active = False
-        user.save()
-        context['msg'] = 'Profile successfully disabled.'
-    except Exception as e:
-        context['msg'] = e.message
-
-    return render(request, 'iFood/user-account.html',context=context)
-
-@login_required
 def web_feedback(request):
-    return render(request, 'iFood/web-feedback.html',{})
-
+   if request.method == 'POST':
+       feedback_form = FeedbackForm(request.POST)
+       if feedback_form.is_valid():
+          feedback = feedback_form.save()
+          feedback.save()
+          messages.info(request, 'Your feedback is very valuable for us! Thanks for submitting.')
+          return redirect('web-feedback')
+   else:
+       feedback_form = FeedbackForm()
+   return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
+   
 
 def contact(request):
     return render(request, 'iFood/contact.html',{})
