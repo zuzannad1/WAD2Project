@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 import datetime
+from django.template.defaultfilters import slugify
 
 
 # Create your models here.
@@ -9,6 +10,11 @@ class Restaurant(models.Model):
 	name    = models.CharField(max_length = 128, unique=True)
 	address = models.CharField(max_length = 128, unique=True)
 	type    = models.CharField(max_length = 128)
+	slug    = models.SlugField(blank = True,unique=True)
+
+	def save(self, *args, **kwargs):
+                self.slug = slugify(self.name)
+                super(Category, self).save(*args, **kwargs)
 	
 	
 class UserProfile(models.Model):
@@ -55,6 +61,9 @@ class Comments(models.Model):
         created_at = models.DateField(default=datetime.date.today())
         def __str__(self):
                 return str(self.created_at)
+
+        class Meta:
+                verbose_name_plural = "Comments"
         
         
 

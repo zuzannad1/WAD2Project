@@ -9,9 +9,13 @@ from iFood.models import Comments
 
 # Register your models here.
 admin.site.register(UserProfile)
-admin.site.register(Restaurant)
 admin.site.register(Dishes)
 admin.site.register(Feedback)
 admin.site.register(Orders)
 admin.site.register(Comments)
+
+class RestaurantAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Restaurant, RestaurantAdmin)
 

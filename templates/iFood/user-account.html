@@ -1,6 +1,6 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
-
+{% load crispy_forms_tags %}
 
 {% block title_block %}
 Account Details
@@ -28,8 +28,8 @@ Account Details
         </p>
         <form method="POST" action="{% url 'account' %}" class="" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
-            {{prof.as_p}}
+            {{form.as_p|crispy}}
+            {{prof.as_p|crispy}}
 
             <input type="submit" name="" value="Edit and Save">
                 {% if messages %}

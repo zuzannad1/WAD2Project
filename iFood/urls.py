@@ -14,4 +14,7 @@ urlpatterns = [
     url(r'^web-feedback/$', views.web_feedback, name='web-feedback'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^account/$', views.edit_profile, name ='account'),
+  #  url(r'^restaurant/(?P<restaurant_name_slug>[\w\-]+)/$',
+  #      views.restaurant, name='restaurant'),
+
 ]

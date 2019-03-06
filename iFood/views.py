@@ -11,6 +11,8 @@ from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 
 
 def index(request):
@@ -25,6 +27,7 @@ def about(request):
 
 def signup(request):
    registered = False
+   template_name = 'iFood/signup.html'
    if request.method == 'POST':
       user_form = UserForm(data=request.POST)
       profile_form = UserProfileForm(data=request.POST)
@@ -65,7 +68,7 @@ def edit_profile(request):
                 user.set_password(new_password)
             messages.info(request, 'Your new details and password were saved!')
             return HttpResponseRedirect(reverse('account'))
-    context = {"form": form, "prof":prof,}
+    context = {"form": form, "prof":prof}
 
     return render(request, "iFood/user-account.html", context) 
                  
@@ -93,7 +96,7 @@ def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
-@login_required
+
 def web_feedback(request):
    if request.method == 'POST':
        feedback_form = FeedbackForm(request.POST)

@@ -1,21 +1,22 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
-
+{% load crispy_forms_tags %}
 
 {% block title_block %}
-	Web Feedback 
+	iFood Feedback
 {% endblock %} 
 
 
 {%block body_block %}
 	<body>
+        {% if registered %}
 		<p>
-			Gives us some feedback!
+			Give us some feedback!
 		</p>
         <form method="POST" action="{% url 'web-feedback' %}" class="" enctype="multipart/form-data">
             {% csrf_token %}
-            {{feedback_form.as_p}}
-            <input type="submit" name="" value="Submit">
+            {{feedback_form|crispy}}
+            <button type="submit" class="btn btn-success">Submit your comment</button>
                 {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
@@ -26,6 +27,12 @@
                 </ul>
                 {% endif %}
         </form>
-        
+        {% else %}
+        <p> This page is restricted to registered users only.</p>
+        <p> Why not sign up then? </p>
+        <form action="/iFood/signup/">
+            <input type="submit" value="Sign up" />
+        </form>
+        {% endif %}
 	</body>
 {% endblock %} 
