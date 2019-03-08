@@ -6,6 +6,23 @@
 Sign Up and Eat
 {%endblock%}
 {% block body_block %}
+<html>
+    <head>
+        <style>
+            
+            * {box-sizing: border-box;}
+            
+            .jumbotron {
+                position: relative;
+                color: #333;
+                bottom: 300px;
+            }
+        
+        
+            
+        </style>
+    </head>
+</html>
 	<div class="container">
 	    <div class="jumbotron">
 	        {% if registered %}
@@ -13,30 +30,14 @@ Sign Up and Eat
 		    {% else %}
 		        <h1>Register Here</h1>
 		        <h3>Just fill out the form.</h3>
+                <div class = 'form'>
                 <form id="user_form" method="post" action="{% url 'signup' %}"
                     16 enctype="multipart/form-data">
                     {% csrf_token %}
-                            {{user_form.username|as_crispy_field}}
-                         <div class="row">
-                        <div class='col-6'>
-                            {{user_form.first_name|as_crispy_field}}
-                        </div>
-                        <div class='col-6'>
-                            {{user_form.last_name|as_crispy_field}}
-                        </div>
-                        </div>
-                            {{user_form.email|as_crispy_field}}
-                            {{user_form.password|as_crispy_field}}
-                            {{profile_form.address|as_crispy_field}}
-                        <div class = "row">
-                            <div class = 'col-6'>
-                            {{profile_form.facebook|as_crispy_field}}
-                            </div>
-                            <div class = 'col-6'>
-                            {{profile_form.twitter|as_crispy_field}}
-                            </div>
-
-		            <button type="submit" class="btn btn-success">Sign me up!</button>
+                    {{user_form|crispy}}
+                    {{profile_form|crispy}}
+                    <button type="submit" class="btn btn-success">Sign me up!</button>
+                    </div>
 		        </form>
 	        {% endif %}
 	    </div>

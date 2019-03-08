@@ -112,3 +112,9 @@ def web_feedback(request):
 
 def contact(request):
     return render(request, 'iFood/contact.html',{})
+
+def checkout(request):
+    return render(request, 'iFood/checkout.html',{})
+
+def my_order(request):
+    return render(request, 'iFood/my-order.html',{})

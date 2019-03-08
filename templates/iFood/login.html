@@ -1,32 +1,71 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
-{% load crispy_forms_tags %
+{% load crispy_forms_tags %}
 
 {% block title_block %}
     Login
 {% endblock %}
 
 {% block body_block %}
+            <style>
+            .signup {
+                position: relative;
+                top: 25px;
+                    
+            }
+            
+            .jumbotron {
+                position: relative;
+                color: #333;
+                bottom: 200px;
+            }
+            
+            .username {
+                position: relative;
+                top: 30px;
+                left: 100px;
+            }
+            
+            .password {
+                position: relative;
+                left: 350px;
+            }
+            
+            .btn-success {
+                position: relative;
+                left: 295px;
+                top: 15px;
+                
+            }
+            
+            </style>
+<body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Login here :</h1>
+			<h1><center>Login here:</center></h1>
 			<form id="login_form" method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-				<label for="username">Username</label>
-				<input type="text" name="username" placeholder="Username">
-				<label for="password">Password</label>
-				<input type="password" name="password" placeholder="Password">
-				<input type="submit" name="" value="Login">
+                   {% csrf_token %}
+                <div class= 'username'>
+                <label for="username"></label>
+                <input type="text" name="username" placeholder="Your username">
+                </div>
+                <div class = 'password'>
+                <label for="password"></label>
+                <input type="password" name="password" placeholder="Your password">
+                </div>
+                <button type="submit" class="btn btn-success" value = "Login">Log in</button>
 				{% if messages %}
-					<ul class="messages">
 						{% for message in messages %}
-							<li class="{{ message.tags }}">
-								{{ message }} 
-							</li>
+                        <div class="alert alert-danger" role="alert">
+                            <strong><center>{{ message }}</center></strong>
+                        </div>
 						{% endfor %}
-					</ul>
 				{% endif %}
 			</form>
+            <div class = 'signup'>
+            <center><h5>Not registered yet? Sign up <a href='{% url 'signup' %}'>here.</a></center>
+            </div>
 		</div>
 	</div>
+ </body>
 {% endblock %}

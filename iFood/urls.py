@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^account/$', views.edit_profile, name ='account'),
   #  url(r'^restaurant/(?P<restaurant_name_slug>[\w\-]+)/$',
   #      views.restaurant, name='restaurant'),
-
+	url(r'^checkout/$', views.checkout, name='checkout'),
+	url(r'^my-order/$', views.my_order, name='my-order'),
 ]

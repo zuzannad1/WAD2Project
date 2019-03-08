@@ -8,31 +8,43 @@
 
 
 {%block body_block %}
+<html>
+    <head>
+        <style>
+            
+            .form {
+                position:relative;
+                top:-250px;
+            }
+        
+        .alert-success{
+            position:relative;
+            top: -550px;
+            height: 38px;
+            border-radius: 5px;
+
+        }
+        
+        
+        </style>
+    </head>
+    
 	<body>
-        {% if registered %}
-		<p>
-			Give us some feedback!
-		</p>
-        <form method="POST" action="{% url 'web-feedback' %}" class="" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'web-feedback' %}" class="form" enctype="multipart/form-data">
+            <h3>
+            Any comments? Thanks for leaving your remarks, each of them helps improve our website.
+            </h3>
             {% csrf_token %}
             {{feedback_form|crispy}}
             <button type="submit" class="btn btn-success">Submit your comment</button>
                 {% if messages %}
-                <ul class="messages">
                     {% for message in messages %}
-                    <li class="{{ message.tags }}">
-                        {{ message }}
-                    </li>
+                        <div class="alert-success" role="alert">
+                            <h3 class="alert-heading"><center>{{message}}</center></h3>
+                        </div>
                     {% endfor %}
-                </ul>
                 {% endif %}
         </form>
-        {% else %}
-        <p> This page is restricted to registered users only.</p>
-        <p> Why not sign up then? </p>
-        <form action="/iFood/signup/">
-            <input type="submit" value="Sign up" />
-        </form>
-        {% endif %}
 	</body>
+</html>
 {% endblock %} 

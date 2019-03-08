@@ -1,49 +1,152 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
-
-
 {% block title_block %}
+{% load crispy_forms_tags %}
 Account Details
-{% endblock %} 
+{% endblock %}
 
-
-{%block body_block %}
-	<body>
-		<p>
-		Hello : 
-		<strong>{{ user.username }}</strong>
-        Edit your user details here!
-		</p>
-        <p>
-        This is your email address: {{user.email}}
-        </p>
-        <p>
-        This is your full name: {{user.get_full_name}}
-        </p>
-        <p>
-        This is your address: {{user.userprofile.address}}
-        </p>
-        <p>
-        This is your facebook and twitter handle respectively {{user.userprofile.facebook}} {{user.userprofile.twitter}}
-        </p>
-        <form method="POST" action="{% url 'account' %}" class="" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form.as_p}}
-            {{prof.as_p}}
-
-            <input type="submit" name="" value="Edit and Save">
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li class="{{ message.tags }}">
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            
-        </form>
-        
+{% block body_block %}
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <style>
+                body {font-family: Arial, Helvetica, sans-serif;}
+                * {box-sizing: border-box;}
                 
-	</body>
-{% endblock %} 
+                /* Button used to open the contact form - fixed at the bottom of the page */
+                .open-button {
+                    background-color: #333;
+                    color: white;
+                    padding: 16px 20px;
+                    border: none;
+                    cursor: pointer;
+                    opacity: 0.8;
+                    position: relative;
+                    left: 240px;
+                    width: 280px;
+                    top: -200px;
+                }
+            .main-site {
+                position: relative;
+                left: 240px;
+                top: -200px;
+                
+            }
+            /* The popup form - hidden by default */
+            .form-popup {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                width: 500px;
+                left: 487px;
+                border: 10px solid #9CD2D3   ;
+                z-index: 9;
+                background-color: #9CD2D3  ;
+                opacity: 0.975;
+                border-radius: 20px;
+            }
+            
+            /* Add styles to the form container */
+            .form-container {
+                max-width: 300px;
+                padding: 10px;
+                background-color: black;
+            }
+            
+            /* Full-width input fields */
+            .form-container input[type=text], .form-container input[type=password] {
+                width: 100%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+            }
+            
+            /* When the inputs get focus, do something */
+            .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+            
+            /* Add a red background color to the cancel button */
+            .form-popup .cancel {
+                background-color: #F6795E;
+                color: white;
+            }
+            
+            .form-popup .form-fields {
+                color: #333;
+                right: 130px;
+            }
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover, .open-button:hover {
+                opacity: 1;
+            }
+            
+            .form-popup .btn:hover, .cancel:hover {
+                opacity:1;
+            }
+            
+            .alert-success{
+                position:relative;
+                top: -600px;
+                height: 38px;
+                border-radius: 5px;
+                
+            }
+            
+    </style>
+    </head>
+    <body>
+        <div class="main-site">
+            <h1>Welcome <strong>{{user.username}}</strong></h1>
+            <p>You can edit your user details here.</br>
+            Your current user details are as listed:</br>
+            Your e-mail address: {{user.email}} </br>
+            Your full name: {{user.get_full_name}}</br>
+            Your delivery address: {{user.userprofile.address}}</br>
+            ... and your social handles: </br>
+            {{user.userprofile.facebook}}</br>
+            {{user.userprofile.twitter}}</br></p>
+        </div>
+        <button class="open-button" onclick="openForm()">Open the Form</button>
+        </br>
+        </br>
+       	<div>
+		<a href="{% url 'checkout' %}">
+			<button class="open-button" style="vertical-align:middle">
+				My order
+			</button>
+		</a>
+       </div>
+		<div class="form-popup" id="myForm">
+                <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    {{prof|crispy}}
+                    <button type="submit" class="btn btn-success">Save my details!</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+        </div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert-success" role="alert">
+                <h3 class="alert-heading"><center>{{message}}</center></h3>
+            </div>
+            {% endfor %}
+            {% endif %}
+        
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+        
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+        </script>
+        
+    </body>
+</html>
+
+{% endblock %}
