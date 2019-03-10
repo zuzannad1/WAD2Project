@@ -13,7 +13,7 @@ class Restaurant(models.Model):
 
 	def save(self, *args, **kwargs):
                 self.slug = slugify(self.name)
-                super(Category, self).save(*args, **kwargs)
+                super(Restaurant, self).save(*args, **kwargs)
 	
 	
 class UserProfile(models.Model):

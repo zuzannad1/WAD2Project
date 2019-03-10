@@ -5,7 +5,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm, UserDetailsForm
-from iFood.forms import FeedbackForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response

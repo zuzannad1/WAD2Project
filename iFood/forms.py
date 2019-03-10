@@ -50,8 +50,3 @@ class FeedbackForm(forms.ModelForm):
         model = Comments
         fields = ('comment','created_at')
 
-class DishForm(forms.ModelForm):
-    ordered = forms.BooleanField(widget=forms.BooleanField()
-    class Meta:
-        model = Dishes
-        fields = ('ordered')
