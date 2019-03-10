@@ -96,7 +96,6 @@ def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
-
 def web_feedback(request):
    if request.method == 'POST':
        feedback_form = FeedbackForm(request.POST)
@@ -109,12 +108,25 @@ def web_feedback(request):
        feedback_form = FeedbackForm()
    return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
    
+def restaurant(request, restaurant_name_slug):
+   context_dict = {}
+   try:
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+        dishes = Dishes.objects.filter(restaurant=restaurant)
+        context_dict['restaurant'] = restaurant
+        context_dict['dishes'] = dishes
+   except Category.DoesNotExist:
+        context_dict['restaurant'] = None
+        context_dict['dishes'] = None
+   return render(request, 'iFood/restaurant.html', context_dict)
 
 def contact(request):
     return render(request, 'iFood/contact.html',{})
-
+   
+@login_required
 def checkout(request):
     return render(request, 'iFood/checkout.html',{})
-
+   
+@login_required
 def my_order(request):
     return render(request, 'iFood/my-order.html',{})

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from iFood.models import UserProfile, Feedback, Comments
+from iFood.models import UserProfile, Feedback, Comments, Dishes
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 
@@ -50,3 +50,8 @@ class FeedbackForm(forms.ModelForm):
         model = Comments
         fields = ('comment','created_at')
 
+class DishForm(forms.ModelForm):
+    ordered = forms.BooleanField(widget=forms.BooleanField()
+    class Meta:
+        model = Dishes
+        fields = ('ordered')

@@ -1,0 +1,19 @@
+{% extends 'ifood/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    {{restaurant.name}}
+{% endblock %} 
+
+
+{%block body_block %}
+    {% if restaurant %}
+<p> This is {{restaurant.name}} page </p>
+{% if dishes %}
+{% for dish in dishes %}
+<p>{{dish.name}}</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

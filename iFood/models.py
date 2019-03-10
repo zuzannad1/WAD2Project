@@ -4,7 +4,6 @@ from django.conf import settings
 import datetime
 from django.template.defaultfilters import slugify
 
-
 # Create your models here.
 class Restaurant(models.Model):
 	name    = models.CharField(max_length = 128, unique=True)
@@ -50,7 +49,7 @@ class Feedback(models.Model):
 class Orders(models.Model):
 	ordered_dishes = models.CharField(max_length = 150)
 	restaurant     = models.CharField(max_length = 128)
-	user_ID        = models.IntegerField(default = 0)
+	user       = models.ForeignKey(User, default=1)
 	def __str__(self):
                 return self.name
 	class Meta:
