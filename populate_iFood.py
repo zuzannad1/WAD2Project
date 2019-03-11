@@ -36,10 +36,10 @@ def populate():
         {"name":"Tarka Daal",
          "cuisine":"indian", "description": "Lentils cooked with garlic & ginger fried in butter", "price":4.90 },
          {"name":"Malaidar King Prawn",
-         "cuisine":"Indian", "description": "King Prawns & Spinach puree simmered with lashings of green chilli & garlic with a dash of fresh cream", "price":}  ]
+         "cuisine":"Indian", "description": "King Prawns & Spinach puree simmered with lashings of green chilli & garlic with a dash of fresh cream", "price":8.00}  ]
 	
 #Asian cuisines
-	station_wok_dishes = [
+    station_wok_dishes = [
 		{"name": "Kung Po Chicken",
          "cuisine":"Chinese", "description": "Spicy, stir-fried dish made with chicken, peanuts, vegetables, and chili peppers.", "price": 7.20 },
         {"name":"Beef with Green Pepper in Black Bean Sauce",
@@ -47,7 +47,7 @@ def populate():
         {"name":"Sweet & Sour King Prawn",
          "cuisine":"Chinese", "description": "Sweet and Sour curry with King Prawns", "price": 7.70} ]
          
-	temaki_dishes = [
+    temaki_dishes = [
 		{"name": "Futomaki Sushi Burrito",
          "cuisine":"Japanese", "description": "Sushi with tofu, avocado, cucumber & wrapped in a burrito.", "price": 9.00 },
         {"name":"Beef with Green Pepper in Black Bean Sauce",
@@ -55,7 +55,7 @@ def populate():
         {"name":"Agadashi Tofu Starter",
          "cuisine":"Japanese", "description": "Tofu flash fried and served with bonito flakes, spring onions and dashi sauce.", "price": 7.70} ]
 	
-	feng_huang_dishes = [
+    feng_huang_dishes = [
 		{"name": "Squid Thai Red Curry",
          "cuisine":"Thai", "description": "Squid with curry sauce made from many mixed spices, coconut oil & coconut milk.", "price": 6.50 },
         {"name":"King Prawn with Thai Sweet Chilli",
@@ -64,7 +64,7 @@ def populate():
          "cuisine":"Thai", "description": "Soup with hot and sour spices", "price": 3.00} ]
          
 #Italian cuisines
-	grillicious_mediterranean_dishes = [
+    grillicious_mediterranean_dishes = [
 		{"name": "Margherita Pizza",
          "cuisine":"Italian", "description": "Home roast tomato sauce, mozzarella cheese & fresh basil leaves, 14 inches.", "price": 7.80 },
         {"name":"Calzone",
@@ -72,7 +72,7 @@ def populate():
         {"name":"Gamberoni Portofino",
          "cuisine":"Italian", "description": "King prawns in truffle oil, sliced shallots, peppers, fresh coriander leaves & sliced chillies served with garlic bread", "price": 6.80} ]
          
-	pastaios_dishes = [
+    pastaios_dishes = [
 		{"name": "Pepperoni Pizza",
          "cuisine":"Italian", "description": "Tomato sauce, mozzarella & pepperoni, 12 inches.", "price": 8.50 },
         {"name":"Penne Arrabiata",
@@ -80,7 +80,7 @@ def populate():
         {"name":"Focaccia Pomodoro",
          "cuisine":"Italian", "description": "Traditional italian bread topped with cherry tomato & fresh basil.", "price": 5.00} ]
 	
-	feng_huang_dishes = [
+    tony_macaroni_dishes = [
 		{"name": "Spaghetti Carbonara",
          "cuisine":"Italian", "description": "A sauce with fresh garlic, crispy bacon, egg cream parmesan cheese sauce.", "price": 6.55 },
         {"name":"Vegetariana Pizza",
@@ -89,7 +89,7 @@ def populate():
          "cuisine":"Italian", "description": "Homemade chargrilled burger with grilled onion, crispy bacon, sliced tomato on a bap bun served with french fries.", "price": 6.40} ]
 
 #Western Cuisine
-	number_sixteen_dishes = [
+    number_sixteen_dishes = [
 		{"name": "Roasted beetroot",
          "cuisine":"Scottish", "description": "Golden beetroot marmalade, gorgonzola, figs, puffed buckwheat, mizuna.", "price": 7.95 },
         {"name":"Lamb belly",
@@ -97,7 +97,7 @@ def populate():
         {"name":"Crispy salt cod brandade",
          "cuisine":"Scottish", "description": "Cod with roast garlic and parsley sauce, caviar, samphire.", "price": 8.45} ]
 	
-	cote_brasserie_dishes = [
+    cote_brasserie_dishes = [
 		{"name": "Spinach and Mushroom Crêpes",
          "cuisine":"French", "description": "Baked crêpes with wild mushrooms, spinach and Gruyère cheese.", "price": 10.95 },
         {"name":"Prawn Gratinée",
@@ -105,7 +105,7 @@ def populate():
         {"name":"Chicken Liver Parfait",
          "cuisine":"French", "description": "Chicken liver pâté with toasted brioche and spiced apple chutney.", "price": 6.50} ]
 	
-	steak_and_cherry_dishes = [
+    steak_and_cherry_dishes = [
 		{"name": "Philly Cheese Steak Baguette",
          "cuisine":"American", "description": "Fillet steak strips with caramelized onions & cheese, with homemade chips.", "price": 9.95 },
         {"name":"Ribeye Steak",
@@ -116,22 +116,25 @@ def populate():
 	
 	
 		         
-    cats = {"Curry Pot": {"dishes": curry_pot_dishes, rating = 0},
-            "Indian Orchard": {"dishes": indian_orchard_dishes, rating = 0},
-            "Bollywood Spice": {"dishes": bollywood_spice_dishes, rating = 0} 
-			"Station Wok": {"dishes": station_wok_dishes, rating = 0}
-			"Temaki": {"dishes": temaki_dishes, rating = 0}
-			"Feng_huang": {"dishes": feng_huang_dishes, rating = 0}
-			"Number Sixteen": {"dishes": number_sixteen_dishes, rating = 0}
-            "Cote Brasserie": {"dishes": cote_brasserie_dishes, rating = 0}
-            "Steak and Cherry": {"dishes": steak_and_cherry_dishes, rating = 0}
+    cats = {"Curry Pot": {"dishes": curry_pot_dishes},
+            "Indian Orchard": {"dishes": indian_orchard_dishes},
+            "Bollywood Spice": {"dishes": bollywood_spice_dishes}, 
+	    "Station Wok": {"dishes": station_wok_dishes},
+	    "Temaki": {"dishes": temaki_dishes},
+	    "Feng Huang": {"dishes": feng_huang_dishes},
+            "Grillicious Mediterranean Dishes" : {"dishes": grillicious_mediterranean_dishes},
+            "Pastaios": {"dishes": pastaios_dishes},
+            "Tony Macaroni": {"dishes": tony_macaroni_dishes}, 
+	    "Number Sixteen": {"dishes": number_sixteen_dishes},
+            "Cote Brasserie": {"dishes": cote_brasserie_dishes},
+            "Steak and Cherry": {"dishes": steak_and_cherry_dishes},
   
             }
    
    
     for cat, cat_data in cats.items(): 
         
-        c = add_restaurant(cat, cat_data["rating"])
+        c = add_restaurant(cat, rating=0)
         for p in cat_data["dishes"]:
             add_dishes(c, p["name"], p["cuisine"], p["description"], p["price"])
     # Print out the categories we have added.
@@ -140,16 +143,16 @@ def populate():
             print("- {0} - {1}".format(str(c), str(p)))
 
 def add_dishes(cat, name, cuisine, description, price):
-    p = Page.objects.get_or_create(restaurant=cat, name=name)[0] 
+    p = Dishes.objects.get_or_create(restaurant=cat, name=name)[0] 
     p.cuisine = cuisine
     p.description = description
     p.price = price
     p.save()
     return p
 
-def add_restaurant(name, ratings):
-    c = Category.objects.get_or_create(name=name)[0] 
-    c.ratings = ratings
+def add_restaurant(name, rating=0):
+    c = Restaurant.objects.get_or_create(name=name)[0] 
+    c.rating = rating
     c.save()
     return c
 
@@ -158,5 +161,5 @@ def add_restaurant(name, ratings):
 
 # Start execution here!
 if __name__ == '__main__':
-    print("Starting Rango population script...") 
+    print("Starting iFood population script...") 
     populate()

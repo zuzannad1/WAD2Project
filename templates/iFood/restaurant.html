@@ -12,8 +12,11 @@
 <p> This is {{restaurant.name}} page </p>
 {% if dishes %}
 {% for dish in dishes %}
-<p>{{dish.name}}</p>
-    {% endif %}
+<p>Dish: {{dish.name}} Price: {{dish.price}}
+</br>Description: {{dish.description}} Cuisine: {{dish.cuisine}}</p>
+
+{% endfor %}
+{% endif %}
 {% endif %}
 
 {% endblock %}

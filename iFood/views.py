@@ -12,7 +12,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
-
+from django.shortcuts import get_object_or_404
+from iFood.models import Restaurant, Dishes
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -109,12 +110,12 @@ def web_feedback(request):
    
 def restaurant(request, restaurant_name_slug):
    context_dict = {}
+   restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
    try:
-        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
         dishes = Dishes.objects.filter(restaurant=restaurant)
         context_dict['restaurant'] = restaurant
         context_dict['dishes'] = dishes
-   except Category.DoesNotExist:
+   except restaurant.DoesNotExist:
         context_dict['restaurant'] = None
         context_dict['dishes'] = None
    return render(request, 'iFood/restaurant.html', context_dict)
