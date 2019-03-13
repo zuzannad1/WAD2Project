@@ -1,6 +1,7 @@
 
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 
 {% block title_block %}
@@ -15,9 +16,9 @@
 {% for dish in dishes %}
 <p>Dish: {{dish.name}} Price: {{dish.price}}
 </br>Description: {{dish.description}} Cuisine: {{dish.cuisine}}</p>
-
 {% endfor %}
 {% endif %}
+
 {% endif %}
 
 {% endblock %}

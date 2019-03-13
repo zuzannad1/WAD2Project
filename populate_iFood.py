@@ -148,9 +148,8 @@ def add_dishes(cat, name, cuisine, description, price):
     p.save()
     return p
 
-def add_restaurant(name, type, rating=0):
+def add_restaurant(name, rating=0):
     c = Restaurant.objects.get_or_create(name=name)[0] 
-    c.type = type
     c.rating = rating
     c.save()
     return c

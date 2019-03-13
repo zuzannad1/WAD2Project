@@ -7,12 +7,17 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Restaurant(models.Model):
 	name    = models.CharField(max_length = 128)
-	#address = models.CharField(max_length = 128)
-	type    = models.CharField(max_length = 128)
+<<<<<<< Updated upstream
 	rating_choices = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
 	rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=rating_choices)
 	slug    = models.SlugField(unique=True)
 
+=======
+	#address = models.CharField(max_length = 128)
+	#type    = models.CharField(max_length = 128)
+	slug    = models.SlugField(unique=True)
+	rating = models.PositiveSmallIntegerField('Rating', blank=True)
+>>>>>>> Stashed changes
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Restaurant, self).save(*args, **kwargs)
@@ -20,14 +25,6 @@ class Restaurant(models.Model):
 
 	def __str__(self):
 		return self.name
-	
-# class Cuisine(models.Model):
-# 	name = models.CharField(max_length = 128)
-# 	class Meta:
-# 		verbose_name_plural = 'cuisines'
-# 		
-# 	def __str__(self):
-#                 return self.name
 	
 class UserProfile(models.Model):
         user = models.OneToOneField(User)
@@ -43,7 +40,8 @@ class Dishes(models.Model):
         restaurant  = models.ForeignKey(Restaurant, null=True, related_name='dishes')
         cuisine    = models.CharField(max_length = 20, default="None")
         description = models.TextField(max_length = 300)
-        price       = models.DecimalField('Pounds amount', max_digits=8, decimal_places=2, blank=True, null=True)
+        price       = models.DecimalField('Pounds amount',
+                                          max_digits=8, decimal_places=2, blank=True,null=True)
 
         class Meta:
                 verbose_name_plural = 'Dishes'
@@ -65,16 +63,6 @@ class Feedback(models.Model):
 	class Meta:
                 verbose_name_plural = 'Feedback'
 
-class Orders(models.Model):
-	ordered_dishes = models.CharField(max_length = 150)
-	restaurant     = models.CharField(max_length = 128)
-	user       = models.ForeignKey(User, default=1)
-
-	def __str__(self):
-                return self.name
-
-	class Meta:
-                verbose_name_plural = 'Orders'
 
 class Comments(models.Model):
         comment = models.TextField(blank=True, null=True)

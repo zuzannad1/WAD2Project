@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
-from iFood.models import UserProfile, Feedback, Comments, Dishes
+from iFood.models import UserProfile, Feedback, Comments, Dishes, Restaurant
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
@@ -50,3 +51,12 @@ class FeedbackForm(forms.ModelForm):
         model = Comments
         fields = ('comment','created_at')
 
+ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'))
+class RestaurantFeedbackForm(forms.ModelForm):
+    rating = forms.CharField(label='How many stars would you give this restaurant?',
+                             widget=forms.RadioSelect(choices=ratings))
+    class Meta:
+        fields = ('rating',)
+        model = Restaurant
+
+    

@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.http import HttpResponse
-from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm, UserDetailsForm
+from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm
+from iFood.forms import UserDetailsForm, FeedbackForm, RestaurantFeedbackForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
@@ -66,7 +67,6 @@ def edit_profile(request):
             new_password = form.cleaned_data.get('password')
             if new_password:
                 user.set_password(new_password)
-            messages.info(request, 'Your new details and password were saved!')
             return HttpResponseRedirect(reverse('account'))
     context = {"form": form, "prof":prof}
 
@@ -102,7 +102,6 @@ def web_feedback(request):
        if feedback_form.is_valid():
           feedback = feedback_form.save()
           feedback.save()
-          messages.info(request, 'Your feedback is very valuable for us! Thanks for submitting.')
           return redirect('web-feedback')
    else:
        feedback_form = FeedbackForm()
@@ -110,8 +109,7 @@ def web_feedback(request):
    
 def show_restaurant(request, restaurant_name_slug):
    context_dict = {}
-   #restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
-   restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+   restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
    try:
        dishes = Dishes.objects.filter(restaurant=restaurant)
        context_dict['restaurant'] = restaurant
@@ -119,6 +117,7 @@ def show_restaurant(request, restaurant_name_slug):
    except restaurant.DoesNotExist:
         context_dict['restaurant'] = None
         context_dict['dishes'] = None
+   
    return render(request, 'iFood/restaurant.html', context_dict)
 
 def contact(request):
@@ -131,3 +130,4 @@ def checkout(request):
 @login_required
 def my_order(request):
     return render(request, 'iFood/my-order.html',{})
+

@@ -36,15 +36,13 @@
             </h3>
             {% csrf_token %}
             {{feedback_form|crispy}}
-            <button type="submit" class="btn btn-success">Submit your comment</button>
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert-success" role="alert">
-                            <h3 class="alert-heading"><center>{{message}}</center></h3>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            <button type="submit" class="btn btn-success" onclick="alertFunc()">Submit your comment</button>
         </form>
+    <script>
+        function alertFunc() {
+            alert("Thank you for your feedback!")
+        }
+    </script>
 	</body>
 </html>
 {% endblock %} 

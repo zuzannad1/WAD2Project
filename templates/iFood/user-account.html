@@ -22,26 +22,28 @@ Account Details
                     cursor: pointer;
                     opacity: 0.8;
                     position: relative;
-                    left: 240px;
-                    width: 280px;
-                    top: -200px;
+                    margin: auto;
+                    left: 10%;
+                    width: 40%;
                 }
             .main-site {
                 position: relative;
-                left: 240px;
+                margin: auto;
                 top: -200px;
+                border: #333;
+                outline: thick ridge lightblue;
                 
             }
             /* The popup form - hidden by default */
             .form-popup {
                 display: none;
                 position: fixed;
-                bottom: 20px;
-                width: 500px;
+                bottom: 10px;
+                width: 550px;
                 left: 487px;
-                border: 10px solid #9CD2D3   ;
+                border: 10px solid lightblue;
                 z-index: 9;
-                background-color: #9CD2D3  ;
+                background-color: lightblue;
                 opacity: 0.975;
                 border-radius: 20px;
             }
@@ -99,50 +101,48 @@ Account Details
     </head>
     <body>
         <div class="main-site">
-            <h1>Welcome <strong>{{user.username}}</strong></h1>
-            <p>You can edit your user details here.</br>
-            Your current user details are as listed:</br>
-            Your e-mail address: {{user.email}} </br>
-            Your full name: {{user.get_full_name}}</br>
-            Your delivery address: {{user.userprofile.address}}</br>
-            ... and your social handles: </br>
-            {{user.userprofile.facebook}}</br>
-            {{user.userprofile.twitter}}</br></p>
+           <center> <h1>Welcome <strong>{{user.username}}</strong></h1>
+            <p>Click on User Details button to preview or edit your user details.</br>
+               Click on My Order button to display your current order details. </p>
+            </center>
+           <button class="open-button" onclick="openForm()">User Details</button>
+           <button class="open-button" onclick="openForm1()">My Order</button>
         </div>
-        <button class="open-button" onclick="openForm()">Open the Form</button>
-        </br>
-        </br>
-       	<div>
-		<a href="{% url 'checkout' %}">
-			<button class="open-button" style="vertical-align:middle">
-				My order
-			</button>
-		</a>
-       </div>
 		<div class="form-popup" id="myForm">
                 <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{form|crispy}}
                     {{prof|crispy}}
-                    <button type="submit" class="btn btn-success">Save my details!</button>
+                    <button type="submit" class="btn btn-success" onclick="alertFunc()">Save my details!</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>
         </div>
-            {% if messages %}
-            {% for message in messages %}
-            <div class="alert-success" role="alert">
-                <h3 class="alert-heading"><center>{{message}}</center></h3>
-            </div>
-            {% endfor %}
-            {% endif %}
-        
+        <div class="form-popup" id="myForm1">
+            <p> This is a pop-up my order window where details about the order and time elapsing
+            for the order to be completed will be displayed</p>
+                <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
+
+        </div>
+
+
         <script>
             function openForm() {
                 document.getElementById("myForm").style.display = "block";
             }
+        function openForm1() {
+            document.getElementById("myForm1").style.display = "block";
+        }
         
         function closeForm() {
             document.getElementById("myForm").style.display = "none";
+        }
+        function closeForm1() {
+            document.getElementById("myForm1").style.display = "none";
+        }
+        
+        function alertFunc() {
+            closeForm()
+            alert("Your details have been successfully saved!")
         }
         </script>
         
