@@ -7,17 +7,12 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Restaurant(models.Model):
 	name    = models.CharField(max_length = 128)
-<<<<<<< Updated upstream
 	rating_choices = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
 	rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=rating_choices)
 	slug    = models.SlugField(unique=True)
-
-=======
-	#address = models.CharField(max_length = 128)
-	#type    = models.CharField(max_length = 128)
 	slug    = models.SlugField(unique=True)
 	rating = models.PositiveSmallIntegerField('Rating', blank=True)
->>>>>>> Stashed changes
+
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Restaurant, self).save(*args, **kwargs)
