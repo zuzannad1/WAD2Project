@@ -108,13 +108,14 @@ def web_feedback(request):
        feedback_form = FeedbackForm()
    return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
    
-def restaurant(request, restaurant_name_slug):
+def show_restaurant(request, restaurant_name_slug):
    context_dict = {}
-   restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
+   #restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
+   restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
    try:
-        dishes = Dishes.objects.filter(restaurant=restaurant)
-        context_dict['restaurant'] = restaurant
-        context_dict['dishes'] = dishes
+       dishes = Dishes.objects.filter(restaurant=restaurant)
+       context_dict['restaurant'] = restaurant
+       context_dict['dishes'] = dishes
    except restaurant.DoesNotExist:
         context_dict['restaurant'] = None
         context_dict['dishes'] = None

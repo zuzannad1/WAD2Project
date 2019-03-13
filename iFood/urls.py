@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^account/$', views.edit_profile, name ='account'),
     url(r'^(?P<restaurant_name_slug>[\w\-]+)/$',
-        views.restaurant, name='restaurant'),
+        views.show_restaurant, name='restaurant'),
 	url(r'^checkout/$', views.checkout, name='checkout'),
 	url(r'^my-order/$', views.my_order, name='my-order'),
 ]

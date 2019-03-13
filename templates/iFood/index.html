@@ -556,11 +556,19 @@
                                          	<div class="col-md-3">
                                             	<div class="box">
                                                 	<ul>
-                                                    	<li><h4>Asian Cuisine</h4></li>
-                                                        <li><a href="#">Restaurant 1<span class="fa fa-laptop"></span></a></li>
-                                                        <li><a href="#">Restaurant 2<span class="fa fa-laptop"></span></a></li>
-                                                        <li><a href="#">Restaurant 3<span class="fa fa-laptop"></span></a></li>
-                                                	</ul>
+                                                	<li><h4>Asian Cuisine</h4></li>
+                                                	{% if Restaurant %}
+                                                	{% for restaurants in Restaurant %}
+                                                        <li>
+                                                        <a href="{% url 'show_restaurant' restaurant.slug %}">
+                                                        	{{ restaurant.name }}<span class="fa fa-laptop"></span>
+                                                        </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                    {% else %}
+            											<strong>There are no restaurant present.</strong>
+        											{% endif %}
+        											</ul>
                                             	</div><!-- end box -->
                                         	</div><!-- end col -->
                                         </div><!-- /.tabbable -->
