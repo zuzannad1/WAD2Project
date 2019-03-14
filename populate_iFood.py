@@ -116,25 +116,24 @@ def populate():
 	
 	
 		         
-    cats = {"Indian": {"Curry Pot": {"dishes": curry_pot_dishes},
-                       "Indian Orchard": {"dishes": indian_orchard_dishes},
-                       "Bollywood Spice": {"dishes": bollywood_spice_dishes}}, 
-            "Asian":{"Station Wok": {"dishes": station_wok_dishes},
-                     "Temaki": {"dishes": temaki_dishes},
-                     "Feng Huang": {"dishes": feng_huang_dishes}},
-            "Italian":{"Grillicious Mediterranean Dishes" : {"dishes": grillicious_mediterranean_dishes},
-                       "Pastaios": {"dishes": pastaios_dishes},
-                       "Tony Macaroni": {"dishes": tony_macaroni_dishes}}, 
-            "Western":{"Number Sixteen": {"dishes": number_sixteen_dishes},
-                       "Cote Brasserie": {"dishes": cote_brasserie_dishes},
-                       "Steak and Cherry": {"dishes": steak_and_cherry_dishes}} }
+    cats = {"Curry Pot": {"dishes": curry_pot_dishes},
+            "Indian Orchard": {"dishes": indian_orchard_dishes},
+            "Bollywood Spice": {"dishes": bollywood_spice_dishes}, 
+            "Station Wok": {"dishes": station_wok_dishes},
+            "Temaki": {"dishes": temaki_dishes},
+            "Feng Huang": {"dishes": feng_huang_dishes},
+            "Grillicious Mediterranean Dishes" : {"dishes": grillicious_mediterranean_dishes},
+            "Pastaios": {"dishes": pastaios_dishes},
+            "Tony Macaroni": {"dishes": tony_macaroni_dishes}, 
+            "Number Sixteen": {"dishes": number_sixteen_dishes},
+            "Cote Brasserie": {"dishes": cote_brasserie_dishes},
+            "Steak and Cherry": {"dishes": steak_and_cherry_dishes}}
    
    
-    for cuisine, cat in cats.items():
-        for ca,cat_data in cat.items():   
-            c = add_restaurant(ca, cuisine, rating=0)
-            for p in cat_data["dishes"]:
-                add_dishes(c, p["name"], p["cuisine"], p["description"], p["price"])
+    for ca,cat_data in cats.items():   
+        c = add_restaurant(ca, rating=0)
+        for p in cat_data["dishes"]:
+            add_dishes(c, p["name"], p["cuisine"], p["description"], p["price"])
     # Print out the categories we have added.
     for c in Restaurant.objects.all():
         for p in Dishes.objects.filter(restaurant=c):

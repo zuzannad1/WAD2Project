@@ -10,9 +10,6 @@ class Restaurant(models.Model):
 	rating_choices = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
 	rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=rating_choices)
 	slug    = models.SlugField(unique=True)
-	slug    = models.SlugField(unique=True)
-	rating = models.PositiveSmallIntegerField('Rating', blank=True)
-
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Restaurant, self).save(*args, **kwargs)
