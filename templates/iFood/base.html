@@ -141,8 +141,8 @@
 		  		<a href="{% url 'account' %}">
 		  			{{ user.username }}
     	    	</a>
-                <a href="{ % url 'my-order' %}">
-                    Basket
+                <a href="{% url "cart:cart_detail" %}">
+                    Cart
                 </a>
                 </div>
     	   {% else %}

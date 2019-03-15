@@ -41,6 +41,12 @@
         
         .btn{
             background-color: lightgray;
+            right: 60px;
+            
+        }
+        
+        .form {
+            width: 40px;
         }
     
         </style>
@@ -55,9 +61,12 @@
 {% if dishes %}
 {% for dish in dishes %}
 <p><strong>{{dish.name}}</strong> &nbsp;&nbsp;
-<strong><b>£{{dish.price}}</strong></b></b>&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="button" class="btn btn-default btn-sm">
-    <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button></br>
+<strong><b>£{{dish.price}}</strong></b>&nbsp;
+<form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
+{% csrf_token %}
+<div class="form">{{ form.quantity|as_crispy_field }}</div>
+<input type="submit" value="add to cart" class="btn btn-default btn-sm">
+</form></p>
 
 <font color=grey>{{dish.description}}</font></p>
 {% endfor %}
