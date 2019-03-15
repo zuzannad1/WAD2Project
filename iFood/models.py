@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 import datetime
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -14,10 +15,30 @@ class Restaurant(models.Model):
 		self.slug = slugify(self.name)
 		super(Restaurant, self).save(*args, **kwargs)
     
-
 	def __str__(self):
 		return self.name
-	
+
+class Product(models.Model):
+        name = models.CharField(max_length = 128)
+        restaurant  = models.ForeignKey(Restaurant, null=True, related_name='products')
+        cuisine    = models.CharField(max_length = 20, default="None")
+        description = models.TextField(max_length = 300)
+        price       = models.DecimalField('Pounds amount',
+                                          max_digits=8, decimal_places=2, blank=True,null=True)
+        slug = models.SlugField(unique=True)
+
+        def save(self, *args, **kwargs):
+                self.slug = slugify(self.id)
+                super(Product, self).save(*args, **kwargs)
+		
+        class Meta:
+                index_together = (('id','slug'),)
+                ordering = ('name',)
+       
+        def __str__(self):
+                return self.name
+
+
 class UserProfile(models.Model):
         user = models.OneToOneField(User)
         address = models.CharField(max_length = 128, blank = True)
@@ -26,20 +47,7 @@ class UserProfile(models.Model):
 
         def __str__(self):
                 return self.user.username
-
-class Dishes(models.Model):
-        name = models.CharField(max_length = 128)
-        restaurant  = models.ForeignKey(Restaurant, null=True, related_name='dishes')
-        cuisine    = models.CharField(max_length = 20, default="None")
-        description = models.TextField(max_length = 300)
-        price       = models.DecimalField('Pounds amount',
-                                          max_digits=8, decimal_places=2, blank=True,null=True)
-
-        class Meta:
-                verbose_name_plural = 'Dishes'
-       
-        def __str__(self):
-                return self.name
+	      
         
 class Feedback(models.Model):
 	comment    = models.TextField(blank=True, null=True)
@@ -54,7 +62,6 @@ class Feedback(models.Model):
 
 	class Meta:
                 verbose_name_plural = 'Feedback'
-
 
 class Comments(models.Model):
         comment = models.TextField(blank=True, null=True)

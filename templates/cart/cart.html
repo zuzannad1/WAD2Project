@@ -7,9 +7,11 @@ Shopping Cart
 
 {% block body_block %}
 <html>
+    
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
-            .container {
+        .container {
                 position: relative;
                 top: -200px;
             }
@@ -17,10 +19,80 @@ Shopping Cart
         .btn-primary {
             background-color:#F6EEDD;
         }
+        
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 410px;
+            width: 550px;
+            left: 487px;
+            border: 10px solid beige;
+            z-index: 9;
+            background-color: beige;
+            opacity: 0.975;
+            border-radius: 20px;
+        }
+        
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: black;
+        }
+        
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+        
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        
+        /* Add a red background color to the cancel button */
+        .form-popup .cancel {
+            background-color: #F6795E;
+            color: white;
+        }
+        
+        .form-popup .form-fields {
+            color: #333;
+            right: 130px;
+        }
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+        
+        .form-popup .btn:hover, .cancel:hover {
+            opacity:1;
+        }
+        
+        .alert-success{
+            position:relative;
+            top: -600px;
+            height: 38px;
+            border-radius: 5px;
+            
+        }
+        
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+        
+        
         </style>
 <body>
 <div class="container">
-    <h2> Your shopping cart
+    <h2>
         {% with total_items=cart|length %}
         {% if cart|length > 0 %}
         My Order:
@@ -64,17 +136,43 @@ Shopping Cart
                 {% endfor %}
                 <tr style="background-color: #F6EEDD">
                     <td><b>Total</b></td>
-                    <td colspan="6"></td>
-                    <td colspan="5"><b>{{ cart.get_total_price }}</b></td>
+                    <td colspan="3"></td>
+                    <td><b>{{ cart.get_total_price }}</b></td>
                 </tr>
             </tbody>
         </table>
         <p class="text-right">
         <a href="{% url "index" %}" class="btn btn-default">Continue Browsing</a>
-        <a href="" class="btn btn-primary">Checkout</a>
+        <button class="btn btn-default" onclick="openForm()">Checkout</button>
         </p>
+        <div class="form-popup" id="myForm">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <button type="button" class="btn cancel" onclick="alertFunc()">Close</button>
+            
+        </div>
     </div>
 </div>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+
+function alertFunc() {
+    closeForm()
+    alert("Your order is being processed now! Thank you. Follow the link for My Order to view the details.")
+}
+</script>
 </body>
 </html>
 {% endblock %}

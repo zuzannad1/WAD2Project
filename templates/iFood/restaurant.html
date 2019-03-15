@@ -62,11 +62,14 @@
 {% for dish in dishes %}
 <p><strong>{{dish.name}}</strong> &nbsp;&nbsp;
 <strong><b>£{{dish.price}}</strong></b>&nbsp;
+{% if user.is_authenticated %}
 <form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
 {% csrf_token %}
 <div class="form">{{ form.quantity|as_crispy_field }}</div>
 <input type="submit" value="add to cart" class="btn btn-default btn-sm">
-</form></p>
+</form>
+{% endif %}
+</p>
 
 <font color=grey>{{dish.description}}</font></p>
 {% endfor %}

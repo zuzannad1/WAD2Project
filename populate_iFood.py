@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'project.settings')
 import django
 django.setup()
-from iFood.models import Restaurant, Dishes
+from iFood.models import Restaurant, Product
 
 
 def populate():
@@ -136,11 +136,11 @@ def populate():
             add_dishes(c, p["name"], p["cuisine"], p["description"], p["price"])
     # Print out the categories we have added.
     for c in Restaurant.objects.all():
-        for p in Dishes.objects.filter(restaurant=c):
+        for p in Product.objects.filter(restaurant=c):
             print("- {0} - {1}".format(str(c), str(p)))
 
 def add_dishes(cat, name, cuisine, description, price):
-    p = Dishes.objects.get_or_create(restaurant=cat, name=name)[0] 
+    p = Product.objects.get_or_create(restaurant=cat, name=name)[0] 
     p.cuisine = cuisine
     p.description = description
     p.price = price

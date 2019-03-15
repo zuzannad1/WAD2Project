@@ -19,10 +19,12 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+ 
 
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^cart/', include('cart.urls')),
     url(r'^iFood/', include('iFood.urls')),
     url(r'^admin/', admin.site.urls),
 

@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
-from django.http import HttpResponse
 from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm
 from iFood.forms import UserDetailsForm, FeedbackForm, RestaurantFeedbackForm
 from django.contrib import messages
@@ -14,7 +13,8 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django.shortcuts import get_object_or_404
-from iFood.models import Restaurant, Dishes
+from iFood.models import Restaurant, Product
+from cart.forms import CartAddProductForm
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -95,7 +95,11 @@ def user_login(request):
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
-
+   
+@login_required
+def my_order(request):
+    return render(request, 'iFood/my-order.html',{})
+   
 def web_feedback(request):
    if request.method == 'POST':
        feedback_form = FeedbackForm(request.POST)
@@ -106,28 +110,32 @@ def web_feedback(request):
    else:
        feedback_form = FeedbackForm()
    return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
-   
+
+#Works
 def show_restaurant(request, restaurant_name_slug):
    context_dict = {}
    restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
    try:
-       dishes = Dishes.objects.filter(restaurant=restaurant)
+       dishes = Product.objects.filter(restaurant=restaurant)
        context_dict['restaurant'] = restaurant
        context_dict['dishes'] = dishes
+       for dish in dishes:
+          form = product_detail(request, id=dish.id, slug=dish.slug)
+          context_dict['form'] = form
    except restaurant.DoesNotExist:
         context_dict['restaurant'] = None
         context_dict['dishes'] = None
-   
    return render(request, 'iFood/restaurant.html', context_dict)
 
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product, id=id, slug=slug)
+    cart_product_form = CartAddProductForm()
+    context = {
+        'product': product,
+        'cart_product_form': cart_product_form}
+    return cart_product_form
+   
 def contact(request):
     return render(request, 'iFood/contact.html',{})
-   
-@login_required
-def checkout(request):
-    return render(request, 'iFood/checkout.html',{})
-   
-@login_required
-def my_order(request):
-    return render(request, 'iFood/my-order.html',{})
 
+   

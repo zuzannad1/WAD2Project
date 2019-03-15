@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'iFood',
     'reset_migrations',
     'crispy_forms',
+    'cart',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -148,3 +151,5 @@ MEDIA_URL = '/media/'
 LOGIN_URL = 'iFood/login/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CART_SESSION_ID = 'cart'
