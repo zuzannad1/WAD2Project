@@ -107,7 +107,8 @@ Account Details
                Click on My Order button to display your current order details. </p>
             </center>
            <button class="open-button" onclick="openForm()">User Details</button>
-           <button class="open-button" onclick="openForm1()">My Order</button>
+           <button class="open-button"><a href="{% url "my-order" %}">
+               My Order</a></button>
         </div>
 		<div class="form-popup" id="myForm">
                 <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">
@@ -118,27 +119,13 @@ Account Details
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>
         </div>
-        <div class="form-popup" id="myForm1">
-            <p> This is a pop-up my order window where details about the order and time elapsing
-            for the order to be completed will be displayed</p>
-                <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
-
-        </div>
-
-
         <script>
             function openForm() {
                 document.getElementById("myForm").style.display = "block";
             }
-        function openForm1() {
-            document.getElementById("myForm1").style.display = "block";
-        }
         
         function closeForm() {
             document.getElementById("myForm").style.display = "none";
-        }
-        function closeForm1() {
-            document.getElementById("myForm1").style.display = "none";
         }
         
         function alertFunc() {

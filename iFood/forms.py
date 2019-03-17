@@ -59,4 +59,5 @@ class RestaurantFeedbackForm(forms.ModelForm):
         fields = ('rating',)
         model = Restaurant
 
-    
+
+

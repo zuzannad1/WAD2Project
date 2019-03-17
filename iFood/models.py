@@ -55,7 +55,10 @@ class Feedback(models.Model):
 	created_at = models.DateField(default=datetime.date.today())
 	restaurant = models.ForeignKey(Restaurant)
 	rating_choices = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
-	rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=rating_choices)
+	rating = models.PositiveSmallIntegerField('Rating (stars)',
+                                                  blank=False,
+                                                  default=3,
+                                                  choices=rating_choices)
 	
 	def __str__(self):
                 return self.comment
@@ -72,3 +75,5 @@ class Comments(models.Model):
 
         class Meta:
                 verbose_name_plural = "Comments"
+
+

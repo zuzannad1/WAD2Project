@@ -16,8 +16,9 @@ Shopping Cart
                 top: -200px;
             }
         
-        .btn-primary {
-            background-color:#F6EEDD;
+        .btn-default {
+            background-color: #A19F9C;
+            color: black;
         }
         
         .form-popup {
@@ -89,6 +90,8 @@ Shopping Cart
         }
         
         
+        
+        
         </style>
 <body>
 <div class="container">
@@ -96,7 +99,7 @@ Shopping Cart
         {% with total_items=cart|length %}
         {% if cart|length > 0 %}
         My Order:
-        <a href="{% url "cart:cart_detail" %}" style="color: violet">
+        <a href="{% url "cart:cart_detail" %}" style="color: #3124F1">
             {{ total_items }} item{{ total_items|pluralize }} - £
             {{ cart.get_total_price }}
         </a>
@@ -123,8 +126,8 @@ Shopping Cart
                             {% csrf_token %}
                             {{ item.update_quantity_form.quantity}}
                             {{ item.update_quantity_form.update}}
-                            <input type="submit" value="Update" class="btn btn-primary">
-                                </form>
+                            <input type="submit" value="Update" class="btn btn-default">
+                        </form>
                     </td>
                     <td>
                     <a href="{% url "cart:cart_remove" product.id %}">Remove</a>
@@ -141,22 +144,46 @@ Shopping Cart
                 </tr>
             </tbody>
         </table>
-        <p class="text-right">
-        <a href="{% url "index" %}" class="btn btn-default">Continue Browsing</a>
-        <button class="btn btn-default" onclick="openForm()">Checkout</button>
-        </p>
         <div class="form-popup" id="myForm">
-            <h3>Payment</h3>
-            <label for="fname">Accepted Cards</label>
-            <div class="icon-container">
-                <i class="fa fa-cc-visa" style="color:navy;"></i>
-                <i class="fa fa-cc-amex" style="color:blue;"></i>
-                <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                <i class="fa fa-cc-discover" style="color:orange;"></i>
-            </div>
-            <button type="button" class="btn cancel" onclick="alertFunc()">Close</button>
-            
+            <div class="col-50">
+                <h2> Delivery address :</h2>
+                <p>{{user.userprofile.address}}</p>
+                <a href="{% url "account"%}">Edit address</a>
+                <hr>
+                <h3>Payment</h3>
+                <label for="fname">Accepted Cards</label>
+                <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                </div>
+                <label for="cname">Name on Card</label>
+                <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        <label for="expmonth">Exp Month</label>
+                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Exp Year</label>
+                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                        </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="352">
+                                        </div>
+                            </div>
+                            </div>
+                <button type="submit" class="btn btn-success" onclick="alertFunc()">Submit and Pay!</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </div>
+        <p class="text-right">
+       <button class="btn btn-default"><a href="{% url "index" %}">Continue Browsing</a></button>
+       {% if cart|length > 0 %} <button class="btn btn-default" onclick="openForm()">Checkout</button></h2> {% endif %}
+        </p>
+        <h2> Already ordered? <button class="btn btn-default"><a href="{% url "my-order" %}">
+            My Order</a></button></h2>
     </div>
 </div>
 <script>

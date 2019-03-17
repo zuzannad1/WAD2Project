@@ -1,14 +1,15 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
 
-
+{% load crispy_forms_tags %}
 
 {% block title_block %}
-    Check Out
+My Order
 {% endblock %} 
 
 
 {%block body_block %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 h1 {
   color: #000000;
@@ -44,7 +45,26 @@ h1 {
   padding-top: 5px;
   font-size: 16px;
 }
+
+.icon-container {
+    font-size: 50px;
+}
+
+.body {
+    position: relative;
+    top: -250px;
+}
 </style>
+<div id="body">
+    {% if cart|length > 0 %}
+    Your order:
+    {% for item in cart %}
+    {% with product=item.product  %}
+    {{product.name}} x {{item.quantity}}
+    {% endwith %}
+    {% endfor %}
+    
+</div>
 <h3>Time to deliver : </h3>
 				<div id="clockdiv">
 		  			<div>
@@ -59,8 +79,14 @@ h1 {
 		    			<span class="seconds"></span>
 		    			<div class="smalltext">Seconds</div>
 		  			</div>
+                    {% else %}
+                    <h2> Your current order is empty </h2>
 				</div>
+
+                
+{% endif %}
  <script>
+ 
  function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor((t / 1000) % 60);

@@ -15,6 +15,8 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django.shortcuts import get_object_or_404
 from iFood.models import Restaurant, Product
 from cart.forms import CartAddProductForm
+from cart.cart import Cart
+
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -95,10 +97,7 @@ def user_login(request):
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
-   
-@login_required
-def my_order(request):
-    return render(request, 'iFood/my-order.html',{})
+
    
 def web_feedback(request):
    if request.method == 'POST':
@@ -137,5 +136,12 @@ def product_detail(request, id, slug):
    
 def contact(request):
     return render(request, 'iFood/contact.html',{})
+
+@login_required
+def my_order(request):
+    cart = Cart(request)
+   # cart.clear()
+  
+    return render(request, 'iFood/my-order.html', {})
 
    
