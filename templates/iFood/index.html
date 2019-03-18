@@ -7,758 +7,254 @@
 
 {%block body_block %}
 	<style>
+.main {
+	background-size: cover;
+	display: table;
+	height: 100px;
+	width: 100%;
+	position: relative;
+}
+.main img { 
+  	width: 100%;
+  	height: auto;
+  	opacity: 0.4;
+}
+.landing-text {
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	font-size: 25px;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	color: #000000;
+	text-shadow: 0 0 2px #E0FFFF;
+}
+.landing-text h1 {
+	text-align: center;
+  	margin-top: 50px;
+	color: #000000;
+	font-size: 50px;
+	font-weight: 700;
+    text-shadow: 0 0 2px #E0FFFF;
+}
 
-		/* MENU VERTICAL */
-		
-		#vertical .navbar-brand {
-		}
-		#vertical .ttmenu-full.open {
-		  	float: left;
-		    max-width: 100%;
-		    width: 100% !important;
-		    position: absolute; 
-		}
-		#vertical .navbar-default,
-		#vertical .navbar-default .nav,
-		#vertical .navbar-default .collapse,
-		#vertical .navbar-default .dropup,
-		#vertical .navbar-default .dropdown {
-		    position: static;
-		    width: 100% !important;
-		    left:0;
-		}
-		#vertical .navbar-collapse {
-		    padding: 0
-		}
-		#vertical .navbar-default .navbar-nav li .vertical-menu {
-		    opacity: 1;
-		    position: absolute;
-		    left: 240px !important;
-		    right: 0 !important;
-		    top:auto;
-		    margin-top: -65px !important;
-		    max-width: 100%;
-		    padding:0;
-		}
-		
-		#vertical .navbar-default .navbar-nav li .vertical-dropdown-menu {
-		    opacity: 1;
-		    position: absolute;
-		    left: 240px !important;
-		    right: 0 !important;
-		    top:auto;
-		    margin-top: -65px !important;
-		    max-width: 240px;
-		    padding:0;
-		}
-		#vertical .navbar-default .navbar-nav li .dropdown {
-		    width: 240px !important
-		}
-		#vertical .navbar-default .navbar-nav li ul {
-		    width: 100% !important
-		}
-		#vertical .dropdown-menu, 
-		#vertical .navbar-default .ttmenu-content {
-		    padding:20px;
-		}
-		#vertical .nav-pills {
-		    max-width: 200px;
-		}
-		#vertical .dropme:after{
-		    content: "\f036";
-		    color:#fff;
-		    position: absolute;
-		    right: 20px;
-		    padding-left: 5px;
-		    font-family: 'FontAwesome';
-		}
-		
-		/* MENU DEFAULT */
-		
-		.ttmenu .navbar-default {
-			border:0;
-		    width: 100% !important;
-		    border-radius: 0;
-		}
-		.ttmenu .navbar-default .dropdown-menu {
-		    background: rgb(255,255,255); 
-		    box-shadow:none !important;
-			border:0;
-		}
-		.ttmenu .navbar-default .dropdown-menu,
-		.ttmenu .navbar-default .dropdown-menu li a {
-		    color:#282828;
-			list-style:none;
-		    background-color: transparent !important;
-		}
-		.white-style .navbar-brand i {
-		    color:#ffffff !important;
-		}
-		.ttmenu .navbar-default .navbar-toggle span {
-			color:#fff !important;
-			background:#fff !important;
-		}
-		.ttmenu .navbar-default .navbar-toggle {
-			border-color:#111;
-			color:#fff !important;
-			margin-top:15px;
-		}
-		.ttmenu .navbar ul {
-			padding-left:0;
-			list-style:none;
-		}
-		.ttmenu .navbar-brand {
-		    color: #fff !important;
-		    float: left;
-		    font-size: 20px;
-		    height:65px;
-			background:#303030;
-		    line-height: 38px;
-		    position: relative;
-		    text-align: center;
-		    top: 0;
-		    width:65px;
-		}
-		.ttmenu .navbar-collapse {
-		    border-bottom: 0  !important;
-		}
-		.ttmenu .navbar-default .navbar-nav > li > .dropdown-menu {
-		    margin-top:0;
-		}
-		.ttmenu .navbar-default .nav,
-		.ttmenu .navbar-default .collapse,
-		.ttmenu .navbar-default .dropup,
-		.ttmenu .navbar-default .dropdown {
-		    position: static;
-		}
-		.ttmenu .navbar-default .container {
-		    position: relative;
-		}
-		.ttmenu .navbar-default .dropdown-menu {
-		    left: auto;
-		    background-color: #ffffff !important
-		}
-		.ttmenu-content .box li,
-		.ttmenu .navbar-default .dropdown-menu li a {
-			text-decoration:none !important;
-		}
-		.ttmenu .navbar-default .dropdown-menu,
-		.ttmenu-content .dropdown-menu {
-			padding:0 !important
-		}
-		.navbar-default .navbar-nav > li > a {
-		    padding-bottom: 20px;
-		    padding-top: 23px;
-			font-family: "Raleway",Arial,sans-serif;
-			font-size: 20px;
-			height:65px;
-		    font-style: normal;
-			color:#fff !important;
-		    font-weight: 700;
-		    text-transform: uppercase;
-		}
-		.navbar-default .dropdown-menu li a  {
-			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-		    color: #282828;
-		    font-size: 13px;
-		    font-weight: 400;
-			font-family: "Raleway",Arial,sans-serif;
-		    padding: 13px 10px 13px 15px !important;
-		    position: relative;
-			text-decoration:none;
-		    text-transform: none;
-		}
-		.ttmenu .navbar-default li .widget a {
-			padding:0 !important;
-		}
-		.ttmenu-content .box li a{
-		    color: #282828;
-		    font-size: 15px;
-			border-bottom:none;
-			border-bottom:0 !important;
-		    font-weight: 400;
-			font-family: "Raleway",Arial,sans-serif;
-		    padding: 14px 30px 12px 0 !important;
-		    position: relative;
-			text-decoration:none;
-		    text-transform: none;
-		}
-		.ttmenu .dropdown-menu,
-		.ttmenu .navbar-default .ttmenu-content {
-		    padding:30px 30px;
-		}
-		.ttmenu .navbar-default .ttmenu-full .dropdown-menu {
-		    left: 0;
-		    right: 0;
-		}
-		.ttmenu .nav li span.label {
-			color:#fff !important;
-		    margin-left: 5px;
-		    margin-top: 2px !important;
-		    padding: 5px 10px;
-		}
-		.ttmenu .navbar-default .navbar-nav > .active > a, 
-		.ttmenu .navbar-default .navbar-nav > .active > a:hover, 
-		.ttmenu .navbar-default .navbar-nav > .active > a:focus {
-		    background-color: transparent;
-		}
-		.ttmenu-content .widget {
-		    padding:0;
-		    margin:0;
-		}
-		.ttmenu-content,
-		.ttmenu-content .widget,
-		.ttmenu-content .widget .thumb {
-		    position: relative;
-		}
-		.ttmenu-content .widget .title h4 {
-		    font-size:14px;
-		    text-transform: uppercase;
-		    font-weight: 400;
-		}
-		.ttmenu-content .box li {
-		    border-bottom: 1px solid #ededed;
-		    position: relative;
-			padding:10px 500px 10px 0;
-		}
-		.ttmenu-content .box li i {
-		    right:0;
-		    clear: both;
-		    top:10px;
-		    display:block;
-		    position: relative;
-		}
-		.dropme:after{
-		    content: "\f036";
-		    color:#fff;
-		    padding-left: 5px;
-		    font-family: 'FontAwesome';
-		}
-		.dropme-left:after{
-		    content: "\f036";
-		    color:#1a1a1a;
-		    font-family: 'FontAwesome';
-		    display:block;
-			right:10px;
-		    width:0;
-			position:absolute;
-		    height:0;
-			top:13px;
-		    margin-top:0;
-		    margin-right:0px;
-		}
-		.navbar-default .dropdown-menu li:last-child,
-		.ttmenu-content .box li:last-child {
-		    border-bottom:0 solid #fff;
-		}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-		.box h4 {
-		    color:#1a1a1a;
-		    font-weight: bold;
-		    font-size:20px;
-		}
-		.box ul li span {
-			float:right;
-			margin-top:4px;
-		}
-		
-		/* MENU GRADIENT */
-		
-		.demo_changer .demo-icon,
-		.menu-color-gradient .btn-primary,
-		.menu-color-gradient .label-danger,
-		.menu-color-gradient .navbar-brand,
-		.menu-color-gradient .navbar-default .navbar-nav > .open > a,
-		.menu-color-gradient .navbar-default .navbar-nav > .open > a:hover,
-		.menu-color-gradient .navbar-default .navbar-nav > .open > a:focus,
-		.menu-color-gradient .navbar-default .navbar-nav > li > a:focus,
-		.menu-color-gradient .navbar-default .navbar-nav > li > a:active,
-		.menu-color-gradient .navbar-default .navbar-nav > li > a.active,
-		.menu-color-gradient .navbar-default .navbar-nav > li > a:hover {
-		    background-color: transparent;
-		  border-top:2px solid #f97352;
-		    opacity:1;
-		}
-		.menu-color-gradient .navbar-default .navbar-toggle:hover,
-		.menu-color-gradient .coldesc:hover {
-		    background:#f97352;
-		    color:#fff !important;
-		}
-		.menu-color-gradient .form-control:focus {
-		    border-color: #f97352;
-		    outline: 0;
-		    box-shadow:none;
-		}
-		.menu-color-gradient .btn-primary {
-		    border-radius:0;
-		    font-size:13px;
-		    background-color: #f97352 !important;
-		    border-color: #f97352 !important;
-		    color: #fff !important;
-		}
-		.menu-color-gradient .box ul li:hover .fa {
-		    color: #f97352 !important;
-		}
-		.menu-color-gradient .magnifier {
-		    background-color:rgba(169,3,41,.9);
-		}
-		
-		/* DARK STYLE */
-		
-		.dark-style .coldesc {
-		    background:#333;
-		    color:#fff;
-		    margin-bottom: 10px;
-		    text-align:center;
-		}
-		.dark-style .navbar-default .ttmenu-content {
-		    border-radius: 0;
-		}
-		.dark-style .dropdown-menu {
-		    background-color:#ffffff !important;
-		}
-		.dark-style .navbar-default .dropdown-menu li a,
-		.dark-style .ttmenu-content .box li a,
-		.dark-style .ttmenu-content .box li:before {
-		    color:#1a1a1a !important;
-		}
-		.dark-style .ttmenu-content .box li a:hover,
-		.dark-style .ttmenu-content .box li a:focus {
-		    background:none !important
-		}
-		.dark-style .ttmenu-content .box li {
-		    border-bottom-color: rgba(0, 0, 0, 0.1);
-		}
-		.dark-style .navbar-default .dropdown-menu li a:hover,
-		.dark-style .navbar-default .dropdown-menu li a:focus {
-		    background:#ffffff;
-		}
 
-		.dark-style .navbar-default {
-		    background: transparent!important; 
-		 
-		}
-		
-		/* RESPONSIVE */
-		
-		@media (max-width: 100px) {
-		
-		    #vertical .navbar-brand {
-		        width: 60px;
-		    }
-		    #vertical .ttmenu-full.open {
-		        max-width: 100%;
-		        width: 100% !important;
-		        position: relative;
-		    }
-		    #vertical .navbar-default,
-		    #vertical .navbar-default .nav,
-		    #vertical .navbar-default .collapse,
-		    #vertical .navbar-default .dropup,
-		    #vertical .navbar-default .dropdown {
-		        position: static;
-		        width: 100% !important;
-		        left:0;
-		    }
-		    #vertical .navbar-collapse {
-		        padding: 0
-		    }
-		    #vertical .navbar-default .navbar-nav li .vertical-menu {
-		        opacity: 1;
-		        position: static;
-		        left: 100% !important;
-		        right: 100% !important;
-		        top:auto;
-		        margin-top: 0 !important;
-		        max-width: 100%;
-		        padding:0;
-		    }
-		    #vertical .navbar-default .navbar-nav li .vertical-dropdown-menu {
-		        opacity: 1;
-		        position: static;
-		        left: 100% !important;
-		        right: 100% !important;
-		        top:auto;
-		        margin-top: 0 !important;
-		        max-width: 100%;
-		        padding:0;
-		    }
-		    #vertical .navbar-collapse {
-		        padding:0 0 0 20px;
-		    }
-		    #vertical .dropdown-menu, 
-		    #vertical .navbar-default .ttmenu-content {
-		        padding:0px;
-		    }
-		    #vertical .nav-pills {
-		        max-width: 200px;
-		    }
-		    #vertical .dropme:after{
-		        content: "\f036";
-		        color:#fff;
-		        position: absolute;
-		        right: 20px;
-		        padding-left: 5px;
-		        font-family: 'FontAwesome';
-		    }
-		    .nav-pills > li > a::after,
-		    .dropme-left:after{
-		        content: "\f036";
-		    }
-		    .ttmenu .nav-pills,
-		    #vertical .nav-pills {
-		        width: 100%;
-		        padding:0;
-		        max-width: 100%;
-		        margin-bottom: 20px;
-		    }
-		}
+ul { list-style-type: none; }
 
-		.ttmenu .open > .dropdown-menu {
-		  animation-name: slidenavAnimation;
-		  animation-duration:.5s;
-		  animation-iteration-count: 1;
-		  animation-timing-function: ease;
-		  animation-fill-mode: forwards;
-		  -webkit-animation-name: slidenavAnimation;
-		  -webkit-animation-duration:.5s;
-		  -webkit-animation-iteration-count: 1;
-		  -webkit-animation-timing-function: ease;
-		  -webkit-animation-fill-mode: forwards;
-		  -moz-animation-name: slidenavAnimation;
-		  -moz-animation-duration:.5s;
-		  -moz-animation-iteration-count: 1;
-		  -moz-animation-timing-function: ease;
-		  -moz-animation-fill-mode: forwards;
-		}
-		@keyframes slidenavAnimation {
-		  from {
-		    opacity: 0;
-		  }
-		  to {
-		    opacity: 1;
-		  }
-		}
-		@-webkit-keyframes slidenavAnimation {
-		  from {
-		    opacity: 0;
-		  }
-		  to {
-		    opacity: 1;
-		  }
-		.img-container {
-		  float: left;
-		  width: 50%;
-		  padding: 20px;
-		}
-		
-		.clearfix::after {
-		  content: "";
-		  clear: both;
-		  display: table;
-		}
-		/* RATING - Form */
-		.rating-form {
-			margin-top: 40px;
-		}
-		
-			/* RATING - Form - Group */
-			.rating-form .form-group {
-		    position: relative;
-		    border: 0;
-			}
-		
-			/* RATING - Form - Legend */
-			.rating-form .form-legend {
-				display: none;
-				margin: 0;
-				padding: 0;
-				font-size: 20px; font-size: 2rem;
-				/*background: green;*/
-			}
-		
-			/* RATING - Form - Item */
-			.rating-form .form-item {
-				position: relative;
-				margin: auto;
-				width: 300px;
-				text-align: center;
-				direction: rtl;
-				/*background: green;*/
-			}
-		
-			.rating-form .form-legend + .form-item {
-				padding-top: 10px;
-			}
-		
-				.rating-form input[type='radio'] {
-					position: absolute;
-					left: -9999px;
-				}
-		
-			  /* RATING - Form - Label */
-			  .rating-form label {
-				display: inline-block;
-				cursor: pointer;
-			  }
-		
-				.rating-form .rating-star {
-		       display: inline-block;
-					position: relative;
-				}
-		
-			.rating-form input[type='radio'] + label:before {
-				content: attr(data-value);
-				position: absolute;
-				right: 30px; top: 83px;
-				font-size: 30px; font-size: 3rem;
-				opacity: 0;
-				direction: ltr;
-				.transition();
-			}
-		
-			.rating-form input[type='radio']:checked + label:before {
-				right: 25px;
-				opacity: 1;
-			}
-		
-			.rating-form input[type='radio'] + label:after {
-				content: "/ 5";
-				position: absolute;
-				right: 5px; top: 96px;
-				font-size: 16px; font-size: 1.6rem;
-				opacity: 0;
-				direction: ltr;
-				.transition();
-			}
-		
-			.rating-form input[type='radio']:checked + label:after {
-				/*right: 5px;*/
-				opacity: 1;
-			}
-		
-				.rating-form label .fa {
-				  font-size: 60px; font-size: 6rem;
-				  line-height: 60px;
-				  .transition();
-				}
-		
-				.rating-form label .fa-star-o {
-		
-				}
-		
-				.rating-form label:hover .fa-star-o,
-				.rating-form label:focus .fa-star-o,
-				.rating-form label:hover ~ label .fa-star-o,
-				.rating-form label:focus ~ label .fa-star-o,
-				.rating-form input[type='radio']:checked ~ label .fa-star-o {
-				  opacity: 0;
-				}
-		
-				.rating-form label .fa-star {
-				  position: absolute;
-				  left: 0; top: 0;
-				  opacity: 0;
-				}
-		
-				.rating-form label:hover .fa-star,
-				.rating-form label:focus .fa-star,
-				.rating-form label:hover ~ label .fa-star,
-				.rating-form label:focus ~ label .fa-star,
-				.rating-form input[type='radio']:checked ~ label .fa-star {
-				  opacity: 1;
-				}
-		
-				.rating-form input[type='radio']:checked ~ label .fa-star {
-				  color: gold;
-				}
-		
-				.rating-form .ir {
-				  position: absolute;
-				  left: -9999px;
-				}
-		
-			/* RATING - Form - Action */
-			.rating-form .form-action {
-				opacity: 0;
-				position: absolute;
-				left: 5px; bottom: -40px;
-				.transition();
-			}
-		
-			.rating-form input[type='radio']:checked ~ .form-action {
-			  cursor: pointer;
-			  opacity: 1;
-			}
-		
-			.rating-form .btn-reset {
-				display: inline-block;
-				margin: 0;
-				padding: 4px 10px;
-				border: 0;
-				font-size: 10px; font-size: 1rem;
-				background: #fff;
-				color: #333;
-				cursor: auto;
-				border-radius: 5px;
-				outline: 0;
-				.transition();
-			}
-		
-			   .rating-form .btn-reset:hover,
-			   .rating-form .btn-reset:focus {
-				 background: gold;
-			   }
-		
-			   .rating-form input[type='radio']:checked ~ .form-action .btn-reset {
-				 cursor: pointer;
-			   }
-		
-		
-			/* RATING - Form - Output */
-			.rating-form .form-output {
-				display: none;
-				position: absolute;
-				right: 15px; bottom: -45px;
-				font-size: 30px; font-size: 3rem;
-				opacity: 0;
-				.transition();
-			}
-		
-			.no-js .rating-form .form-output {
-				right: 5px;
-				opacity: 1;
-			}
-		
-			.rating-form input[type='radio']:checked ~ .form-output {
-				right: 5px;
-				opacity: 1;
-			}
-	</style>
-	<h1> Welcome to iFood ! </h1>
-	<p>Eats whatever you want !</p>
-	<div class="clearfix">
-  		<div class="img-container">
-			<img src="{% static "images/home2.jpg" %}"alt="home2" style="width:250px;margin-left:20px"/>
-			<img src="{% static "images/home1.jpg" %}"alt="home1" style="width:250px;margin-right:20px"/>
-		</div>
+a {
+  color: #b63b4d;
+  text-decoration: none;
+}
+
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+
+
+.drop h1 {
+  background: #F8F8FF;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 80px;
+  font-size: 45px;
+}
+
+.drop h1 a {
+  color: #c12c42;
+  font-size: 16px;
+}
+
+.accordion {
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto 50px;
+  background: #FFFAFA;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.accordion .link {
+  cursor: pointer;
+  display: block;
+  padding: 15px 15px 15px 42px;
+  color: #4D4D4D;
+  font-size: 30px;
+  font-weight: 700;
+  border-bottom: 1px solid #CCC;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link { border-bottom: 0; }
+
+.accordion li i {
+  position: absolute;
+  top: 25px;
+  left: 12px;
+  font-size: 30px;
+  color: #595959;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+  right: 12px;
+  left: auto;
+  font-size: 20px;
+}
+
+.accordion li.open .link { color: #A9A9A9; }
+
+.accordion li.open i { color: #A9A9A9; }
+
+.accordion li.open i.fa-chevron-down {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+
+
+.submenu {
+  display: none;
+  background: #444359;
+  font-size: 20px;
+}
+
+.submenu li { border-bottom: 1px solid #4b4a5e; }
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  color: #d9d9d9;
+  padding: 12px;
+  padding-left: 42px;
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+  background: #D3D3D3;
+  color: #000000;
+}
+
+@media screen and (max-width:768px) {
+	.landing-text h1 {
+		font-size: 300%;
+   }
+} 
+
+
+</style>
+<body>
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<div class="main">
+		<img src="{% static "images/background.jpg" %}"alt="home4"width="1000" height="300" />
+		<div class="landing-text">
+			<h1>Welcome to iFood !</h1>
+			<p>Eats whatever you want !</p>
+		</div>	
 	</div>
-	<body>
-	<link href="https://www.skazee.com/resp/mmenu/tt/font-awesome.css" rel="stylesheet">
-	<!-- Bootstrap Styles -->
-	<link href="https://www.skazee.com/resp/mmenu/tt/bootstrap.css" rel="stylesheet">
-	<div class="container">
-    	<div class="hero">
-            <div class="hovermenu ttmenu dark-style menu-color-gradient"> 
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown ttmenu-full">
-                            	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Indian Cuisine<b class="dropme"></b></a>
-             	 				<ul class="dropdown-menu">
-                                    <li>
-                                    <div class="ttmenu-content">
-                                   		<div class="tabbable row">
-					                    	<div class="col-md-9">
-					                      		<div class="tab-content">
-					                          		<div id="tabs5-pane1" class="tab-pane active">
-					                            		<div class="row">
-						                              		<div class="col-md-4">
-						                                		<div class="box">
-		                                                			<ul>
-				                                                    	<li><h4>Indian Cuisine</h4></li>
-                                                                        <li><a href="/iFood/curry-pot">Curry Pot<span class="fa fa-spoon"></span></a></li>
-				                                                        <li><a href="/iFood/indian-orchard">Indian Orchard<span class="fa fa-spoon"></span></a></li>
-				                                                        <li><a href="/iFood/bollywood-spice">Bollywood Spice<span class="fa fa-spoon"></span></a></li>
-				                                                	</ul>
-				                                                </div>
-				                                        	</div>
-				                                    	</div>        
-			                                    	</div>
-                                            	</div><!-- end box -->
-                                        	</div><!-- end col -->
-                                        </div><!-- /.tabbable -->
-                                    </div><!-- end ttmenu-content -->
-                                    </li>
-                                </ul>
-                            </li><!-- end mega menu -->
-                            <li class="dropdown ttmenu-full">
-                            	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Western Cuisine <b class="dropme"></b></a>
-              					<ul class="dropdown-menu">
-                                    <li>
-                                    <div class="ttmenu-content">
-                                        <div class="tabbable row">
-                                         	<div class="col-md-3">
-                                            	<div class="box">
-                                                	<ul>
-                                                    	<li><h4>Western Cuisine</h4></li>
-                                                        <li><a href="/iFood/number-sixteen">Number Sixteen<span class="fa fa-spoon"></span></a></li>
-                                                        <li><a href="/iFood/cote-brasserie">Cote Brasserie<span class="fa fa-spoon"></span></a></li>
-                                                        <li><a href="/iFood/steak-and-cherry">Steak and Cherry<span class="fa fa-spoon"></span></a></li>
-                                                	</ul>
-                                            	</div><!-- end box -->
-                                        	</div><!-- end col -->
-                                        </div><!-- /.tabbable -->
-                                    </div><!-- end ttmenu-content -->
-                                    </li>
-                                </ul>
-                            </li><!-- end mega menu -->
-                            <li class="dropdown ttmenu-full">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Italian Cuisine <span class="dropme"></span></a>
-              					<ul class="dropdown-menu">
-                                    <li>
-                                    <div class="ttmenu-content">
-                                        <div class="tabbable row">
-                                         	<div class="col-md-3">
-                                            	<div class="box">
-                                                	<ul>
-                                                    	<li><h4>Italian Cuisine</h4></li>
-                                                        <li><a href="/iFood/grillicious-mediterranean-dishes">Grillicious Mediterranean Dishes<span class="fa fa-spoon"></span></a></li>
-                                                        <li><a href="/iFood/pastaios">Pastaios<span class="fa fa-spoon"></span></a></li>
-                                                        <li><a href="/iFood/tony-macaroni">Tony Macaroni<span class="fa fa-spoon"></span></a></li>
-                                                	</ul>
-                                            	</div><!-- end box -->
-                                        	</div><!-- end col -->
-                                        </div><!-- /.tabbable -->
-                                    </div><!-- end ttmenu-content -->
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown ttmenu-full">
-                            	<a href="#" data-toggle="dropdown" class="dropdown-toggle">Asian Cuisine <b class="dropme"></b></a>
-						            <ul class="dropdown-menu">
-                                    <li>
-                                    <div class="ttmenu-content">
-                                        <div class="tabbable row">
-                                         	<div class="col-md-3">
-                                            	<div class="box">
-                                                	<ul>
-                                                    	<li><h4>Asian Cuisine</h4></li>
-                                                        <li><a href="/iFood/station-wok">Station Wok<span class="fa fa-laptop"></span></a></li>
-                                                        <li><a href="/iFood/temaki">Temaki<span class="fa fa-laptop"></span></a></li>
-                                                        <li><a href="/iFood/feng-huang">Feng Huang<span class="fa fa-laptop"></span></a></li>
-                                                	</ul>
-                                            	</div><!-- end box -->
-                                        	</div><!-- end col -->
-                                        </div><!-- /.tabbable -->
-                                    </div><!-- end ttmenu-content -->
-                                    </li>
-                                </ul>
-                            </li><!-- end mega menu -->
-                        </ul><!-- end nav navbar-nav -->
-                    </div><!--/.nav-collapse -->
-                </div><!-- end navbar navbar-default clearfix -->
-            </div><!-- end menu 1 -->  
-        </div><!-- end hero -->  
-	</div><!-- /container -->
-    <!-- Main jQuery-->
-   	<img src="{% static "images/home3.jpg" %}"alt="home3" style="width:250px"/>
-	<img src="{% static "images/home4.jpg" %}"alt="home4" style="width:250px"/>
-<script src="https://www.skazee.com/resp/mmenu/tt/jquery.js"></script>
-<!-- Bootstrap -->
-<script src="https://www.skazee.com/resp/mmenu/tt/bootstrap.min.js"></script>
-<!-- TT Menu -->
-<script src="https://www.skazee.com/resp/mmenu/tt/ttmenu.js"></script>
-</body>
+		
 
+<div class="drop">
+	<h1>Cuisines</h1>
+	<!-- Contenedor -->
+	<ul id="accordion" class="accordion">
+	  <li>
+	    <div class="link">Indian Cuisine<i class="fa fa-chevron-down"></i></div>
+	    <ul class="submenu">
+	      <li><a href="/iFood/curry-pot">Curry Pot</a></li>
+	      <li><a href="/iFood/indian-orchard">Indian Orchard</a></li>
+	      <li><a href="/iFood/bollywood-spice">Bollywood Spice</a></li>
+	    </ul>
+	  </li>
+	  <li>
+	    <div class="link">Western Cuisine<i class="fa fa-chevron-down"></i></div>
+	   	<ul class="submenu">
+	      <li><a href="/iFood/number-sixteen">Number Sixteen</a></li>
+	      <li><a href="/iFood/cote-brasserie">Cote Brasserie</a></li>
+	      <li><a href="/iFood/steak-and-cherry">Steak and Cherry</a></li>
+	    </ul>
+	  </li>
+	  <li>
+	    <div class="link">Italian Cuisine<i class="fa fa-chevron-down"></i></div>
+	    <ul class="submenu">
+	      <li><a href="/iFood/grillicious-mediterranean-dishes">Grillicious Mediterranean Dishes</a></li>
+	      <li><a href="/iFood/pastaios">Pastaios</a></li>
+	      <li><a href="/iFood/tony-macaroni">Tony Macaroni</a></li>
+	    </ul>
+	  </li>
+	  <li>
+	    <div class="link">Asian Cuisine<i class="fa fa-chevron-down"></i></div>
+	    <ul class="submenu">
+	      <li><a href="/iFood/station-wok">Station Wok</a></li>
+	      <li><a href="/iFood/temaki">Temaki</a></li>
+	      <li><a href="/iFood/feng-huang">Feng Huang</a></li>
+	    </ul>
+	  </li>
+	</ul>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$(function() {
+	var Accordion = function(el, multiple) {
+		this.el = el || {};
+		this.multiple = multiple || false;
+
+		// Variables privadas
+		var links = this.el.find('.link');
+		// Evento
+		links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+	}
+
+	Accordion.prototype.dropdown = function(e) {
+		var $el = e.data.el;
+			$this = $(this),
+			$next = $this.next();
+
+		$next.slideToggle();
+		$this.parent().toggleClass('open');
+
+		if (!e.data.multiple) {
+			$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+		};
+	}	
+
+	var accordion = new Accordion($('#accordion'), false);
+});
+$(window).scroll(function() {    
+	var scroll = $(window).scrollTop();
+
+	if (scroll >= 150) {
+		$(".fixed-header").slideDown();
+	} else {
+		$(".fixed-header").slideUp();
+		
+	}
+});
+</script>
 {% endblock %} 

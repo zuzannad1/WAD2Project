@@ -9,59 +9,87 @@
 {% block body_block %}
             <style>
             .signup {
-                position: relative;
-                top: 25px;
-                    
-            }
-            
-            .jumbotron {
-                position: relative;
-                color: #333;
-                bottom: 200px;
-                background-color: #F6EEDD;
-            }
-            
-            .username {
-                position: relative;
-                top: 30px;
-                left: 100px;
-            }
-            
-            .password {
-                position: relative;
-                left: 350px;
-            }
-            
-            .btn-success {
-                position: relative;
-                left: 295px;
-                top: 15px;
-                
+                position: relative;                    
             }
             
             .alert-danger {
                 position: relative;
                 top: -300px;
             }
-            
-            </style>
-<body>
-	<div class="container">
-		<div class="jumbotron">
-			<h1><center>Login here:</center></h1>
-			<form id="login_form" method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-                <div class= 'username'>
-                <label for="username"></label>
-                <input type="text" name="username" placeholder="Your username">
-                </div>
-                <div class = 'password'>
-                <label for="password"></label>
-                <input type="password" name="password" placeholder="Your password">
-                </div>
-                <button type="submit" class="btn btn-success" value = "Login">Log in</button>
-				{% if messages %}
-						{% for message in messages %}
+            .container{
+                height: 300px;
+                opacity: 0.8;
+                border-radius: 8px;
+            }
+            #login img{
+                margin: 10px 0;
+            }
+            #login .center {
+                text-align: center;
+            }
+
+            #login .login {
+                max-width: 300px;
+                margin: 35px auto;
+            }
+
+            #login .login-form{
+            	padding:0px 25px;
+
+            }
+            #login h1 {
+                margin-bottom: 20px;
+            }
+            #login span{
+                width: 25px;
+                height: 30px;
+            }
+            #login input{
+                height: 30px;
+            }
+            hr{
+                width: 225px;
+                border-top: 1px solid #f8f8f8;
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+                margin: 0 auto;
+            }     
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+        <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="SimpleRestLoginStyle.css">
+		<body>
+<!-- 	hhahaha -->
+	       <div id="login" class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="login well well-small">
+                        <div class="center">
+                            <h1>Welcome</h1>   
+                        </div>               
+        <form id="login_form" method="post" action="{% url 'login' %}" class="login-form">
+          <div class="control-group">
+            <div class="input-prepend">
+                <hr>
+              <h4>Login</h4>  
+              {% csrf_token %}
+              <span class="add-on"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+              <input name="username" placeholder="Username" type="text"> 
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="input-prepend">
+              <span class="add-on"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+              <input type="password" name="password" placeholder="Password"> 
+            </div>
+          </div>
+          <div class="control-group">
+              <button class="btn btn-primary btn-large btn-block" type="submit" value="Sign in">Log In</button> 
+          </div>
+          				{% if messages %}
+        						{% for message in messages %}
                         <div class="alert alert-danger" role="alert">
                             <strong><center>{{ message }}</center></strong>
                         </div>
@@ -71,7 +99,9 @@
             <div class = 'signup'>
             <center><h5>Not registered yet? Sign up <a href='{% url 'signup' %}'>here.</a></center>
             </div>
-		</div>
-	</div>
+      </div><!--/.login-->
+    </div><!--/.span12-->
+  </div><!--/.row-fluid-->
+</div><!--/.container-->
  </body>
 {% endblock %}

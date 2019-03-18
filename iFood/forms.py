@@ -10,7 +10,7 @@ class UserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First name'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'E-Mail'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':"8+ characters and please don't use your username as password"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':"8+ characters & please don't use your username as password"}))
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email','password')

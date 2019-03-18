@@ -3,46 +3,89 @@
 {% load crispy_forms_tags %}
 
 {% block title_block %}
-Sign Up and Eat
+	Sign Up and Eat
 {%endblock%}
+
 {% block body_block %}
-<html>
-    <head>
-        <style>
-            
-            * {box-sizing: border-box;}
-            
-            .jumbotron {
-                position: relative;
-                color: #333;
-                bottom: 300px;
-                background-color: #F6EEDD;
+            <style>
+            .container{
+                height: 300px;
+                opacity: 0.8;
+                border-radius: 8px;
             }
-        .form {
-            background-color: #F6EEDD;
-        }
-        
-            
+            #signup img{
+                margin: 10px 0;
+            }
+            #signup .center {
+                text-align: center;
+            }
+
+            #signup .signup {
+                max-width: 470px;
+                margin: 35px auto;
+            }
+
+            #signup .signup-form{
+            	padding:0px 25px;
+
+            }
+            #signup h1 {
+                margin-bottom: 20px;
+            }
+            #signup span{
+                width: 25px;
+                height: 30px;
+            }
+            #signup input{
+                height: 30px;
+                width: 400px;
+            }
+            hr{
+                width: 225px;
+                border-top: 1px solid #f8f8f8;
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+                margin: 0 auto;
+            }     
         </style>
-    </head>
-</html>
-	<div class="container">
-	    <div class="jumbotron">
-	        {% if registered %}
-		        <h1>Thank you for registering!</h1>
-		    {% else %}
-		        <h1>Register Here</h1>
-		        <h3>Just fill out the form.</h3>
-                <div class = 'form'>
-                <form id="user_form" method="post" action="{% url 'signup' %}"
-                    16 enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{user_form|crispy}}
-                    {{profile_form|crispy}}
-                    <button type="submit" class="btn btn-success">Sign me up!</button>
-                    </div>
-		        </form>
-	        {% endif %}
-	    </div>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+        <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="SimpleRestLoginStyle.css">
+<body>
+	<div id="signup" class="container">
+		<div class="row-fluid">
+        	<div class="span12">
+            	<div class="signup well well-small">
+                	<div class="center">
+			        	<h1>Sign Up</h1>
+			       	</div>
+                	<form id="user_form" method="post" action="{% url 'signup' %}" 
+                	16 enctype="multipart/form-data" class="signup-form">
+               		<hr>
+               		<div class="control-group">
+						<div class="input-prepend">
+		       			{% if registered %}
+			        		<h4>Thank you for registering!</h4>
+			    		{% else %}
+			    			<h4>Just fill out the form.</h4>
+		                    {% csrf_token %}
+                    		{{user_form|crispy}}
+		                </div>
+		            </div>
+               		<hr>
+		            <div class="control-group">
+						<div class="input-prepend">
+		                    {{profile_form|crispy}}
+		                    <button type="submit" class="btn btn-primary btn-large btn-block">Sign me up!</button>
+		                </div>
+		            </div>
+		        	</form>
+	        		{% endif %}
+	    		</div>
+			</div>
+		</div>
 	</div>
+</body>
 {% endblock %}
