@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'iFood',
-    'reset_migrations',
     'crispy_forms',
     'cart',
 

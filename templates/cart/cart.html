@@ -174,7 +174,7 @@ Shopping Cart
                                         </div>
                             </div>
                             </div>
-                <button type="submit" class="btn btn-success" onclick="alertFunc()">Submit and Pay!</button>
+                <button type="submit" class="btn btn-success" onclick="closeFormandGo()">Submit and Pay!</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </div>
         <p class="text-right">
@@ -190,6 +190,10 @@ Shopping Cart
         document.getElementById("myForm").style.display = "block";
     }
 
+function closeFormandGo() {
+    document.getElementById("myForm").style.display = "none";
+    location.replace("{% url "my-order" %}");
+}
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }

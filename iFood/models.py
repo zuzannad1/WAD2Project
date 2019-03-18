@@ -4,6 +4,7 @@ from django.conf import settings
 import datetime
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+import random
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -75,5 +76,27 @@ class Comments(models.Model):
 
         class Meta:
                 verbose_name_plural = "Comments"
+
+class Order(models.Model):
+        user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='orders')
+        created = models.DateField(default=datetime.date.today())
+        delivery = models.CharField(default=random.randrange(35,120), max_length=3)
+        def __str__(self):
+                return 'Order {}'.format(self.id)
+
+        def get_total_cost(self):
+                return sum(item.get_cost() for item in self.items.all())
+        
+class OrderItem(models.Model):
+        order = models.ForeignKey(Order, default=1, related_name='items', on_delete=models.CASCADE)
+        product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
+        price = models.DecimalField(max_digits=10, decimal_places=2)
+        quantity = models.PositiveIntegerField(default=1)
+        def __str__(self):
+                return '{}'.format(self.id)
+
+        def get_cost(self):
+                return self.price * self.quantity
+        
 
 
