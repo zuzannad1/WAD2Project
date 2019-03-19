@@ -4,6 +4,7 @@ from iFood.models import Restaurant
 from iFood.models import Product
 from iFood.models import Feedback
 from iFood.models import Comments
+from iFood.models import OrderItem, Order
 
 
 
@@ -23,8 +24,21 @@ admin.site.register(Restaurant, RestaurantAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name','slug','restaurant','cuisine','description','price']
-    list_editable = ['price']
     prepopulated_fields = {'slug':('name',)}
 
 admin.site.register(Product, ProductAdmin)
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ['product']
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id','user','created']
+    inlines = [OrderItemInline]
+
+
+admin.site.register(Order, OrderAdmin)
+
+
 

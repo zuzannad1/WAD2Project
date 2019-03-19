@@ -13,10 +13,9 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django.shortcuts import get_object_or_404
-from iFood.models import Restaurant, Product
+from iFood.models import Restaurant, Product, OrderItem, Order
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
-
 
 def index(request):
    context_dict = {'boldmessage' : "Eats whatever you want! "}
@@ -110,7 +109,6 @@ def web_feedback(request):
        feedback_form = FeedbackForm()
    return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
 
-#Works
 def show_restaurant(request, restaurant_name_slug):
    context_dict = {}
    restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
@@ -136,12 +134,27 @@ def product_detail(request, id, slug):
    
 def contact(request):
     return render(request, 'iFood/contact.html',{})
+   
+"""
+@login_required
+def my_order(request):
+    my_orders = Order.objects.filter(user=request.user)
+    return render(request, 'iFood/my-order.html', {'my_orders':my_orders})"""
 
 @login_required
 def my_order(request):
+    user = request.user
+    context = {}
     cart = Cart(request)
-   # cart.clear()
-  
-    return render(request, 'iFood/my-order.html', {})
+    if request.method == 'POST':
+       order = Order.objects.create(user=request.user)
+       for item in cart:
+          OrderItem.objects.create(order=order,
+                    product=item['product'],
+                    price=item['price'],
+                    quantity=item['quantity'])
+       cart.clear()
+       context['order'] = order
+    return render(request, 'iFood/my-order.html', context)
 
-   
+

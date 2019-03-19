@@ -56,71 +56,34 @@ h1 {
 </style>
 <div id="body">
     {% if cart|length > 0 %}
-    Your order:
+    Do you want to confirm ordering: </br>
     {% for item in cart %}
     {% with product=item.product  %}
-    {{product.name}} x {{item.quantity}}
+    {{product.name}} x {{item.quantity}} </br>
     {% endwith %}
     {% endfor %}
+    Total price: £{{ cart.get_total_price }}
     
+    <form action="{% url "my-order" %}" method="post">
+        {% csrf_token %}
+    <button type="submit" class="btn btn-default" onclick="alertFunc()">Confirm this order.</button>
+    <button type ="submit" onclick="alertFunc()"></button>
+    </form>
+    <a href ="/cart"><button type="button" class="btn cancel">No, take me back to my cart!</button></a>
+    {% else %}
+ -> This is where the clock is going to be </br>
+    
+  Nothing here! Maybe your order was already completed or you didn't order yet?
+  <button><a href="{% url 'index' %}">Take me to the menus again!</button></a></br>
+ <button><a href="/cart">Take me to the basket</button></a>
+
 </div>
-<h3>Time to deliver : </h3>
-				<div id="clockdiv">
-		  			<div>
-		    			<span class="hours"></span>
-		    			<div class="smalltext">Hours</div>
-		  			</div>
-		  			<div>
-		    			<span class="minutes"></span>
-		    			<div class="smalltext">Minutes</div>
-		 			</div>
-		  			<div>
-		    			<span class="seconds"></span>
-		    			<div class="smalltext">Seconds</div>
-		  			</div>
-                    {% else %}
-                    <h2> Your current order is empty </h2>
-				</div>
+<script>
 
-                
-{% endif %}
- <script>
- 
- function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  return {
-    'total': t,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
+function alertFunc() {
+    alert("Your order is being processed now! Thank you. Visit this page to see live time until your order is ready.")
 }
-
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
-
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
-
-var deadline = new Date(Date.parse(new Date()) + 2 * 20 * 20 * 1000);
-initializeClock('clockdiv', deadline);
 </script>
+
+{% endif %}
 {% endblock %} 

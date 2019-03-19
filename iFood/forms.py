@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from iFood.models import UserProfile, Feedback, Comments, Product, Restaurant
+from iFood.models import UserProfile, Feedback, Comments, Product, Restaurant, Order
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
@@ -60,4 +60,8 @@ class RestaurantFeedbackForm(forms.ModelForm):
         model = Restaurant
 
 
-
+class OrderCreateForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('created',)
+    
