@@ -149,6 +149,7 @@ body {
 
 
 	</style>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	</head>
 	<body>
 <div class="static-header">
@@ -160,7 +161,7 @@ body {
 		{% if user.is_authenticated %}
 			<a href="{% url 'logout' %}">Log Out</a>
 			<a href="{% url 'account' %}">{{ user.username }}</a>
-			<a href="{% url "cart:cart_detail" %}">Cart</a>
+			<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
 		{% else %}
 			<a href="{% url 'signup' %}">Sign Up</a>
 			<a href="{% url 'login' %}">Sign In</a>
@@ -177,7 +178,7 @@ body {
 			{% if user.is_authenticated %}
 				<a href="{% url 'logout' %}">Log Out</a>
 				<a href="{% url 'account' %}">{{ user.username }}</a>
-				<a href="{% url "cart:cart_detail" %}">Cart</a>
+				<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
 			{% else %}
 				<a href="{% url 'signup' %}">Sign Up</a>
 				<a href="{% url 'login' %}">Sign In</a>

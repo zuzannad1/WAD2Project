@@ -29,7 +29,6 @@ Account Details
             .main-site {
                 position: relative;
                 margin: auto;
-                top: -200px;
                 border: #333;
                 outline: thick ridge #F1E5C6;
                 background-color:#F1E5C6;
@@ -92,7 +91,6 @@ Account Details
             
             .alert-success{
                 position:relative;
-                top: -600px;
                 height: 38px;
                 border-radius: 5px;
                 
@@ -107,8 +105,8 @@ Account Details
                Click on My Order button to display your current order details. </p>
             </center>
            <button class="open-button" onclick="openForm()">User Details</button>
-           <button class="open-button"><a href="{% url "my-order" %}">
-               My Order</a></button>
+          <a href="{% url "my-order" %}"><button class="open-button">
+               My Order</button></a>
         </div>
 		<div class="form-popup" id="myForm">
                 <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">

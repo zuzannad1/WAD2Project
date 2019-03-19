@@ -7,74 +7,117 @@
     {{restaurant.name}}
 {% endblock %}
 {%block body_block %}
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
-        <style>
-            
-            .restaurant {
-                font-family: 'Amatic SC';
-                outline: thick ridge #F6EEDD;
-                position: relative;
-                top: -200px;
-                background-color: #F6EEDD;
-                opacity: 0.85;
-                max-width: 2000px;
-                padding: 10px;
-            }
-            .rest-name {
-                color: #335;
-                font-family: 'Amatic SC';
-                font-size: 60px;
-                position: relative;
-                font-weight: 1000;
-                
-            }
-        
-        .dishes {
-            font-size: 40px;
-        }
-        
-        .btn{
-            background-color: lightgray;
-            right: 60px;
-            
-        }
-        
-        .form {
-            width: 40px;
-        }
-    
-        </style>
-    </head>
-</html>
-<div class = 'restaurant'>
-    {% if restaurant %}
-<div class = 'rest-name'>
-<p><center><b> Welcome to {{restaurant.name}}!</b></center> </p>
-</div>
-<div class = 'dishes'>
-{% if dishes %}
-{% for dish in dishes %}
-<p><strong>{{dish.name}}</strong> &nbsp;&nbsp;
-<strong><b>£{{dish.price}}</strong></b>&nbsp;
-{% if user.is_authenticated %}
-<form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
-{% csrf_token %}
-<div class="form">{{ form.quantity|as_crispy_field }}</div>
-<input type="submit" value="add to cart" class="btn btn-default btn-sm">
-</form>
-{% endif %}
-</p>
+<style>    
+.container {
+	padding: 20px;
+ 	width: 100%;
+}
+.container .wrap-menu {
+  display: table;
+  width: 440px;
+  max-width: 440px;
+}
+.container .wrap-menu .restaurant {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 36px;
+  color: #cc9900;
+}
+.container .wrap-menu .restaurant .ic-cate {
+  display: inline-block;
+  width: 235px;
+  height: 27px;
+}
+.container .wrap-menu img {
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+}
+.container .wrap-menu .row-menu-wrap {
+  margin-bottom: 35px;
+}
+.container .wrap-menu .row-menu-wrap .row-menu {
+  display: table-row;
+}
+.container .wrap-menu .row-menu-wrap .row-menu .item-menu {
+  display: table-cell;
+  width: 90%;
+  font-size: 21px;
+  font-family: "yeseva";
+  color: #cc9900;
+}
+.container .wrap-menu .row-menu-wrap .row-menu .item-prise {
+  display: table-cell;
+  font-size: 21px;
+  font-family: "yeseva";
+  color: #cc9900;
+}
+.gold-line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 8px;
+  background-color: #cc9900;
+}
+.item-descr {
+  font-size: 16px;
+  font-family: "lato";
+}
 
-<font color=grey>{{dish.description}}</font></p>
-{% endfor %}
-{% endif %}
+.btn{
+	background-color: lightgray;
+	padding-botton: 10px;
+}
+        
+.form {
+	text-align: left;
+}
+  
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+<div class="container">
+  <div class="col-md-5 left">
+    <div class="wrap-menu">
+      {% if restaurant %}
+      <h2 class="restaurant">
+        <span>{{restaurant.name}}</span>
+        <i class="ic-cate"></i>
+      </h2>
+      {% if dishes %} 
+      {% for dish in dishes %}
+      <div class="row-menu-wrap">
+        <div class="row-menu">
+          <p class="item-menu">{{dish.name}}</p>
+          <span href="#" class="item-prise">£{{dish.price}}</span>
+        </div>
+        <span class="gold-line"></span>
+        <span class="item-descr">{{dish.description}}</span>
+        {% if user.is_authenticated %}
+			<form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
+			{% csrf_token %}
+			<button type="submit" class="btn">Add to cart <i class="fas fa-cart-plus"></i></button>
+			{{ form.quantity }}
+			</form>
+        {% endif %}
+      </div>
+      {% endfor %} 
+      {% endif %} 
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-5 right">
+	  <div class="wrap-menu">
+	  <img src="{% static "images/bg2.jpg" %}">
+	  </div>
+  </div>
 </div>
-{% endif %}
-</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
