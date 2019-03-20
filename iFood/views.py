@@ -66,7 +66,7 @@ def signup(request):
 #Decorator used so that only logged in users can open the page
 #Renders two forms that handle editing details of
 #current user's details and user's userprofile
-@login_required
+@login_required(login_url = 'iFood/login/')
 def edit_profile(request):
     user = request.user
     form = UserDetailsForm(request.POST or None, instance=user)
@@ -112,14 +112,14 @@ def user_login(request):
 #Handles log out using built in django method
 #Decorator needed, because only logged in users should
 #be able to log out
-@login_required     
+@login_required(login_url = 'iFood/login/')     
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
 #The view handling comments logged-in users can add
 #about the website itself
-@login_required  
+@login_required(login_url = 'iFood/login/')
 def web_feedback(request):
    if request.method == 'POST':
        feedback_form = FeedbackForm(request.POST)
@@ -171,7 +171,7 @@ def contact(request):
 #Not through the confirmation button
 #The current order is selected by finding order with highest number
 #(The most recent) from user's orders and displays its details
-@login_required
+@login_required(login_url = 'iFood/login/')
 def my_order(request):
    user = request.user
    context = {}
