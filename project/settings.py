@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'iFood',
     'crispy_forms',
     'cart',
+    'star_ratings',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
