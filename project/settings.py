@@ -152,3 +152,6 @@ LOGIN_URL = 'iFood/login/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 CART_SESSION_ID = 'cart'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

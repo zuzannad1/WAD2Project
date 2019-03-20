@@ -5,6 +5,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 
+#The user form, based on django built-in User Model
+#The __init__ helper is a crispy forms form helper
+#Used while handling the form at signup
 class UserForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First name'}))
@@ -21,6 +24,9 @@ class UserForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Save person'))
 
+#User profile form is an additional form for User signup
+#Based on user profile model
+#The helper is the same helper as in UserForm
 class UserProfileForm(forms.ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '1234 Food Street'}))
     facebook = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'https://facebook.com/your-name'}))
@@ -35,22 +41,28 @@ class UserProfileForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Save person'))
 
+#The user profile edit form is a form for
+#Editing user profile details for already registered users
 class UserProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('address','facebook','twitter')
 
+#The user profile edit form is a form for
+#Editing user details (incl. password) for already registered users
 class UserDetailsForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput())
     class Meta:
         model = User
         fields = ('first_name','last_name','email','is_active')
 
+#This form handles comments about the website itself
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ('comment','created_at')
 
+#This form handles restaurant ratings
 ratings = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'))
 class RestaurantFeedbackForm(forms.ModelForm):
     rating = forms.CharField(label='How many stars would you give this restaurant?',
@@ -59,9 +71,4 @@ class RestaurantFeedbackForm(forms.ModelForm):
         fields = ('rating',)
         model = Restaurant
 
-
-class OrderCreateForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = ('created',)
     

@@ -96,26 +96,26 @@ Account Details
                 
             }
             
-    </style>
-    </head>
+                </style>
+            </head>
     <body>
         <div class="main-site">
-           <center> <h1>Welcome <strong>{{user.username}}</strong></h1>
-            <p>Click on User Details button to preview or edit your user details.</br>
-               Click on My Order button to display your current order details. </p>
+            <center> <h1>Welcome <strong>{{user.username}}</strong></h1>
+                <p>Click on User Details button to preview or edit your user details.</br>
+                Click on My Order button to display your current order details. </p>
             </center>
-           <button class="open-button" onclick="openForm()">User Details</button>
-          <a href="{% url "my-order" %}"><button class="open-button">
-               My Order</button></a>
+            <button class="open-button" onclick="openForm()">User Details</button>
+            <a href="{% url "my-order" %}"><button class="open-button">
+                My Order</button></a>
         </div>
-		<div class="form-popup" id="myForm">
-                <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    {{prof|crispy}}
-                    <button type="submit" class="btn btn-success" onclick="alertFunc()">Save my details!</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                </form>
+        <div class="form-popup" id="myForm">
+            <form method="POST" action="{% url 'account' %}" class="form-fields" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                {{prof|crispy}}
+                <button type="submit" class="btn btn-success" onclick="alertFunc()">Save my details!</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
         </div>
         <script>
             function openForm() {

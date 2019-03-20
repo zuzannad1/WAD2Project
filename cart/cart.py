@@ -2,7 +2,11 @@ from decimal import Decimal
 from django.conf import settings
 from iFood.models import Product
 
-
+#Cart class and methods to: add dish to cart, save the cart,
+#Remove item from cart, iterate through the items in cart,
+#Return how many objects are there in the cart, get total value of cart
+#Clear the cart
+#Note: the cart is session based, so it does not depend on the database at all
 class Cart(object):
     def __init__(self, request):
         self.session = request.session

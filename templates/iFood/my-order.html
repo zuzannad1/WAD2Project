@@ -67,15 +67,22 @@ h1 {
     <form action="{% url "my-order" %}" method="post">
         {% csrf_token %}
     <button type="submit" class="btn btn-default" onclick="alertFunc()">Confirm this order.</button>
-    <button type ="submit" onclick="alertFunc()"></button>
     </form>
     <a href ="/cart"><button type="button" class="btn cancel">No, take me back to my cart!</button></a>
     {% else %}
- -> This is where the clock is going to be </br>
-    
-  Nothing here! Maybe your order was already completed or you didn't order yet?
-  <button><a href="{% url 'index' %}">Take me to the menus again!</button></a></br>
- <button><a href="/cart">Take me to the basket</button></a>
+    <h2>Your current order:</h2>
+    Order reference ID: {{current}}</br>
+    Created: {{current.created}}</br>
+    Delivery in: {{current.delivery}} mins
+    <h2>Your order details:</h2>
+    {% for item in order_items %}
+    Dish: {{item.product.name}} £{{item.product.price}} x {{item.quantity}}</br>
+    Total cost: £{{item.get_cost}} {% endfor %}</br>
+    Time elapsing until delivery: <body>
+        <div><span id="time">{{current.delivery}}</span> minutes!</div>
+    </body></br>
+  <button><a href="{% url 'index' %}">Take me to home page!</button></a></br>
+
 
 </div>
 <script>
@@ -83,6 +90,30 @@ h1 {
 function alertFunc() {
     alert("Your order is being processed now! Thank you. Visit this page to see live time until your order is ready.")
 }
+
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+                minutes = parseInt(timer / 60, 10)
+                seconds = parseInt(timer % 60, 10);
+                
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                
+                display.textContent = minutes + ":" + seconds;
+                
+                if (--timer < 0) {
+                timer = duration;
+                }
+                }, 1000);
+}
+
+window.onload = function () {
+    var Minutes = 60 * {{current.delivery}},
+    display = document.querySelector('#time');
+    startTimer(Minutes, display);
+};
+                    
 </script>
 
 {% endif %}

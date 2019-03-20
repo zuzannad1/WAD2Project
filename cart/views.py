@@ -4,7 +4,13 @@ from iFood.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
 
+#The cart views that are rendered in the cart template
 
+#Cart add view
+#Uses a require_POST decorator
+#Gets product (dish) by dish id invoked in method declaration
+#And adds it to the current cart (based on current session)
+#Using the CartAdd.. form
 @require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
@@ -15,14 +21,17 @@ def cart_add(request, product_id):
         cart.add(product=product, quantity=cd['quantity'], update_quantity=cd['update'])
     return redirect('cart:cart_detail')
 
-
+#Cart remove view
+#Removes product object from the current cart
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
 
-
+#Cart detail view
+#Used to update the quantity of a particular product object
+#In the current cart
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:
