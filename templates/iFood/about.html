@@ -10,183 +10,111 @@
 {%block body_block %}
 	<style>
 
-.about-section{
-	position:relative;
-	padding:10px 0px;
+.aboutContainer{
+  	position:relative;
+	  padding:30px 50px;
+    color: white;
+    height:100%;
+}
+.aboutContent{
+    position:relative;
+    color: #000;
 }
 
-.about-section .content-column{
-	position:relative;
-}
-
-.about-section .content-column .inner-column{
-	position:relative;
-	padding-top:20px;
-	padding-right:100px;
-}
-
-.about-section .content-column .text{
-	position:relative;
-	color:#777777;
-	font-size: 15px;
-	line-height:2em;
-	margin-bottom:40px;
-	text-align: right;
-	padding: 50px;
-}
-.about-section .content-column .text p{
-	position:relative;
-	color:#000000;
-	font-size: 20px;
-}
-
-.about-section .image-column{
-	padding: 60px ;
-	position:relative;
-	margin-bottom:50px;
-}
-
-.about-section .image-column .inner-column{
-	position:relative;
-	padding:30px 40px 0px 0px;
-	margin-left:50px;
-}
-
-.about-section .image-column .inner-column:after{
-	position:absolute;
-	content:'';
-	right:0px;
-	top:0px;
-	left:40px;
-	bottom:100px;
-	z-index:-1;
-	border:2px solid #d7a449;
-}
-
-.about-section .image-column .inner-column .image{
-	position:relative;
-}
-
-.about-section .image-column .inner-column .image:before{
-	position:absolute;
-	content:'';
-	left:-50px;
-	bottom:-50px;
-	width:299px;
-	height:299px;
-}
-
-.about-section .image-column .inner-column .image img{
-	position:relative;
-	width:100%;
-	display:block;
-	opacity: 0.3;
-}
-
-.about-section .btn-style-three:before {
-    position: absolute;
-    content: '';
-    left: 10px;
-    top: 10px;
-    z-index: -1;
-    right: -10px;
-    bottom: -10px;
-    background: url(https://i.ibb.co/DKn55Qz/pattern-1.jpg) repeat;
-}
-.about-section .btn-style-three:hover {
-    color: #000000;
-    background: #d7a449;
-}
-.about-section .btn-style-three {
+.aboutTitle{
     position: relative;
-    line-height: 24px;
-    color: #252525;
-    font-size: 25px;
-    font-weight: 700;
-    background: none;
-    display: inline-block;
-    padding: 11px 30px;
-    background-color: #ffffff;
-    text-transform: capitalize;
-    border: 2px solid #d7a449;
+    padding: 0px 0px 0px 30px;
 }
-.feedback {
-	padding: 5px 50px;
-	font-size: 20px;
+.aboutTitle h2{
+    padding: 0px 0px 0px 50px;
 }
-
-.feedback p{
-	font-size: 15px;
-}
-.sec-title2{
-	color:#fff;
-}
-.sec-title {
+.aboutTitle .title{
     position: relative;
-}
-.sec-title h2{
-	float: right;
-	padding: 0px 800px 0px 0px;
-}
-.sec-title .title {
-    position: relative;
-    width: 230px;
     color: #d7a449;
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 700;
-    padding-right: 50px;
     display: inline-block;
-    padding: 10px;
+    text-transform: capitalize;
 }
-.sec-title .title:before {
+.aboutTitle .title:before{
     position: absolute;
     content: '';
-    left: 165px;
-    bottom: 25px;
+    right: -120px;
+    bottom: 44px;
     width: 100px;
     height: 1px;
     background-color: #bbbbbb;
 }
+
+.aboutText{
+    position:relative;
+    color: #777777;
+    font-size:15px;
+    line-height:2em;
+    text-align:right;
+}
+.aboutText h3{
+    color: #000;
+}
+
+.feedback {
+	padding: 35px 0px 0px 40px;
+	font-size: 20px;
+}
+.feedback .btn{
+     position: relative;
+    line-height: 24px;
+    color: #252525;
+    font-size: 20px;
+    font-weight: 700;
+    background: none;
+    display: inline-block;
+    padding: 11px 40px;
+    background-color: #ffffff;
+    text-transform: capitalize;
+    border: 2px solid #d7a449;
+}
+.feedback .btn:hover{
+    color: #ffffff;
+    background: #d7a449;
+}
+.feedback p{
+	font-size: 15px;
+}
+
+.image{
+  	position:relative;
+    opacity:0.4;
+    width:100%;
+    text-align:center;
+}
+.image img{
+    width:100%;
+}
 	</style>
 	<body>
-<section class="about-section">
-  <div class="container">
-    <div class="row clearfix">
-
-      <!--Content Column-->
-      <div class="content-column col-md-6 col-sm-12 col-xs-12">
-        <div class="inner-column">
-          <div class="sec-title">
-            <div class="title">About Us</div>
-            <h2>We deliver the dishes that you love.</h2>
-          </div>
-          <div class="text"><p>This web app is designed by :</p>
-	          Jing Kuan Lee<br>
-	          Raza Ali<br>
-	          Zuzia Dubanowska<br>
-	          Pedro Henrique Castro<br>
-          </div>
-          {% if user.is_authenticated %}
-          <div class="feedback">
-          Feel free to give us some feedback: 
-          <a href="{% url 'web-feedback' %}" class="theme-btn btn-style-three">Feedback</a>
-          <p> * This can help up to improve our website *</p>
-          </div>
-          {% endif %}
-        </div>
+<div class="aboutContainer">
+  <div class="aboutContent">
+    <div class="aboutTitle">
+      <div class="title">
+        <h1>About Us</h1>
       </div>
-
-      <!--Image Column-->
-      <div class="image-column col-md-6 col-sm-12 col-xs-12">
-        <div class="inner-column">
-          <div class="image">
-            <img src="{% static "images/about.jpg" %}" alt="about us" >
-          </div>
-        </div>
-      </div>
-
+      <h2>We deliver the dishes that you love.</h2>
+    </div>
+    <div class="aboutText">
+      <hr>     
+      <h3>This web app is designed by :</h3>
+      Jing Kuan Lee<br> Raza Ali<br> Zuzia Dubanowska<br> Pedro Henrique Castro<br>
+    </div>
+    <div class="feedback">
+      Feel free to give us some feedback:
+      <a href="{% url 'web-feedback' %}"><button class="btn">Feedback</button></a>
+      <p> * This can help up to improve our website *</p>
     </div>
   </div>
-</section>
+  <div class="image">
+  <img src="{% static "images/about.jpg" %}"/>
+  </div>
+</div>
 	</body>
 {% endblock %} 

@@ -31,9 +31,10 @@ class UserProfileForm(forms.ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '1234 Food Street'}))
     facebook = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'https://facebook.com/your-name'}))
     twitter = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'https://twitter.com/your-twitter-name'}))
+    picture = forms.ImageField(required=False)
     class Meta:
         model = UserProfile
-        fields = ('address','facebook','twitter')
+        fields = ('address','facebook','twitter','picture')
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,7 +47,7 @@ class UserProfileForm(forms.ModelForm):
 class UserProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('address','facebook','twitter')
+        fields = ('address','facebook','twitter','picture')
 
 #The user profile edit form is a form for
 #Editing user details (incl. password) for already registered users

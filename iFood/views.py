@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm
-from iFood.forms import UserDetailsForm, FeedbackForm, RestaurantFeedbackForm
+from iFood.forms import UserDetailsForm, FeedbackForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
@@ -40,13 +40,15 @@ def signup(request):
    template_name = 'iFood/signup.html'
    if request.method == 'POST':
       user_form = UserForm(data=request.POST)
-      profile_form = UserProfileForm(data=request.POST)
+      profile_form = UserProfileForm(request.POST,request.FILES)
       if user_form.is_valid() and profile_form.is_valid():
          user = user_form.save()
          user.set_password(user.password)
          user.save()
          profile = profile_form.save(commit=False)
          profile.user = user
+         if 'picture' in request.FILES:
+             profile.picture = request.FILES['picture']
          profile.save()
          registered = True
          login(request,user)
@@ -70,11 +72,13 @@ def signup(request):
 def edit_profile(request):
     user = request.user
     form = UserDetailsForm(request.POST or None, instance=user)
-    prof = UserProfileEditForm(request.POST or None, instance=user.userprofile)
+    prof = UserProfileEditForm(request.POST or None, request.FILES, instance=user.userprofile)
     if request.method == 'POST':
         if form.is_valid() and prof.is_valid():
             # Save the changes but password
             form.save()
+            if 'picture' in request.FILES:
+                prof.picture = request.FILES['picture']
             prof.save()
             # Change password
             new_password = form.cleaned_data.get('password')

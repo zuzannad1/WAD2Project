@@ -3,39 +3,128 @@
 {% load crispy_forms_tags %}
 
 {% block title_block %}
-	iFood Feedback
+	Feedback
 {% endblock %} 
 
 
 {%block body_block %}
-<html>
-    <head>
-        <style>
+<style>
             
-            .form {
-                position:relative;
-            }
-        
-        .alert-success{
-            position:relative;
-            top: -550px;
-            height: 38px;
-            border-radius: 5px;
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-        }
-        
-        
-        </style>
-    </head>
-    
+#feedback-page{
+	text-align:center;
+}
+
+#form-main{
+	width:100%;
+	float:left;
+	padding-top:0px;
+}
+
+#form-div {
+	background-color:rgba(72,72,72,0.4);
+	padding-left:35px;
+	padding-right:35px;
+	padding-top:35px;
+	padding-bottom:50px;
+	width: 450px;
+	float: left;
+	left: 50%;
+	position: absolute;
+  margin-top:30px;
+	margin-left: -260px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+#button-blue{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #3498db;
+	color:white;
+	font-size:24px;
+	padding-top:10px;
+	padding-bottom:10px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  	margin-top:10px;
+  	font-weight:700;
+}
+
+#button-blue:hover{
+	background-color: rgba(0,0,0,0);
+	color: #0493bd;
+}
+	
+.submit:hover {
+	color: #3498db;
+}
+textarea {
+    width: 100%;
+    height: 150px;
+    line-height: 150%;
+    resize:vertical;
+}
+.ease {
+	width: 0px;
+	height: 74px;
+	background-color: #fbfbfb;
+	-webkit-transition: .3s ease;
+	-moz-transition: .3s ease;
+	-o-transition: .3s ease;
+	-ms-transition: .3s ease;
+	transition: .3s ease;
+}
+
+.submit:hover .ease{
+  width:100%;
+  background-color:white;
+}
+
+@media only screen and (max-width: 580px) {
+	#form-div{
+		left: 3%;
+		margin-right: 3%;
+		width: 88%;
+		margin-left: 0;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+}
+.alert-success{
+      position:relative;
+        height: 38px;
+     border-radius: 5px;
+}
+.title h1{
+	text-align: center;
+	padding: 10px 0px 0px 0px;
+}
+</style>    
 	<body>
-        <form method="POST" action="{% url 'web-feedback' %}" class="form" enctype="multipart/form-data">
-            <h3>
-            Any comments? Thanks for leaving your remarks, each of them helps improve our website.
-            </h3>
-            {% csrf_token %}
-            {{feedback_form|crispy}}
-            <button type="submit" class="btn btn-success" onclick="alertFunc()">Submit your comment</button>
+	<div class="title">
+	<h1>Feedback</h1>
+	</div>
+	
+        <form method="POST" action="{% url 'web-feedback' %}" class="form" enctype="multipart/form-data" class="form" id="form1">
+<div id="form-main">
+  <div id="form-div">
+        Any comments? Thanks for leaving your remarks, each of them helps improve our website.
+        <hr>
+        {% csrf_token %}
+        {{feedback_form|crispy}} 
+        <hr>
+      <div class="submit">
+        <input type="submit" value="SEND" id="button-blue" onclick="alertFunc()"/>
+        <div class="ease"></div>
+      </div>
+  </div>
+</div>
         </form>
     <script>
         function alertFunc() {
@@ -43,5 +132,4 @@
         }
     </script>
 	</body>
-</html>
 {% endblock %} 

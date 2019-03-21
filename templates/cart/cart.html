@@ -10,415 +10,446 @@ Shopping Cart
     
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-                        <style>
-                            .container {
-                                position: relative;
-                            }
-                        
-                        .btn-default {
-                            background-color: #A19F9C;
-                            color: black;
-                        }
-                        
-                        .expiry-date-group {
-                            float: left;
-                            width: 50%;
-                        }
-                        .expiry-date-group input {
-                            width: calc(100% + 1px);
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-                        }
-                        .expiry-date-group input:focus {
-                            position: relative;
-                            z-index: 10;
-                        }
-                        .security-code-group {
-                            float: right;
-                            width: 50%;
-                        }
-                        .security-code-group input {
-                            border-top-left-radius: 0;
-                            border-bottom-left-radius: 0;
-                        }
-                        .zip-code-group {
-                            clear: both;
-                        }
-                        #PayButton {
-                            outline: 0 !important;
-                            height: 42px;
-                            font-size: 16px;
-                            background-color: #54c7c3 !important;
-                            border: none;
-                        }
-                        #PayButton:hover {
-                            background-color: #6dcecb !important;
-                        }
-                        #PayButton:active {
-                            background-color: #4fbcb9 !important;
-                        }
-                        #PayButton:disabled {
-                            background: rgba(84, 199, 195, 0.5) !important;
-                            color: #fff !important;
-                        }
-                        .inline {
-                            max-width: 350px;
-                            margin: 0 auto;
-                            width: 100%; /* Full width */
-                            height: 100%; /* Full height */
-                            overflow: auto; /* Enable scroll if needed */
-                            background-color: rgb(0, 0, 0); /* Fallback color */
-                            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-                            -webkit-animation-name: fadeIn; /* Fade in the background */
-                            -webkit-animation-duration: 0.4s;
-                            animation-name: fadeIn;
-                            animation-duration: 0.4s;
-                        }
-                        #Checkout {
-                            z-index: 100001;
-                            background: ;
-                            width: 50%;
-                            min-width: 300px;
-                            height: 100%;
-                            min-height: 100%;
-                            background: 0 0 #ffffff;
-                            border-radius: 8px;
-                            border: 1px solid #dedede;
-                            margin-left: auto;
-                            margin-right: auto;
-                            display: none;
-                            -webkit-animation-name: slideIn;
-                            -webkit-animation-duration: 0.4s;
-                            animation-name: slideIn;
-                            animation-duration: 0.4s;
-                        }
-                        #Checkout > h1 {
-                            margin: 0;
-                            padding: 20px;
-                            text-align: center;
-                            background: #eef2f4;
-                            color: #5d6f78;
-                            font-size: 24px;
-                            font-weight: 300;
-                            border-bottom: 1px solid #dedede;
-                            border-top-left-radius: 8px;
-                            border-top-right-radius: 8px;
-                        }
-                        #Checkout > form {
-                            margin: 0 25px 25px;
-                        }
-                        label {
-                            color: #46545c;
-                            margin-bottom: 2px;
-                        }
-                        .input-container {
-                            position: relative;
-                        }
-                        .input-container input {
-                            padding-right: 25px;
-                        }
-                        .input-container > i,
-                        a[role="button"] {
-                            color: #d3d3d3;
-                            width: 25px;
-                            height: 30px;
-                            line-height: 30px;
-                            font-size: 16px;
-                            position: absolute;
-                            top: 2px;
-                            right: 2px;
-                            cursor: pointer;
-                            text-align: center;
-                        }
-                        .input-container > i:hover,
-                        a[role="button"]:hover {
-                            color: #777;
-                        }
-                        .amount-placeholder {
-                            font-size: 20px;
-                            height: 34px;
-                        }
-                        .amount-placeholder > button {
-                            float: right;
-                            width: 60px;
-                        }
-                        .amount-placeholder > span {
-                            line-height: 34px;
-                        }
-                        .card-row {
-                            text-align: center;
-                            margin: 0px 25px 10px;
-                        }
-                        .card-row  i{
-                            font-size: 30px;
-                        }
-                        .card-row span {
-                            width: 48px;
-                            height: 30px;
-                            margin-right: 3px;
-                            background-repeat: no-repeat;
-                            display: inline-block;
-                            background-size: contain;
-                        }
-                        .align-middle {
-                            vertical-align: middle;
-                        }
-                        input {
-                            box-shadow: none !important;
-                        }
-                        input:focus {
-                            border-color: #b0e5e3 !important;
-                            background-color: #eef9f9 !important;
-                        }
-                        .close {
-                            color: #000000;
-                            font-size: 28px;
-                            font-weight: bold;
-                            padding: 0px 10px 0px 0px;
-                        }
-                        .close:hover,
-                        .close:focus {
-                            color: #000;
-                            text-decoration: none;
-                            cursor: pointer;
-                        }
-                        @-webkit-keyframes slideIn {
-                            from {
-                                bottom: -300px;
-                                opacity: 0;
-                            }
-                            to {
-                                bottom: 0;
-                                opacity: 1;
-                            }
-                        }
-                        @keyframes slideIn {
-                            from {
-                                bottom: -300px;
-                                opacity: 0;
-                            }
-                            to {
-                                bottom: 0;
-                                opacity: 1;
-                            }
-                        }
-                        @-webkit-keyframes fadeIn {
-                            from {
-                                opacity: 0;
-                            }
-                            to {
-                                opacity: 1;
-                            }
-                        }
-                        @keyframes fadeIn {
-                            from {
-                                opacity: 0;
-                            }
-                            to {
-                                opacity: 1;
-                            }
-                        }
-                        .table > tbody > tr > td,
-                        .table > tfoot > tr > td {
-                            vertical-align: middle;
-                        }
-                        .main-cart {
-                            margin: 0 auto;
-                        }
-                        .main-cart h1 {
-                            font-size: 35px;
-                            padding: 10px 40px;
-                        }
-                        .main-cart h2 {
-                            font-size: 20px;
-                            padding: 10px 40px;
-                        }
-                        @media screen and (max-width: 600px) {
-                            table#cart tbody td .form-control {
-                                width: 20%;
-                                display: inline !important;
-                            }
-                            .actions .btn {
-                                width: 36%;
-                                margin: 1.5em 0;
-                            }
-                            .actions .btn-info {
-                                float: left;
-                            }
-                            .actions .btn-danger {
-                                float: right;
-                            }
-                            table#cart thead {
-                                display: none;
-                            }
-                            table#cart tbody td {
-                                display: block;
-                                padding: 0.6rem;
-                                min-width: 320px;
-                            }
-                            table#cart tbody tr td:first-child {
-                                background: #333;
-                                color: #fff;
-                            }
-                            table#cart tbody td:before {
-                                content: attr(data-th);
-                                font-weight: bold;
-                                display: inline-block;
-                                width: 8rem;
-                            }
-                            table#cart tfoot td {
-                                display: block;
-                            }
-                            table#cart tfoot td .btn {
-                                display: block;
-                            }
-                        }
-                        
-                        
-                        
-                            </style>
-                        <body>
-                            <div class="container">
-                                <h1>Shopping Cart</h1>
-                                <h2>
-                                    {% with total_items=cart|length %}
-                                    {% if cart|length > 0 %}
-                                    My Order:
-                                    <a href="{% url "cart:cart_detail" %}" style="color: #3124F1">
-                                        {{ total_items }} item{{ total_items|pluralize }} - £
-                                        {{ cart.get_total_price }}
-                                    </a>
-                                    {% else %}
-                                    Your cart is empty.
-                                    {% endif %}
-                                    {% endwith %}</h2>
-                                <table id="cart" class="table table-hover table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:50%">Product</th>
-                                            <th style="width:10%">Price</th>
-                                            <th style="width:8%">Quantity</th>
-                                            <th style="width:22%" class="text-center">Subtotal</th>
-                                            <th style="width:10%">Remove</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for item in cart %}
-                                        {% with product=item.product  %}
-                                        <tr>
-                                            <td data-th="Product">
-                                                <div class="row">
-                                                    <div class="col-sm-10">
-                                                        <h4 class="nomargin">{{ product.name }}</h4>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td data-th="Price">£{{ item.price }}</td>
-                                            <td data-th="Quantity">
-                                                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                                                    {% csrf_token %}
-                                                    {{ item.update_quantity_form.quantity}}
-                                                    {{ item.update_quantity_form.update}}
-                                                    <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-refresh"></i></button>
-                                                </form>
-                                            </td>
-                                            <td data-th="Subtotal" class="text-center">£{{ item.total_price }}</td>
-                                            <td class="actions" data-th="Remove">
-                                                <a href="{% url "cart:cart_remove" product.id %}">
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        {% endwith %}
-                                        {% endfor %}
-                                        <tfoot>
-                                            <tr class="visible-xs">
-                                                <td class="text-center"><strong>Total {{ cart.get_total_price }}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="{% url "index" %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                                                <td colspan="2" class="hidden-xs"></td>
-                                                <td class="hidden-xs text-center"><strong>Total: £{{ cart.get_total_price }}</strong></td>
-                                                {% if cart|length > 0 %}
-                                                <td>
-                                                    <button class="btn btn-success btn-block" id="myBtn" >Checkout <i class="fa fa-angle-right"></i>
-                                                    </button>
-                                                </td>
-                                                {% endif %}
-                                            </tr>
-                                            </tbody>
-                                    </tfoot>
-                                </table>
-                                <h2> Check your order: <a href="{% url "my-order" %}"><button class="btn btn-default">My Order</button></a></h2>
-                                <div id="Checkout" class="inline">
-                                    <span class="close">&times;</span>
-                                    <h1>Pay</h1>
-                                    <form>
-                                        <div class="zip-code-group form-group">
-                                            <label for="ZIPCode">Delivery address :</label>
-                                            <p>{{user.userprofile.address}}</p>
-                                            <a href="{% url "account"%}">Edit address <i class="fa fa-edit"></i></a>
-                                        </div>
-                                    </form>
-                                    <div class="card-row">
-                                        <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                        <i class="fa fa-cc-discover" style="color:orange;"></i>
-                                    </div>
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="PaymentAmount">Payment amount</label>
-                                            <div class="amount-placeholder">
-                                                <span>£{{ cart.get_total_price }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label or="NameOnCard">Name on card</label>
-                                            <input id="NameOnCard" class="form-control" type="text" maxlength="255"></input>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="CreditCardNumber">Card number</label>
-                                            <input id="CreditCardNumber" class="null card-image form-control" type="text"></input>
-                                        </div>
-                                        <div class="expiry-date-group form-group">
-                                            <label for="ExpiryDate">Expiry date</label>
-                                            <input id="ExpiryDate" class="form-control" type="text" placeholder="MM / YY" maxlength="7"></input>
-                                        </div>
-                                        <div class="security-code-group form-group">
-                                            <label for="SecurityCode">Security code</label>
-                                            <div class="input-container">
-                                                <input id="SecurityCode" class="form-control" type="text"></input>
-                                            </div>
-                                        </div>
-                                        <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit" onclick="alertFunc()">
-                                            <span class="align-middle">£ {{ cart.get_total_price }} <i class="fa fa-lock"></i> </span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <script>
-                                var modal = document.getElementById("Checkout");
-                                var btn = document.getElementById("myBtn");
-                                var span = document.getElementsByClassName("close")[0];
-                                btn.onclick = function() {
-                                    modal.style.display = "block";
-                                }
-                            span.onclick = function() {
-                                modal.style.display = "none";
-                            }
-                            function closeForm() {
-                                modal.style.display = "none";
-                            }
-                            function alertFunc() {
-                                closeForm()
-                                alert("Your order is being processed now! Thank you.")
-                                
-                            }
-                            </script>
-                        </body>
+   		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <style>
+        .container {
+                position: relative;
+        }
+        
+        .btn-default {
+            background-color: #A19F9C;
+            color: black;
+        }
+        
+.expiry-date-group {
+  float: left;
+  width: 50%;
+}
+
+.expiry-date-group input {
+  width: calc(100% + 1px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.expiry-date-group input:focus {
+  position: relative;
+  z-index: 10;
+}
+
+.security-code-group {
+  float: right;
+  width: 50%;
+}
+
+.security-code-group input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.zip-code-group {
+  clear: both;
+}
+
+.PayButton {
+  outline: 0 !important;
+  height: 42px;
+  font-size: 16px;
+  background-color: #54c7c3 !important;
+  border: none;
+}
+
+#PayButton:hover {
+  background-color: #6dcecb !important;
+}
+
+.inline {
+  max-width: 350px;
+  margin: 0 auto;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+#Checkout {
+  z-index: 100001;
+  background: ;
+  width: 50%;
+  min-width: 300px;
+  height: 100%;
+  min-height: 100%;
+  background: 0 0 #ffffff;
+  border-radius: 8px;
+  border: 1px solid #dedede;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+#Checkout > h1 {
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  background: #eef2f4;
+  color: #5d6f78;
+  font-size: 24px;
+  font-weight: 300;
+  border-bottom: 1px solid #dedede;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+#Checkout > form {
+  margin: 0 25px 25px;
+}
+
+label {
+  color: #46545c;
+  margin-bottom: 2px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input {
+  padding-right: 25px;
+}
+
+.input-container > i,
+a[role="button"] {
+  color: #d3d3d3;
+  width: 25px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.input-container > i:hover,
+a[role="button"]:hover {
+  color: #777;
+}
+.amount-placeholder {
+  font-size: 20px;
+  height: 34px;
+}
+
+.amount-placeholder > button {
+  float: right;
+  width: 60px;
+}
+
+.amount-placeholder > span {
+  line-height: 34px;
+}
+
+.card-row {
+  text-align: center;
+  margin: 0px 25px 10px;
+}
+.card-row  i{
+  font-size: 30px;
+}
+.card-row span {
+  width: 48px;
+  height: 30px;
+  margin-right: 3px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-size: contain;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+input {
+  box-shadow: none !important;
+}
+
+input:focus {
+  border-color: #b0e5e3 !important;
+  background-color: #eef9f9 !important;
+}
+
+.close {
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+@-webkit-keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  vertical-align: middle;
+}
+.main-cart {
+  margin: 0 auto;
+}
+.main-cart h1 {
+  font-size: 35px;
+  padding: 10px 40px;
+}
+.main-cart h2 {
+  font-size: 20px;
+  padding: 10px 40px;
+}
+@media screen and (max-width: 600px) {
+  table#cart tbody td .form-control {
+    width: 20%;
+    display: inline !important;
+  }
+  .actions .btn {
+    width: 36%;
+    margin: 1.5em 0;
+  }
+  .actions .btn-info {
+    float: left;
+  }
+  .actions .btn-danger {
+    float: right;
+  }
+  table#cart thead {
+    display: none;
+  }
+  table#cart tbody td {
+    display: block;
+    padding: 0.6rem;
+    min-width: 320px;
+  }
+  table#cart tbody tr td:first-child {
+    background: #333;
+    color: #fff;
+  }
+  table#cart tbody td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    display: inline-block;
+    width: 8rem;
+  }
+  table#cart tfoot td {
+    display: block;
+  }
+  table#cart tfoot td .btn {
+    display: block;
+  }
+}
+        
+        
+        
+        </style>
+<body>
+<div class="container">
+  <h1>Shopping Cart</h1>
+    <h2>
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+        My Order:
+        <a href="{% url "cart:cart_detail" %}" style="color: #3124F1">
+            {{ total_items }} item{{ total_items|pluralize }} - £
+            {{ cart.get_total_price }}
+        </a>
+        {% else %}
+        Your cart is empty.
+        {% endif %}
+        {% endwith %}</h2>
+  <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+		        <th style="width:50%">Product</th>
+		        <th style="width:10%">Price</th>
+		        <th style="width:8%">Quantity</th>
+		        <th style="width:22%" class="text-center">Subtotal</th>
+		        <th style="width:10%">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                {% with product=item.product  %}
+                <tr>
+        <td data-th="Product">
+          <div class="row">
+            <div class="col-sm-10">
+              <h4 class="nomargin">{{ product.name }}</h4>
+            </div>
+          </div>
+        </td>
+        <td data-th="Price">£{{ item.price }}</td>
+        <td data-th="Quantity">
+        <form action="{% url "cart:cart_add" product.id %}" method="post">
+         {% csrf_token %}
+         {{ item.update_quantity_form.quantity}}
+         {{ item.update_quantity_form.update}}
+         <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-refresh"></i></button>
+        </form>
+        </td>
+        <td data-th="Subtotal" class="text-center">£{{ item.total_price }}</td>
+        <td class="actions" data-th="Remove">
+		<a href="{% url "cart:cart_remove" product.id %}">
+			<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+		</a>                    
+		</td>
+       </tr>
+       {% endwith %}
+       {% endfor %}     
+      <tfoot>
+              <tr class="visible-xs">
+          <td class="text-center"><strong>Total {{ cart.get_total_price }}</strong></td>
+        </tr>
+        <tr>
+          <td><a href="{% url "index" %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+          <td class="hidden-xs text-center"><strong>Total: £{{ cart.get_total_price }}</strong></td>
+          {% if cart|length > 0 %}
+          <td>
+            <button class="btn btn-success btn-block" id="myBtn" >Checkout <i class="fa fa-angle-right"></i>
+              </button>
+          </td>
+         {% endif %}
+          </tr>
+        </tbody>
+      </tfoot>
+    </table>
+    <h2> Check your order: <a href="{% url "my-order" %}"><button class="btn btn-default">My Order</button></a></h2>
+    <div id="Checkout" class="inline">
+    <span class="close">&times;</span>
+  <h1>Pay</h1>
+  <form>
+  <div class="zip-code-group form-group">
+    <label for="ZIPCode">Delivery address :</label>
+  <p>{{user.userprofile.address}}</p>
+    <a href="{% url "account"%}">Edit address <i class="fa fa-edit"></i></a>
+  </div>
+  </form>
+  <div class="card-row">
+    <i class="fa fa-cc-visa" style="color:navy;"></i>
+    <i class="fa fa-cc-amex" style="color:blue;"></i>
+    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+    <i class="fa fa-cc-discover" style="color:orange;"></i>
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="PaymentAmount">Payment amount</label>
+      <div class="amount-placeholder">
+        <span>£{{ cart.get_total_price }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label or="NameOnCard">Name on card</label>
+      <input id="NameOnCard" class="form-control" type="text" maxlength="255" placeholder="John More Doe"required="required"></input>
+    </div>
+    <div class="form-group">
+      <label for="CreditCardNumber">Card number</label>
+      <input id="CreditCardNumber" class="null card-image form-control" type="text" placeholder="1111-2222-3333-4444"required="required"></input>
+    </div>
+    <div class="expiry-date-group form-group">
+      <label for="ExpiryDate">Expiry date</label>
+      <input id="ExpiryDate" class="form-control" type="text" placeholder="MM / YY" maxlength="7" required="required"></input>
+    </div>
+    <div class="security-code-group form-group">
+      <label for="SecurityCode">Security code</label>
+      <div class="input-container">
+        <input id="SecurityCode" class="form-control" type="text" placeholder="352" required="required"></input>
+      </div>
+    </div>
+    <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+    </label>
+      <div>
+    <button type="submit" class="btn btn-block btn-success submit-button" id="PayButton" onclick="closeFormandGo()">
+     £ {{ cart.get_total_price }} <i class="fa fa-lock"></i> 
+    </button>
+  </div>
+  </form>
+</div>
+</div>
+<script>
+var modal = document.getElementById("Checkout");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+function closeFormandGo() {
+    document.getElementById("Checkout").style.display = "none";
+    alert("Your order is being processed now!")
+    location.replace("{% url "my-order" %}");
+}
+</script>
+</body>
 </html>
 {% endblock %}

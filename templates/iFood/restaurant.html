@@ -74,6 +74,9 @@
 .form {
 	text-align: left;
 }
+.rateRest{
+	padding: 10px 0px 20px 20px;
+}
   
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -118,9 +121,10 @@
 	  <img src="{% static "images/bg2.jpg" %}">
 	  </div>
   </div>
+  <div class="rateRest">
+  {% ratings restaurant %}
+  </div>
 </div>
-#To enable ratings for a restaurant
-{% ratings restaurant %}
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

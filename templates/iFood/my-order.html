@@ -53,41 +53,201 @@ h1 {
 .body {
     position: relative;
 }
+
+
+#container {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index:-1;
+  margin: auto;
+  opacity:0.4;
+}
+
+.progress-tracker {
+  display: flex;
+  margin: 0;
+  counter-reset: item;
+  list-style-type: none;
+  padding: 10px 50px 10px 20px;
+}
+.progress-tracker .step:before {
+  background: #aaaaaa;
+  border-radius: 20px;
+  color: #ffffff;
+  content: "";
+  font-size: 18px;
+  line-height: 1.8em;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  content: counter(item) "  ";
+  counter-increment: item;
+}
+.progress-tracker .step {
+  flex: 1;
+}
+.progress-tracker .step .step-name {
+  display: inline-flex;
+  margin: 0 0 0 15px;
+  background: #dddddd;
+  height: 35px;
+  width: 100%;
+  align-items: center;
+  padding: 0 30px;
+  color: #777777;
+  line-height: 1.2em;
+  font-size: 13px;
+}
+.progress-tracker .step:last-child .step-name {
+  border-radius: 0 20px 20px 0;
+  width: calc(100% - 45px);
+}
+.progress-tracker .step.active .step-name {
+  color: #333333;
+  font-weight: bold;
+}
+.progress-tracker .step.active:before {
+  background: #46c0f5;
+}
+.progress-tracker .step.completed:before {
+  background: #87db55;
+  content: "\2714";
+}
+
+.confirmBtn{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.backBtn{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	background-color: #DC143C;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.homeBtn{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	background-color: #2F4F4F;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.orderCont{
+	margin: 30px auto;
+	padding-top: 30px;
+	width:100%;
+text-align: center;
+}
+.orderCont h1{
+	font-size: 40px;
+}
+.orderCont hr{
+    width: 200px;
+}
+.orderCont h2{
+	font-size: 30px;
+}
+.orderCont h3{
+	font-size: 20px;
+}
+.orderCont h4{
+	font-size: 15px;
+}
+.orderCont p{
+	font-size: 20px;
+}
 </style>
-<div id="body">
+<body>
+	
+<div class="orderCont" id="body">
+
     {% if cart|length > 0 %}
-    Do you want to confirm ordering: </br>
+  <ol class="progress-tracker">
+  <li class="step completed"><a href="/cart" class="step-name">Payment detail</a></li>
+  <li class="step active"><a href="#" class="step-name">Confirm order</a></li>
+  <li class="step"><span class="step-name">Confirmed</span></li>
+	</ol>
+    <h1>Confirm this order: </h1>
+    <hr>
     {% for item in cart %}
     {% with product=item.product  %}
-    {{product.name}} x {{item.quantity}} </br>
+    <h2><i class="fas fa-utensils"></i> {{product.name}} <i class="fas fa-times"></i> {{item.quantity}} </h2>
     {% endwith %}
     {% endfor %}
-    Total price: £{{ cart.get_total_price }}
+    <hr>
+    <p>Total price: £{{ cart.get_total_price }}</p>
     
     <form action="{% url "my-order" %}" method="post">
         {% csrf_token %}
-    <button type="submit" class="btn btn-default" onclick="alertFunc()">Confirm this order.</button>
+    	<button type="submit" class="confirmBtn" onclick="alertmsgFunc()">Confirm <i class="fas fa-hands-helping"></i></button>
     </form>
-    <a href ="/cart"><button type="button" class="btn cancel">No, take me back to my cart!</button></a>
+    <a href ="/cart"><button type="button" class="backBtn"><i class="fas fa-caret-square-left"></i> Go back</button></a>
     {% else %}
-    <h2>Your current order:</h2>
-    Order reference ID: {{current}}</br>
-    Created: {{current.created}}</br>
-    Delivery in: {{current.delivery}} mins
-    <h2>Your order details:</h2>
+    <ol class="progress-tracker">
+  <li class="step completed"><span class="step-name">Payment detail</span></li>
+  <li class="step completed"><span class="step-name">Confirm order</span></li>
+  <li class="step completed"><span class="step-name">Confirmed</span></li>
+  </ol>
+    <h1>Your current order:</h1>
+    <hr>
+    <h3><i class="fas fa-barcode"></i> Reference ID: {{current}}</h3>
+    Ordered at: {{current.created}}
+    <h4><i class="fas fa-clock"></i> Time to deliver: </h4><p>{{current.delivery}} minutes</p>
+    <hr>
+    <h3><i class="fas fa-utensils"></i> Details:</h3>
     {% for item in order_items %}
     Dish: {{item.product.name}} £{{item.product.price}} x {{item.quantity}}</br>
-    Total cost: £{{item.get_cost}} {% endfor %}</br>
-    Time elapsing until delivery: <body>
-        <div><span id="time">{{current.delivery}}</span> minutes!</div>
-    </body></br>
-  <button><a href="{% url 'index' %}">Take me to home page!</button></a></br>
+    Total cost: £{{item.get_cost}} 
+    {% endfor %}</br>
+    <hr>
+    Time remaining: <body>
+    <div><p><span id="time">{{current.delivery}}</span></p></div>
+    <hr>
+    <div id='container'>
+</div>
+  <a href="{% url 'index' %}"><button class="homeBtn">HOME <i class="fas fa-home"></i></button></a>
 
 
 </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.2/lottie.min.js"></script>
+
 <script>
 
-function alertFunc() {
+function alertmsgFunc() {
     alert("Your order is being processed now! Thank you. Visit this page to see live time until your order is ready.")
 }
 
@@ -113,8 +273,17 @@ window.onload = function () {
     display = document.querySelector('#time');
     startTimer(Minutes, display);
 };
-                    
+                   
+var animData = {
+        container: document.getElementById('container'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://raw.githubusercontent.com/robbdiazz/uianims/master/delivery.json'
+    };
+    var anim = bodymovin.loadAnimation(animData); 
 </script>
 
 {% endif %}
 {% endblock %} 
+
