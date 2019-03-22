@@ -28,7 +28,5 @@ urlpatterns = [
     url(r'^iFood/', include('iFood.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings'))
-
-    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

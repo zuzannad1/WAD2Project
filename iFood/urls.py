@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^account/$', views.edit_profile, name ='account'),
 	url(r'^my-order/$', views.my_order, name='my-order'),
+	url(r'^restaurant-feedback/$', views.restaurant_feedback, name='restaurant-feedback'),
     url(r'^(?P<restaurant_name_slug>[\w\-]+)/$',
         views.show_restaurant, name='restaurant'),     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

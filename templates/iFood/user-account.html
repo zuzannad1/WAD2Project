@@ -1,512 +1,576 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
-{% block title_block %}
 {% load crispy_forms_tags %}
-Account Details
+
+{% block title_block %}
+	User Account
 {% endblock %}
 
 {% block body_block %}
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
-
-            <style>
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .save {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.popcontainer {
-  padding: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: #474e5d;
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
- 
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}
-            
-.alert-success{
-   position:relative;
-                height: 38px;
-                border-radius: 5px;
-                
-}
-.container {
-	width: 500px;
-	max-width: 100%;
-}
-/* color for network status */
-.panel {
-  width: 33.3333333333%;
-  float: left;
-  background: #fff;
-  border: 1px solid #e3e3e3;
-  border-top: 6px solid #1d5cab;
-  border-radius: 5px;
-  display: table;
-  margin-bottom: 30px;
-  margin-right: 20px;
-}
-.panel .bold {
-  font-weight: 600;
-}
-.panel.user-detail {
-  width: 100%;
-  height: 200px;
-}
-.panel.user-detail .panel-content {
-  position: relative;
-  display: table;
-  width: 100%;
-}
-.panel.user-detail .panel-content--left {
-  width: 41.6666666667%;
-  float: left;
-}
-.panel-header {
-  border-bottom: 1px solid #ddd;
-  padding: 15px 20px;
-  font-size: 30px;
-}
-.panel-content__image {
-  width: 110px;
-  height: 110px;
-  float: left;
-  overflow: hidden;
-  margin: 20px;
-  text-align: center;
-  outline: 2px solid #EBEAEC;
-  outline-offset: 2px;
-}
-.panel-content__image img {
-  height: 110px;
-}
-.panel-content__base-info {
-  float: left;
-  padding: 20px 20px 15px 0;
-}
-
-.panel-content__base-info ul {
-  list-style: none;
-  padding: 0;
-}
-.panel-content__base-info ul li {
-  margin-top: 6px;
-  margin-left: 15px;
-  margin-bottom: 6px;
-}
-.panel-content__base-info ul li span {
-  position: relative;
-  font-size: 20px;
-}
-.panel-content__base-info ul li span a {
-  color: inherit;
-  text-decoration: underline;
-}
-.panel-content__base-info__item--status .online,
-.panel-content__base-info__item--status .offline,
-.panel-content__base-info__item--status .away,
-.panel-content__base-info__item--status .busy {
-  display: inline-block;
-  margin-bottom: 5px;
-  padding-left: 30px;
-  position: relative;
-}
-.panel-content__base-info__item--status .online:before,
-.panel-content__base-info__item--status .offline:before,
-.panel-content__base-info__item--status .away:before,
-.panel-content__base-info__item--status .busy:before {
-  border: 1px solid blue;
-  border-radius: 50%;
-  content: "";
-  height: 1em;
-  margin-top: -.6em;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 1em;
-  margin-left: 3px;
-}
-.panel-content__base-info__item--status .online:before {
-  background-color: #77AB47;
-  border-color: #77AB47;
-}
-.panel-content__base-info__item--status .online:after {
-  border-radius: 50%;
-  border: 1px solid #77AB47;
-  box-shadow: 0 0 4px rgba(119, 171, 71, 0.6), inset 0 0 4px rgba(119, 171, 71, 0.6);
-  content: "";
-  height: 2em;
-  margin: -1.1em 0 0 -.5em;
-  position: absolute;
-  top: 50%;
-  left: 3px;
-  width: 2em;
-  -webkit-transform: scale(0);
-  -webkit-animation: online-ping 2.5s ease-in-out infinite;
-  animation: online-ping 2.5s ease-in-out infinite;
-}
-.panel-content__base-info__item--status .offline:before {
-  background-color: rgba(148, 137, 146, 0.2);
-  border-color: #948992;
-}
-.panel-content__base-info__item--status .away:before {
-  background-color: rgba(255, 230, 133, 0.6);
-  border-color: #ffd11f;
-}
-.panel-content__base-info__item--status .busy:before {
-  background-color: rgba(197, 56, 91, 0.9);
-  border-color: #C5385B;
-  -webkit-animation: busy-pulse 3s ease-in-out infinite alternate;
-  animation: busy-pulse 3s ease-in-out infinite alternate;
-}
-
-/* Media */
-@media (max-width: 1200px) {
-  .panel.user-detail .panel-content--left {
-    width: 50%;
-    float: left;
-  }
-}
-@media (max-width: 680px) {
-  .panel {
-    width: 100%;
-    float: left;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-@media (max-width: 640px) {
-  .panel.user-detail .panel-content__base-info {
-    width: 100%;
-    float: left;
-    margin-left: 0;
-    margin-right: 0;
-    clear: both;
-    padding: 0 20px;
-    padding-top: 23px;
-  }
-  .panel.user-detail .panel-content__base-info .item-status {
-    position: absolute;
-    top: 145px;
-  }
-  .panel.user-detail .panel-content__base-info ul {
-    margin-bottom: 0;
-  }
-  .panel.user-detail .panel-content__base-info ul li:first-child + li + li {
-    margin-bottom: 0;
-  }
-}
-/* Animation for  online */
-@-webkit-keyframes online-ping {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(0);
-  }
-  50% {
-    opacity: .7;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-  }
-}
-@keyframes online-ping {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(0);
-            transform: scale(0);
-  }
-  50% {
-    opacity: .6;
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-/* Animation for  busy */
-@-webkit-keyframes busy-pulse {
-  0% {
-    background-color: rgba(197, 56, 91, 0.9);
-  }
-  50% {
-    background-color: rgba(197, 56, 91, 0.4);
-  }
-  100% {
-    background-color: rgba(197, 56, 91, 0.9);
-  }
-}
-@keyframes busy-pulse {
-  0% {
-    background-color: rgba(197, 56, 91, 0.9);
-  }
-  50% {
-    background-color: rgba(197, 56, 91, 0.4);
-  }
-  100% {
-    background-color: rgba(197, 56, 91, 0.9);
-  }
-}
-.btnclass{
-	text-align:center;
-	padding: 0px 0px 10px 0px;
-}
-.editbtn{
-	background-color: #B0E0E6;
-    color: #000000;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: relative;
-    margin: auto;
-    width: 350px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.orderbtn{
-	background-color: #8FBC8F;
-    color: #000000;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: relative;
-    margin: auto;
-    width: 350px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.orderbtn:hover{
-	opacity: 1;
-}
-.editbtn:hover{
-	opacity: 1;
-}
-
-    </style>
-    </head>
-    <body>
-    <div class="container">
-      <div class="panel user-detail">
-    <div class="panel-header">
-      User Details
-    </div>
-    <div class="panel-content">
-            <div class="panel-content__image">
-<img src="{{ MEDIA_URL }}{{user.userprofile.picture }}"
-     alt="{{selecteduser.username}}" />			
-     </div>
-        <div class="panel-content__base-info">
-          <ul>
-            <li>
-              <span class="bold">Username:</span>
-              <span class="panel-content__base-info__item">
-                  {{user.username}}
-              </span>
-            </li>            
-            <li>
-              <span class="bold">First Name:</span>
-              <span class="panel-content__base-info__item">
-                  {{user.first_name}}
-              </span>
-            </li>
-            <li>
-              <span class="bold">Last Name:</span>
-              <span class="panel-content__base-info__item">
-                  {{user.last_name}}
-              </span>
-            </li>
-            <li>
-              <span class="bold">Email:</span>
-              <span class="panel-content__base-info__item">
-                  {{user.email}}
-              </span>
-            </li>
-            <li>
-              <span class="bold">Password:</span>
-              <span class="panel-content__base-info__item">
-              	*********
-                </span>
-            </li>            
-            <li>
-              <span class="bold">Address:</span>
-              <span class="panel-content__base-info__item">
-                {{user.userprofile.address}}
-                </span>
-            </li>
-            <li>
-              <span class="bold">Facebook:</span>
-              <span class="panel-content__base-info__item">
-                {{user.userprofile.facebook}}
-                </span>
-            </li>
-            <li>
-              <span class="bold">Twitter:</span>
-              <span class="panel-content__base-info__item">
-                {{user.userprofile.twitter}}
-                </span>
-            </li>                   
-            <li>
-              <span class="panel-content__base-info__item--status">
-                   <span class="online">Online</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <!-- // base info -->
-    </div>
-      <div class="btnclass">
-          <button class="editbtn" onclick="document.getElementById('id01').style.display='block'">Edit detail  <i class="fa fa-edit"></i> </button>
-      </div>
-  </div>
-  <div class="panel user-detail">
-    <div class="panel-header">
-    Your Order
-    </div>
-    <div class="panel-content">
-       <div class="panel-content__base-info">    
-           </div>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style>
+	input[type=text], input[type=password] {
+		width: 100%;
+		padding: 15px;
+		margin: 5px 0 22px 0;
+		display: inline-block;
+		border: none;
+		background: #f1f1f1;
+	}
+	
+	/* Add a background color when the inputs get focus */
+	
+	input[type=text]:focus, input[type=password]:focus {
+		background-color: #ddd;
+		outline: none;
+	}
+	
+	/* Set a style for all buttons */
+	
+	button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+		opacity: 0.9;
+	}
+	
+	button:hover {
+		opacity: 1;
+	}
+	
+	/* Extra styles for the cancel button */
+	
+	.cancelbtn {
+		padding: 14px 20px;
+		background-color: #f44336;
+	}
+	
+	/* Float cancel and signup buttons and add an equal width */
+	
+	.cancelbtn, .save {
+		float: left;
+		width: 50%;
+	}
+	
+	/* Add padding to container elements */
+	
+	.popcontainer {
+		padding: 16px;
+	}
+	
+	/* The Modal (background) */
+	
+	.modal {
+		display: none;
+		/* Hidden by default */
+		position: fixed;
+		/* Stay in place */
+		z-index: 1;
+		/* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%;
+		/* Full width */
+		height: 100%;
+		/* Full height */
+		overflow: auto;
+		/* Enable scroll if needed */
+		background-color: #474e5d;
+		padding-top: 50px;
+	}
+	
+	/* Modal Content/Box */
+	
+	.modal-content {
+		background-color: #fefefe;
+		margin: 5% auto 15% auto;
+		/* 5% from the top, 15% from the bottom and centered */
+		border: 1px solid #888;
+		width: 50%;
+		/* Could be more or less, depending on screen size */
+	}
+	
+	/* Style the horizontal ruler */
+	
+	hr {
+		border: 1px solid #f1f1f1;
+		margin-bottom: 25px;
+	}
+	
+	/* The Close Button (x) */
+	
+	.close {
+		position: absolute;
+		right: 35px;
+		top: 15px;
+		font-size: 40px;
+		font-weight: bold;
+		color: #f1f1f1;
+	}
+	
+	.close:hover, .close:focus {
+		color: #f44336;
+		cursor: pointer;
+	}
+	
+	/* Clear floats */
+	
+	.clearfix::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	
+	/* Change styles for cancel button and signup button on extra small screens */
+	
+	@media screen and (max-width: 300px) {
+		.cancelbtn, .signupbtn {
+			width: 100%;
+		}
+	}
+	
+	.alert-success {
+		position: relative;
+		height: 38px;
+		border-radius: 5px;
+	}
+	
+	.container {
+		width: 500px;
+		max-width: 100%;
+		margin-bottom: 30px;
+	}
+	
+	/* color for network status */
+	
+	.panel {
+		width: 33.3333333333%;
+		float: left;
+		background: #fff;
+		border: 1px solid #e3e3e3;
+		border-top: 6px solid #1d5cab;
+		border-radius: 5px;
+		display: table;
+		margin-bottom: 30px;
+		margin-right: 20px;
+	}
+	
+	.panel .bold {
+		font-weight: 600;
+	}
+	
+	.panel.user-detail {
+		width: 100%;
+		height: 200px;
+	}
+	
+	.panel.user-detail .panel-content {
+		position: relative;
+		display: table;
+		width: 100%;
+	}
+	
+	.panel.user-detail .panel-content--left {
+		width: 41.6666666667%;
+		float: left;
+	}
+	
+	.panel-header {
+		border-bottom: 1px solid #ddd;
+		padding: 15px 20px;
+		font-size: 30px;
+	}
+	
+	.panel-content__image {
+		width: 110px;
+		height: 110px;
+		float: left;
+		overflow: hidden;
+		margin: 20px;
+		text-align: center;
+		outline: 2px solid #EBEAEC;
+		outline-offset: 2px;
+	}
+	
+	.panel-content__image img {
+		height: 110px;
+	}
+	
+	.panel-content__base-info {
+		float: left;
+		padding: 20px 20px 15px 0;
+	}
+	
+	.panel-content__base-info ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+	.panel-content__base-info ul li {
+		margin-top: 6px;
+		margin-left: 15px;
+		margin-bottom: 6px;
+	}
+	
+	.panel-content__base-info ul li span {
+		position: relative;
+		font-size: 20px;
+	}
+	
+	.panel-content__base-info ul li span a {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.panel-content__base-info__item--status .online, .panel-content__base-info__item--status .offline, .panel-content__base-info__item--status .away, .panel-content__base-info__item--status .busy {
+		display: inline-block;
+		margin-bottom: 5px;
+		padding-left: 30px;
+		position: relative;
+	}
+	
+	.panel-content__base-info__item--status .online:before, .panel-content__base-info__item--status .offline:before, .panel-content__base-info__item--status .away:before, .panel-content__base-info__item--status .busy:before {
+		border: 1px solid blue;
+		border-radius: 50%;
+		content: "";
+		height: 1em;
+		margin-top: -.6em;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 1em;
+		margin-left: 3px;
+	}
+	
+	.panel-content__base-info__item--status .online:before {
+		background-color: #77AB47;
+		border-color: #77AB47;
+	}
+	
+	.panel-content__base-info__item--status .online:after {
+		border-radius: 50%;
+		border: 1px solid #77AB47;
+		box-shadow: 0 0 4px rgba(119, 171, 71, 0.6), inset 0 0 4px rgba(119, 171, 71, 0.6);
+		content: "";
+		height: 2em;
+		margin: -1.1em 0 0 -.5em;
+		position: absolute;
+		top: 50%;
+		left: 3px;
+		width: 2em;
+		-webkit-transform: scale(0);
+		-webkit-animation: online-ping 2.5s ease-in-out infinite;
+		animation: online-ping 2.5s ease-in-out infinite;
+	}
+	
+	.panel-content__base-info__item--status .offline:before {
+		background-color: rgba(148, 137, 146, 0.2);
+		border-color: #948992;
+	}
+	
+	.panel-content__base-info__item--status .away:before {
+		background-color: rgba(255, 230, 133, 0.6);
+		border-color: #ffd11f;
+	}
+	
+	.panel-content__base-info__item--status .busy:before {
+		background-color: rgba(197, 56, 91, 0.9);
+		border-color: #C5385B;
+		-webkit-animation: busy-pulse 3s ease-in-out infinite alternate;
+		animation: busy-pulse 3s ease-in-out infinite alternate;
+	}
+	
+	/* Media */
+	
+	@media (max-width: 1200px) {
+		.panel.user-detail .panel-content--left {
+			width: 50%;
+			float: left;
+		}
+	}
+	
+	@media (max-width: 680px) {
+		.panel {
+			width: 100%;
+			float: left;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+	
+	@media (max-width: 640px) {
+		.panel.user-detail .panel-content__base-info {
+			width: 100%;
+			float: left;
+			margin-left: 0;
+			margin-right: 0;
+			clear: both;
+			padding: 0 20px;
+			padding-top: 23px;
+		}
+		.panel.user-detail .panel-content__base-info .item-status {
+			position: absolute;
+			top: 145px;
+		}
+		.panel.user-detail .panel-content__base-info ul {
+			margin-bottom: 0;
+		}
+		.panel.user-detail .panel-content__base-info ul li:first-child+li+li {
+			margin-bottom: 0;
+		}
+	}
+	
+	/* Animation for  online */
+	
+	@-webkit-keyframes online-ping {
+		0% {
+			opacity: 1;
+			-webkit-transform: scale(0);
+		}
+		50% {
+			opacity: .7;
+		}
+		100% {
+			opacity: 0;
+			-webkit-transform: scale(1);
+		}
+	}
+	
+	@keyframes online-ping {
+		0% {
+			opacity: 1;
+			-webkit-transform: scale(0);
+			transform: scale(0);
+		}
+		50% {
+			opacity: .6;
+		}
+		100% {
+			opacity: 0;
+			-webkit-transform: scale(1);
+			transform: scale(1);
+		}
+	}
+	
+	/* Animation for  busy */
+	
+	@-webkit-keyframes busy-pulse {
+		0% {
+			background-color: rgba(197, 56, 91, 0.9);
+		}
+		50% {
+			background-color: rgba(197, 56, 91, 0.4);
+		}
+		100% {
+			background-color: rgba(197, 56, 91, 0.9);
+		}
+	}
+	
+	@keyframes busy-pulse {
+		0% {
+			background-color: rgba(197, 56, 91, 0.9);
+		}
+		50% {
+			background-color: rgba(197, 56, 91, 0.4);
+		}
+		100% {
+			background-color: rgba(197, 56, 91, 0.9);
+		}
+	}
+	
+	.btnclass {
+		text-align: center;
+		padding: 0px 0px 10px 0px;
+	}
+	
+	.editbtn {
+		background-color: #B0E0E6;
+		color: #000000;
+		padding: 16px 20px;
+		border: none;
+		cursor: pointer;
+		opacity: 0.8;
+		position: relative;
+		margin: auto;
+		width: 350px;
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.orderbtn {
+		background-color: #8FBC8F;
+		color: #000000;
+		padding: 16px 20px;
+		border: none;
+		cursor: pointer;
+		opacity: 0.8;
+		position: relative;
+		margin: auto;
+		width: 350px;
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.orderbtn:hover {
+		opacity: 1;
+	}
+	
+	.editbtn:hover {
+		opacity: 1;
+	}
+	
+	.feedbackBtn {
+		background-color: #E0FFFF;
+		color: #000000;
+		padding: 16px 20px;
+		border: none;
+		cursor: pointer;
+		opacity: 0.8;
+		position: relative;
+		margin: auto;
+		width: 350px;
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.feedbackBtn:hover {
+		opacity: 1;
+	}
+</style>
+<body>
+	<div class="container">
+    	<div class="panel user-detail">
+    		<div class="panel-header">
+      			User Details
+    		</div>
+    	<div class="panel-content">
+        	<div class="panel-content__image">
+				<img src="{{ MEDIA_URL }}{{user.userprofile.picture }}" alt="{{selecteduser.username}}" />			
+     		</div>
+        	<div class="panel-content__base-info">
+          		<ul>
+            		<li>
+              			<span class="bold">Username:</span>
+              			<span class="panel-content__base-info__item">
+                  			{{user.username}}
+              			</span>
+            		</li>            
+            		<li>
+              			<span class="bold">First Name:</span>
+              			<span class="panel-content__base-info__item">
+                  			{{user.first_name}}
+              			</span>
+            		</li>
+            		<li>
+              			<span class="bold">Last Name:</span>
+              			<span class="panel-content__base-info__item">
+                  			{{user.last_name}}
+              			</span>
+            		</li>
+            		<li>
+              			<span class="bold">Email:</span>
+              			<span class="panel-content__base-info__item">
+                  			{{user.email}}
+              			</span>
+            		</li>
+            		<li>
+              			<span class="bold">Password:</span>
+              			<span class="panel-content__base-info__item">
+              				*********
+               			</span>
+            		</li>            
+            		<li>
+              			<span class="bold">Address:</span>
+              			<span class="panel-content__base-info__item">
+                			{{user.userprofile.address}}
+                		</span>
+            		</li>
+            		<li>
+              			<span class="bold">Facebook:</span>
+              			<span class="panel-content__base-info__item">
+                			{{user.userprofile.facebook}}
+                		</span>
+            		</li>
+            		<li>
+              			<span class="bold">Twitter:</span>
+              			<span class="panel-content__base-info__item">
+                			{{user.userprofile.twitter}}
+                		</span>
+            		</li>                   
+            		<li>
+              			<span class="panel-content__base-info__item--status">
+                   			<span class="online">Online</span>
+              			</span>
+            		</li>
+          		</ul>
+        	</div>
+		</div>
+      	<div class="btnclass">
+       		<button class="editbtn" onclick="document.getElementById('id01').style.display='block'">Edit detail  <i class="fa fa-edit"></i> </button>
+      	</div>
+  	</div>
+  	<div class="panel user-detail">
+    	<div class="panel-header">
+    		Your Order
+    	</div>
+    	<div class="panel-content">
+	       	<div class="panel-content__base-info">    
+	        </div>
     	</div>
     	<div class="btnclass">
-           <a href="{% url "my-order" %}"><button class="orderbtn">Order detail  <i class="fa fa-truck"></i></button></a>
-      </div>
-   </div>
-</div>
-<!-- // container -->
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content"  method="POST" action="{% url 'account' %}"enctype="multipart/form-data">
-    <div class="popcontainer">
-      <h1>Edit your information</h1>
-      <p>Please fill in the password to change the details.</p>
-      <hr>
-       {% csrf_token %}
-       {{form|crispy}}
-        <hr>
-        {{prof|crispy}}
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="save" onclick="alertFunc()">Save</button>
-      </div>
-    </div>
-  </form>
-</div>
-        <script>
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-        
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
-
-        function alertFunc() {
-            closeForm()
-            alert("Your details have been successfully saved!")
-        }
-        </script>
-        
-    </body>
-</html>
-
+        	<a href="{% url "my-order" %}"><button class="orderbtn">Order detail  <i class="fa fa-truck"></i></button></a>
+      	</div>
+   	</div>
+    <div class="panel user-detail">
+    	<div class="panel-header">
+    		Feedback to Restaurant
+    	</div>
+    	<div class="panel-content">
+       		<div class="panel-content__base-info">    
+           	</div>
+    	</div>
+    	<div class="btnclass">
+        	<a href="{% url 'restaurant-feedback' %}"><button class="feedbackBtn">Give Feedback  <i class="fa fa-comment-alt"></i></button></a>
+      	</div>
+	</div>
+	<div id="id01" class="modal">
+		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	  	<form class="modal-content"  method="POST" action="{% url 'account' %}"enctype="multipart/form-data">
+	    	<div class="popcontainer">
+	      		<h1>Edit your information</h1>
+	      		<p>Please fill in the password to change the details.</p>
+	      		<hr>
+	       		{% csrf_token %}
+	       		{{form|crispy}}
+	        	<hr>
+	        	{{prof|crispy}}
+	      		<div class="clearfix">
+	        		<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+	        		<button type="submit" class="save" onclick="alertFunc()">Save</button>
+	      		</div>
+	    	</div>
+	  	</form>
+	</div>
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+<script>
+	var modal = document.getElementById('id01');
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+	        
+	function closeForm() {
+		document.getElementById("myForm").style.display = "none";
+	}
+	function alertFunc() {
+		closeForm()
+		alert("Your details have been successfully saved!")
+	}
+	</script>        
 {% endblock %}

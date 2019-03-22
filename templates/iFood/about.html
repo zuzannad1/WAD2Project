@@ -8,113 +8,114 @@
 
 
 {%block body_block %}
-	<style>
-
-.aboutContainer{
-  	position:relative;
-	  padding:30px 50px;
-    color: white;
-    height:100%;
-}
-.aboutContent{
-    position:relative;
-    color: #000;
-}
-
-.aboutTitle{
-    position: relative;
-    padding: 0px 0px 0px 30px;
-}
-.aboutTitle h2{
-    padding: 0px 0px 0px 50px;
-}
-.aboutTitle .title{
-    position: relative;
-    color: #d7a449;
-    font-size: 18px;
-    font-weight: 700;
-    display: inline-block;
-    text-transform: capitalize;
-}
-.aboutTitle .title:before{
-    position: absolute;
-    content: '';
-    right: -120px;
-    bottom: 44px;
-    width: 100px;
-    height: 1px;
-    background-color: #bbbbbb;
-}
-
-.aboutText{
-    position:relative;
-    color: #777777;
-    font-size:15px;
-    line-height:2em;
-    text-align:right;
-}
-.aboutText h3{
-    color: #000;
-}
-
-.feedback {
-	padding: 35px 0px 0px 40px;
-	font-size: 20px;
-}
-.feedback .btn{
-     position: relative;
-    line-height: 24px;
-    color: #252525;
-    font-size: 20px;
-    font-weight: 700;
-    background: none;
-    display: inline-block;
-    padding: 11px 40px;
-    background-color: #ffffff;
-    text-transform: capitalize;
-    border: 2px solid #d7a449;
-}
-.feedback .btn:hover{
-    color: #ffffff;
-    background: #d7a449;
-}
-.feedback p{
-	font-size: 15px;
-}
-
-.image{
-  	position:relative;
-    opacity:0.4;
-    width:100%;
-    text-align:center;
-}
-.image img{
-    width:100%;
-}
-	</style>
-	<body>
-<div class="aboutContainer">
-  <div class="aboutContent">
-    <div class="aboutTitle">
-      <div class="title">
-        <h1>About Us</h1>
-      </div>
-      <h2>We deliver the dishes that you love.</h2>
-    </div>
-    <div class="aboutText">
-      <hr>     
-      <h3>This web app is designed by :</h3>
-      Jing Kuan Lee<br> Raza Ali<br> Zuzia Dubanowska<br> Pedro Henrique Castro<br>
-    </div>
-    <div class="feedback">
-      Feel free to give us some feedback:
-      <a href="{% url 'web-feedback' %}"><button class="btn">Feedback</button></a>
-      <p> * This can help up to improve our website *</p>
-    </div>
-  </div>
-  <div class="image">
-  <img src="{% static "images/about.jpg" %}"/>
-  </div>
-</div>
-	</body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	.aboutContainer {
+		position: relative;
+		padding: 30px 50px;
+		color: white;
+		height: 100%;
+	}
+	.aboutContent {
+		position: relative;
+		color: #000;
+	}
+	.aboutTitle {
+		position: relative;
+		padding: 0px 0px 0px 30px;
+	}
+	.aboutTitle h2 {
+		padding: 0px 0px 0px 50px;
+	}
+	.aboutTitle .title {
+		position: relative;
+		color: #d7a449;
+		font-size: 18px;
+		font-weight: 700;
+		display: inline-block;
+		text-transform: capitalize;
+	}
+	.aboutTitle .title:before {
+		position: absolute;
+		content: '';
+		right: -120px;
+		bottom: 44px;
+		width: 100px;
+		height: 1px;
+		background-color: #bbbbbb;
+	}
+	.aboutText {
+		position: relative;
+		color: #777777;
+		font-size: 20px;
+		line-height: 2em;
+		text-align: right;
+	}
+	.aboutText h3 {
+		color: #000;
+	}
+	.feedback {
+		padding: 35px 0px 0px 40px;
+		font-size: 20px;
+	}
+	.feedback .btn {
+		position: relative;
+		line-height: 24px;
+		color: #252525;
+		font-size: 20px;
+		font-weight: 700;
+		background: none;
+		display: inline-block;
+		padding: 11px 40px;
+		background-color: #ffffff;
+		text-transform: capitalize;
+		border: 2px solid #d7a449;
+	}
+	.feedback .btn:hover {
+		color: #ffffff;
+		background: #d7a449;
+	}
+	.feedback p {
+		font-size: 15px;
+	}
+	.image {
+		position: relative;
+		opacity: 0.4;
+		width: 100%;
+		text-align: center;
+	}
+	.image img {
+		width: 100%;
+	}
+</style>
+<body>
+	<div class="aboutContainer">
+		<div class="aboutContent">
+			<div class="aboutTitle">
+				<div class="title">
+					<h1>About Us</h1>
+	      		</div>
+	      		<h2>We deliver the dishes that you love.</h2>
+	    	</div>
+	    	<div class="aboutText">
+	      		<hr>     
+	      		<h3>This web app is designed by :</h3>
+	      		Jing Kuan Lee<br> 
+	      		Raza Ali<br> 
+	      		Zuzia Dubanowska<br> 
+	      		Pedro Henrique Castro<br>
+	    	</div>
+	    	{% if user.is_authenticated %}
+	    	<div class="feedback">
+	      		Feel free to give us some feedback:
+	      		<a href="{% url 'web-feedback' %}"><button class="btn">Feedback</button></a>
+	      		<p> * This can help up to improve our website *</p>
+	    	</div>
+	     	{% endif %}
+	  	</div>
+	  	<div class="image">
+	  		<img src="{% static "images/about.jpg" %}"/>
+	  	</div>
+	</div>
+</body>
 {% endblock %} 

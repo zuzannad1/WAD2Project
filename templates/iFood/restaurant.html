@@ -1,133 +1,185 @@
 {% extends 'ifood/base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
+{% load ratings %}
 
 {% block title_block %}
     {{restaurant.name}}
 {% endblock %}
-{%block body_block %}
-{% load ratings %}
-<style>    
-.container {
-	padding: 20px;
- 	width: 100%;
-}
-.container .wrap-menu {
-  display: table;
-  width: 440px;
-  max-width: 440px;
-}
-.container .wrap-menu .restaurant {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 36px;
-  color: #cc9900;
-}
-.container .wrap-menu .restaurant .ic-cate {
-  display: inline-block;
-  width: 235px;
-  height: 27px;
-}
-.container .wrap-menu img {
-  width: 100%;
-  height: auto;
-  opacity: 0.3;
-}
-.container .wrap-menu .row-menu-wrap {
-  margin-bottom: 35px;
-}
-.container .wrap-menu .row-menu-wrap .row-menu {
-  display: table-row;
-}
-.container .wrap-menu .row-menu-wrap .row-menu .item-menu {
-  display: table-cell;
-  width: 90%;
-  font-size: 21px;
-  font-family: "yeseva";
-  color: #cc9900;
-}
-.container .wrap-menu .row-menu-wrap .row-menu .item-prise {
-  display: table-cell;
-  font-size: 21px;
-  font-family: "yeseva";
-  color: #cc9900;
-}
-.gold-line {
-  display: inline-block;
-  width: 100%;
-  height: 1px;
-  margin-bottom: 8px;
-  background-color: #cc9900;
-}
-.item-descr {
-  font-size: 16px;
-  font-family: "lato";
-}
 
-.btn{
-	background-color: lightgray;
-	padding-botton: 10px;
-}
-        
-.form {
-	text-align: left;
-}
-.rateRest{
-	padding: 10px 0px 20px 20px;
-}
-  
-</style>
+{% block body_block %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Amatic SC'>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>    
+	.container {
+		padding: 60px;
+		width: 100%;
+	}
+	.container .wrap-menu {
+		display: table;
+		width: 440px;
+		max-width: 100%;
+	}
+	.container .wrap-menu .restaurant {
+		width: 80%;
+		margin: 0 auto;
+		text-align: center;
+		font-size: 36px;
+		color: #cc9900;
+	}
+	.container .wrap-menu .restaurant .ic-cate {
+		display: inline-block;
+		width: 235px;
+		height: 27px;
+	}
+	.container .wrap-menu img {
+		width: 100%;
+		height: auto;
+		opacity: 0.3;
+	}
+	.container .wrap-menu .row-menu-wrap {
+		margin-bottom: 35px;
+	}
+	.container .wrap-menu .row-menu-wrap .row-menu {
+		display: table-row;
+	}
+	.container .wrap-menu .row-menu-wrap .row-menu .item-menu {
+		display: table-cell;
+		width: 90%;
+		font-size: 21px;
+		font-family: "yeseva";
+		color: #cc9900;
+	}
+	.container .wrap-menu .row-menu-wrap .row-menu .item-prise {
+		display: table-cell;
+		font-size: 21px;
+		font-family: "yeseva";
+		color: #cc9900;
+	}
+	.gold-line {
+		display: inline-block;
+		width: 100%;
+		height: 1px;
+		margin-bottom: 8px;
+		background-color: #cc9900;
+	}
+	.item-descr {
+		font-size: 16px;
+		font-family: "lato";
+	}
+	.btn {
+		background-color: lightgray;
+		padding-botton: 10px;
+	}
+	.form {
+		text-align: left;
+	}
+	.rateRest {
+		padding: 10px 0px 20px 0px;
+	}
+	.outer-wrapper {
+		margin: 2%;
+		position: relative;
+		color: #737373;
+		display: block;
+		margin-bottom: 50px;
+	}
+	.outer-wrapper .box-wrapper {
+		position: relative;
+		padding: 0px 40px 0px 40px;
+	}
+	.outer-wrapper .box-wrapper .display-box {
+		box-shadow: 1px 1px 2px 0px #C5C5C5;
+		margin: 3%;
+		padding: 0% 6%;
+		border: 1px solid #C5C5C5;
+		position: relative;
+		top: 0;
+		left: 0;
+		color: #000;
+		text-align: center;
+	}
+	.outer-wrapper .box-wrapper .display-box h3 {
+		font-size: 25px;
+	}
+	.outer-wrapper .box-wrapper .display-box .content {
+		font-size: 15px;
+		text-align: left;
+		margin-bottom: 5%;
+		border-bottom: 1px solid #C5C5C5;
+	}
+	.outer-wrapper .box-wrapper .display-box .content li {
+		list-style-type: none;
+		padding: 3px;
+	}
+</style>
 <body>
-<div class="container">
-  <div class="col-md-5 left">
-    <div class="wrap-menu">
-      {% if restaurant %}
-      <h2 class="restaurant">
-        <span>{{restaurant.name}}</span>
-        <i class="ic-cate"></i>
-      </h2>
-      {% if dishes %} 
-      {% for dish in dishes %}
-      <div class="row-menu-wrap">
-        <div class="row-menu">
-          <p class="item-menu">{{dish.name}}</p>
-          <span href="#" class="item-prise">£{{dish.price}}</span>
-        </div>
-        <span class="gold-line"></span>
-        <span class="item-descr">{{dish.description}}</span>
-        {% if user.is_authenticated %}
-			<form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
-			{% csrf_token %}
-			<button type="submit" class="btn">Add to cart <i class="fas fa-cart-plus"></i></button>
-			{{ form.quantity }}
-			</form>
-        {% endif %}
-      </div>
-      {% endfor %} 
-      {% endif %} 
-      {% endif %}
-    </div>
-  </div>
-  <div class="col-md-5 right">
-	  <div class="wrap-menu">
-	  <img src="{% static "images/bg2.jpg" %}">
-	  </div>
-  </div>
-  <div class="rateRest">
-  {% ratings restaurant %}
-  </div>
-</div>
-
+	<div class="container">
+		<div class="col-md-5 left">
+			<div class="wrap-menu">
+	      		{% if restaurant %}
+	      			<h2 class="restaurant">
+		        		<span>{{restaurant.name}}</span>
+		        		<i class="ic-cate"></i>
+	      			</h2>
+	      			{% if dishes %} 
+	      				{% for dish in dishes %}
+	      					<div class="row-menu-wrap">
+		        				<div class="row-menu">
+		          					<p class="item-menu">{{dish.name}}</p>
+		          					<span href="#" class="item-prise">£{{dish.price}}</span>
+		        				</div>
+	        					<span class="gold-line"></span>
+	        					<span class="item-descr">{{dish.description}}</span>
+	        					{% if user.is_authenticated %}
+									<form action="{% url 'cart:cart_add' product_id=dish.id %}" method="post">
+										{% csrf_token %}
+										<button type="submit" class="btn">Add to cart <i class="fas fa-cart-plus"></i></button>
+										{{ form.quantity }}
+									</form>
+	        					{% endif %}
+	      					</div>
+	      				{% endfor %} 
+	      			{% endif %} 
+	      		{% endif %}
+	    	</div>
+	  	</div>
+	  	<div class="col-md-5 right">
+			<div class="wrap-menu">
+		  		<img src="{% static "images/bg2.jpg" %}">
+		 	</div>
+	  	</div>
+	  	<div class="rateRest">
+	  		{% ratings restaurant %}
+	  	</div>
+	</div>
+	<div class="outer-wrapper">
+		<div class="box-wrapper">
+			<div class="display-box">
+	         	<h3>Users' Comments <i class="fas fa-comments"></i></h3>
+	         	<hr>
+	         	<div class="content">
+	          	{% if restaurant %}
+			    	{% if feedback %} 
+			      	<ul>
+				    	{% for feed in feedback %}
+				      	<li>
+				      		<i class="fas fa-quote-right"></i> {{ feed.comment }}
+				     	</li>
+				      	{% endfor %} 
+				  	</ul>
+			      	{% endif %} 
+				{% endif %} 
+				</div>
+	      	</div>
+	   	</div>
+	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}" type="text/javascript"></script>
 {% endblock %}

@@ -63,4 +63,7 @@ class FeedbackForm(forms.ModelForm):
         model = Comments
         fields = ('comment','created_at')
 
-    
+class RestaurantFeedback(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ('restaurant','comment','user','created_at','rating')

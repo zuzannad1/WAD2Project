@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 #And adds it to the current cart (based on current session)
 #Using the CartAdd.. form
 @require_POST
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -25,7 +25,7 @@ def cart_add(request, product_id):
 
 #Cart remove view
 #Removes product object from the current cart
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -35,7 +35,7 @@ def cart_remove(request, product_id):
 #Cart detail view
 #Used to update the quantity of a particular product object
 #In the current cart
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:

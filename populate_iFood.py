@@ -116,22 +116,22 @@ def populate():
 	
 	
 		         
-    cats = {"Curry Pot": {"dishes": curry_pot_dishes},
-            "Indian Orchard": {"dishes": indian_orchard_dishes},
-            "Bollywood Spice": {"dishes": bollywood_spice_dishes}, 
-            "Station Wok": {"dishes": station_wok_dishes},
-            "Temaki": {"dishes": temaki_dishes},
-            "Feng Huang": {"dishes": feng_huang_dishes},
-            "Grillicious Mediterranean Dishes" : {"dishes": grillicious_mediterranean_dishes},
-            "Pastaios": {"dishes": pastaios_dishes},
-            "Tony Macaroni": {"dishes": tony_macaroni_dishes}, 
-            "Number Sixteen": {"dishes": number_sixteen_dishes},
-            "Cote Brasserie": {"dishes": cote_brasserie_dishes},
-            "Steak and Cherry": {"dishes": steak_and_cherry_dishes}}
+    cats = {"Curry Pot": {"dishes": curry_pot_dishes,"rating":5},
+            "Indian Orchard": {"dishes": indian_orchard_dishes,"rating":4},
+            "Bollywood Spice": {"dishes": bollywood_spice_dishes,"rating":3}, 
+            "Station Wok": {"dishes": station_wok_dishes,"rating":4},
+            "Temaki": {"dishes": temaki_dishes,"rating":5},
+            "Feng Huang": {"dishes": feng_huang_dishes,"rating":4},
+            "Grillicious Mediterranean Dishes" : {"dishes": grillicious_mediterranean_dishes,"rating":4},
+            "Pastaios": {"dishes": pastaios_dishes,"rating":5},
+            "Tony Macaroni": {"dishes": tony_macaroni_dishes,"rating":4}, 
+            "Number Sixteen": {"dishes": number_sixteen_dishes,"rating":5},
+            "Cote Brasserie": {"dishes": cote_brasserie_dishes,"rating":4},
+            "Steak and Cherry": {"dishes": steak_and_cherry_dishes,"rating":4}}
    
    
     for ca,cat_data in cats.items():   
-        c = add_restaurant(ca, rating=0)
+        c = add_restaurant(ca, cat_data['rating'])
         for p in cat_data["dishes"]:
             add_dishes(c, p["name"], p["cuisine"], p["description"], p["price"])
     # Print out the categories we have added.

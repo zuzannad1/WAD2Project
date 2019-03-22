@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from iFood.forms import UserForm, UserProfileForm, UserProfileEditForm
-from iFood.forms import UserDetailsForm, FeedbackForm
+from iFood.forms import UserDetailsForm, FeedbackForm, RestaurantFeedback
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django.shortcuts import get_object_or_404
-from iFood.models import Restaurant, Product, OrderItem, Order
+from iFood.models import Restaurant, Product, OrderItem, Order, Feedback
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
 from django.core.files.storage import FileSystemStorage
@@ -21,9 +21,10 @@ from django.core.mail import send_mail
 
 #The index page view 
 def index(request):
-   context_dict = {'boldmessage' : "Eat whatever you want! "}
-   response = render(request, 'iFood/index.html',context = context_dict)
-   return response
+    restaurant_list = Restaurant.objects.order_by('-rating')[:5]
+    context_dict = {'restaurants' : restaurant_list}
+    response = render(request, 'iFood/index.html',context = context_dict)
+    return response
 
 #The about page view
 def about(request):
@@ -68,7 +69,7 @@ def signup(request):
 #Decorator used so that only logged in users can open the page
 #Renders two forms that handle editing details of
 #current user's details and user's userprofile
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def edit_profile(request):
     user = request.user
     form = UserDetailsForm(request.POST or None, instance=user)
@@ -116,43 +117,65 @@ def user_login(request):
 #Handles log out using built in django method
 #Decorator needed, because only logged in users should
 #be able to log out
-@login_required(login_url = 'iFood/login/')     
+@login_required(login_url = '/iFood/login/')     
 def user_logout(request):
    logout(request)
    return HttpResponseRedirect(reverse('index'))
 
 #The view handling comments logged-in users can add
 #about the website itself
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def web_feedback(request):
    if request.method == 'POST':
        feedback_form = FeedbackForm(request.POST)
        if feedback_form.is_valid():
           feedback = feedback_form.save()
           feedback.save()
-          return redirect('web-feedback')
+          return redirect('about')
    else:
        feedback_form = FeedbackForm()
    return render(request, 'iFood/web-feedback.html',{'feedback_form':feedback_form})
 
+@login_required(login_url = '/iFood/login/')
+def restaurant_feedback(request):
+    if request.method == 'POST':
+        restaurant_feedback = RestaurantFeedback(request.POST)
+        if restaurant_feedback.is_valid():
+            res_feedback = restaurant_feedback.save()
+            res_feedback.save()
+            return redirect('account')
+    else:
+        restaurant_feedback = RestaurantFeedback()
+    return render(request, 'iFood/restaurant-feedback.html', 
+                      {'restaurant_feedback':restaurant_feedback})
+        
 #The restaurant view that handles all restaurant's pages
 #and their menus using the slug
 #invokes product_detail method which handles the add-to-cart
 #form. The add to cart feature only available to logged-in users
 def show_restaurant(request, restaurant_name_slug):
-   context_dict = {}
-   restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
-   try:
-       dishes = Product.objects.filter(restaurant=restaurant)
-       context_dict['restaurant'] = restaurant
-       context_dict['dishes'] = dishes
-       for dish in dishes:
-          form = product_detail(request, id=dish.id, slug=dish.slug)
-          context_dict['form'] = form
-   except restaurant.DoesNotExist:
+    context_dict = {}
+    try:
+        restaurant = get_object_or_404(Restaurant,slug=restaurant_name_slug)
+        dishes = Product.objects.filter(restaurant=restaurant)
+        rest_feedback = Feedback.objects.filter(restaurant=restaurant)
+        context_dict['feedback'] = rest_feedback
+        context_dict['restaurant'] = restaurant
+        context_dict['dishes'] = dishes            
+        for dish in dishes:
+            form = product_detail(request, id=dish.id, slug=dish.slug)
+            context_dict['form'] = form
+    except restaurant.DoesNotExist:
         context_dict['restaurant'] = None
         context_dict['dishes'] = None
-   return render(request, 'iFood/restaurant.html', context_dict)
+        context_dict['feedback'] = None
+    return render(request, 'iFood/restaurant.html', context_dict)
+
+def show_feedback(request, restaurant_name):
+    feedback = Feedback(request)
+    rest_feedback = Feedback.objects.filter(restaurant=restaurant)
+    context_dict ={'feedbacks':rest_feedback}
+    return context_dict
 
 #A helper method to the restaurant site that invokes add-to-cart
 #form (see cart.forms) in the menus
@@ -175,7 +198,7 @@ def contact(request):
 #Not through the confirmation button
 #The current order is selected by finding order with highest number
 #(The most recent) from user's orders and displays its details
-@login_required(login_url = 'iFood/login/')
+@login_required(login_url = '/iFood/login/')
 def my_order(request):
    user = request.user
    context = {}

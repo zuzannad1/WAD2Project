@@ -1,214 +1,203 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html>
-<head lang="en">      
-<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>
-	    {% block title_block %}
-		{% endblock %}
-	</title>
-	<style>
-body {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-	margin: 0;
-	padding: 0 15px 30px 15px;
-	box-sizing: border-box;
-	background: #FFFFFF;
-}
-.static-header {
-	max-width: 100%;
-	overflow: hidden;
-	box-sizing: border-box;
-	margin: 5px auto;
-	text-align: left;
-}		
-.static-header .nav {
-	padding: 5px;
-	max-width: 100%;
-}
-.static-header .nav img {
-	float: left;
-	height: 40px;
-	width: auto;
-	padding: 0px 5px 5px 0px;
-}
-
-.static-header .nav a {
-	padding: 5px 5px 0px 0px;
-	display: inline-block;
-	color: #666666;
-	text-decoration: none;
-	font-size: 25px;
-	cursor: pointer;
-	float: right;
-}	
-.static-header .nav a.logo {
-	float: left;
-}
-
-.static-header .nav a:not(:last-of-type) {
-	padding-left: 20px;
-}
-.static-header .nav a:hover {
-	color: #333333;
-}
-	
-.fixed-header {
-	display: none;
-	position: fixed;
-	top: 0;
-	background: #FFFFFF;
-	margin: 0 -15px;
-	width: 100%;
-	border-bottom: 1px solid #CCCCCC;
-	box-sizing: border-box;
-	box-shadow: 0px 0px 10px 0 rgba(#000000, 0.5);
-	opacity: 0.9;
-	z-index: 100;
-}
-.fixed-header .fheader__container {
-	max-width: 100%;
-	padding: 10px 10px;
-	margin: 0 auto;
-	overflow: hidden;
-	box-sizing: border-box;
-}	
-
-.fixed-header .fheader__container .nav {
-	max-width: 100%;
-	text-align: left;
-	padding: 0px 10px 0px 0px;
-}
-.fixed-header .fheader__container .nav img {
-	float: left;
-	height: 40px;
-	width: auto;
-	padding: 1px 5px;
-}
-.fixed-header .fheader__container .nav a {
-	padding: 5px 5px 0px 0px;
-	display: inline-block;
-	color: #666666;
-	text-decoration: none;
-	font-size: 25px;
-	cursor: pointer;
-	float: right;
-}
-
-.fixed-header .fheader__container .nav a.logo {
-	float: left;
-	padding: 0px 2px 0px 0px;
-}
-.fixed-header .fheader__container .nav a:not(:last-of-type) {
-	padding-left: 20px;
-}
-.fixed-header .fheader__container .nav a:hover {
-	color: #333333;
-}
-
-.container__content {
-	margin: 0 auto;
-	max-width: 100%;
-	background: rgba(255, 255, 255, 0.8);
-	box-sizing: border-box;
-	min-height: 100px;
-	overflow: hidden;
-	clear: both;
-}
-
-
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: #696969;
-   color: white;
-   margin: 0;
-   text-align: center;
-   font-family: 'Open Sans', sans-serif;
-   padding: 8px 10px;
-}
-.footer a{
-	float: left;
-	color: white;
-	padding: 10px 10px;
-	padding-right: 10px;
-	font-size: 15px;
-}
-.footer a:hover {
-	color: #D3D3D3;
-}
-.footer img{
-   	float: right;
-	height: 40px;
-	width: auto;
-	padding: 0px 20px;
-}
-
-
-	</style>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<head lang="en">      
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+	    	{% block title_block %}
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-weight: 400;
+				margin: 0;
+				padding: 0 15px 30px 15px;
+				box-sizing: border-box;
+				background: #FFFFFF;
+			}
+			.static-header {
+				max-width: 100%;
+				overflow: hidden;
+				box-sizing: border-box;
+				margin: 5px auto;
+				text-align: left;
+			}
+			.static-header .nav {
+				padding: 5px;
+				max-width: 100%;
+			}
+			.static-header .nav img {
+				float: left;
+				height: 40px;
+				width: auto;
+				padding: 0px 5px 5px 0px;
+			}
+			.static-header .nav a {
+				padding: 5px 5px 0px 0px;
+				display: inline-block;
+				color: #666666;
+				text-decoration: none;
+				font-size: 25px;
+				cursor: pointer;
+				float: right;
+			}
+			.static-header .nav a.logo {
+				float: left;
+			}
+			.static-header .nav a:not(:last-of-type) {
+				padding-left: 20px;
+			}
+			.static-header .nav a:hover {
+				color: #333333;
+			}
+			.fixed-header {
+				display: none;
+				position: fixed;
+				top: 0;
+				background: #FFFFFF;
+				margin: 0 -15px;
+				width: 100%;
+				border-bottom: 1px solid #CCCCCC;
+				box-sizing: border-box;
+				box-shadow: 0px 0px 10px 0 rgba(#000000, 0.5);
+				opacity: 0.9;
+				z-index: 100;
+			}
+			.fixed-header .fheader__container {
+				max-width: 100%;
+				padding: 10px 10px;
+				margin: 0 auto;
+				overflow: hidden;
+				box-sizing: border-box;
+			}
+			.fixed-header .fheader__container .nav {
+				max-width: 100%;
+				text-align: left;
+				padding: 0px 10px 0px 0px;
+			}
+			.fixed-header .fheader__container .nav img {
+				float: left;
+				height: 40px;
+				width: auto;
+				padding: 1px 5px;
+			}
+			.fixed-header .fheader__container .nav a {
+				padding: 5px 5px 0px 0px;
+				display: inline-block;
+				color: #666666;
+				text-decoration: none;
+				font-size: 25px;
+				cursor: pointer;
+				float: right;
+			}
+			.fixed-header .fheader__container .nav a.logo {
+				float: left;
+				padding: 0px 2px 0px 0px;
+			}
+			.fixed-header .fheader__container .nav a:not(:last-of-type) {
+				padding-left: 20px;
+			}
+			.fixed-header .fheader__container .nav a:hover {
+				color: #333333;
+			}
+			.container__content {
+				margin: 0 auto;
+				max-width: 100%;
+				background: rgba(255, 255, 255, 0.8);
+				box-sizing: border-box;
+				min-height: 100px;
+				overflow: hidden;
+				clear: both;
+			}
+			.footer {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				background-color: #696969;
+				color: white;
+				margin: 0;
+				text-align: center;
+				font-family: 'Open Sans', sans-serif;
+				padding: 8px 10px;
+			}
+			.footer a {
+				float: left;
+				color: white;
+				padding: 10px 10px;
+				padding-right: 10px;
+				font-size: 15px;
+			}
+			.footer a:hover {
+				color: #D3D3D3;
+			}
+			.footer img {
+				float: right;
+				height: 40px;
+				width: auto;
+				padding: 0px 20px;
+			}
+		</style>
 	</head>
 	<body>
-<div class="static-header">
-	<div class="nav">
-		<a class="logo" href="{% url 'index' %}">
-		<img src="{% static "images/icon.jpg" %}" height="40" />
-		</a>
-		<a class="logo" href="{% url 'index' %}">Home</a>
-		{% if user.is_authenticated %}
-			<a href="{% url 'logout' %}">Log Out</a>
-			<a href="{% url 'account' %}">{{ user.username }}</a>
-			<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
-		{% else %}
-			<a href="{% url 'signup' %}">Sign Up</a>
-			<a href="{% url 'login' %}">Sign In</a>
-		{% endif %}
-	</div>
-</div>
-<div class="fixed-header">
-	<div class="fheader__container">
-		<div class="nav">
-			<a class="logo" href="{% url 'index' %}">
-			<img src="{% static "images/icon.jpg" %}" height="40" />
-			</a>
-			<a class="logo" href="{% url 'index' %}">Home</a>
-			{% if user.is_authenticated %}
-				<a href="{% url 'logout' %}">Log Out</a>
-				<a href="{% url 'account' %}">{{ user.username }}</a>
-				<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
-			{% else %}
-				<a href="{% url 'signup' %}">Sign Up</a>
-				<a href="{% url 'login' %}">Sign In</a>
-			{% endif %}
+		<div class="static-header">
+			<div class="nav">
+				<a class="logo" href="{% url 'index' %}">
+					<img src="{% static "images/icon.jpg" %}" height="40" />
+				</a>
+				<a class="logo" href="{% url 'index' %}">Home</a>
+				{% if user.is_authenticated %}
+					<a href="{% url 'logout' %}">Log Out</a>
+					<a href="{% url 'account' %}">{{ user.username }}</a>
+					<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
+				{% else %}
+					<a href="{% url 'signup' %}">Sign Up</a>
+					<a href="{% url 'login' %}">Sign In</a>
+				{% endif %}
+			</div>
 		</div>
-	</div>
-</div>
-
-<div class="container__content">
-	{% block body_block %}
-	{% endblock %}
-</div>
-<div class="footer">
-	<div>
-		<a href="{% url 'about' %}">About Us</a>
-		<a href="{% url 'contact' %}">Contact Us</a>
-		<img src="{% static "images/icon2.jpg" %}" height="50" />
-	</div>
-</div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script>
-$(window).scroll(hfunction() {    
-	var scroll = $(window).scrollTop();
-
-	if (scroll >= 200) {
-		$(".fixed-header").slideDown();
-	} else {
-		$(".fixed-header").slideUp();
-	}
-});
-</script>
+		<div class="fixed-header">
+			<div class="fheader__container">
+				<div class="nav">
+					<a class="logo" href="{% url 'index' %}">
+						<img src="{% static "images/icon.jpg" %}" height="40" />
+					</a>
+					<a class="logo" href="{% url 'index' %}">Home</a>
+					{% if user.is_authenticated %}
+						<a href="{% url 'logout' %}">Log Out</a>
+						<a href="{% url 'account' %}">{{ user.username }}</a>
+						<a href="{% url "cart:cart_detail" %}"><i class="fas fa-shopping-cart"></i></a>
+					{% else %}
+						<a href="{% url 'signup' %}">Sign Up</a>
+						<a href="{% url 'login' %}">Sign In</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="container__content">
+			{% block body_block %}
+			{% endblock %}
+		</div>
+		<div class="footer">
+			<div>
+				<a href="{% url 'about' %}">About Us</a>
+				<a href="{% url 'contact' %}">Contact Us</a>
+				<img src="{% static "images/icon2.jpg" %}" height="50" />
+			</div>
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+	$(window).scroll(hfunction() {    
+		var scroll = $(window).scrollTop();
+	
+		if (scroll >= 200) {
+			$(".fixed-header").slideDown();
+		} else {
+			$(".fixed-header").slideUp();
+		}
+	});
+	</script>
 </html>

@@ -3,12 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block title_block %}
-	Feedback
+	Restaurant Feedback
 {% endblock %} 
 
 
 {%block body_block %}
-<style>           
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>            
 	@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 	#feedback-page {
 		text-align: center;
@@ -32,7 +34,7 @@
 		position: relative;
 		margin-top: 30px;
 		margin-left: -260px;
-		margin-bottom: 20px;
+		margin-bottom: 50px;
 		-moz-border-radius: 7px;
 		-webkit-border-radius: 7px;
 	}
@@ -111,28 +113,27 @@
 </style>    
 <body>
 	<div class="title">
-		<h1>Feedback</h1>
+		<h1>Restaurant Feedback</h1>
 	</div>
-	<form method="POST" action="{% url 'web-feedback' %}" class="form" enctype="multipart/form-data" class="form" id="form1">
+	<form method="POST" action="{% url 'restaurant-feedback' %}" class="form" enctype="multipart/form-data" class="form" id="form1">
 		<div id="form-main">
-  			<div id="form-div">
-        		Any comments? Thanks for leaving your remarks, each of them helps improve our website.
-        		<hr>
-        		{% csrf_token %}
-        		{{feedback_form|crispy}} 
-        		<hr>
-      			<div class="submit">
-        			<input type="submit" value="SEND" id="button-blue" onclick="alertFunc()"/>
-        			<div class="ease">
-        			</div>
-      			</div>
-  			</div>
+	  		<div id="form-div">
+	        	Any comments for the restaurant? These can help to improve the restaurant's food quality. 
+	        	<hr>
+	        	{% csrf_token %}
+	        	{{restaurant_feedback|crispy}} 
+	        	<hr>
+	      		<div class="submit">
+	        		<input type="submit" value="SEND" id="button-blue" onclick="alertFunc()"/>
+	        		<div class="ease"></div>
+	      		</div>
+	  		</div>
 		</div>
     </form>
 </body>
 <script>
 	function alertFunc() {
-    	alert("Thank you for your feedback!")
-    }
+		alert("Thank you for your feedback!")
+	}
 </script>
 {% endblock %} 

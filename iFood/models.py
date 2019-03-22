@@ -65,10 +65,10 @@ class UserProfile(models.Model):
 #Restaurant and User models are foreign keys ->
 #Each user can add feedback and each restaurant has feedback
 class Feedback(models.Model):
+	restaurant = models.ForeignKey(Restaurant)
 	comment    = models.TextField(blank=True, null=True)
 	user       = models.ForeignKey(User, default=1)
 	created_at = models.DateField(default=datetime.date.today())
-	restaurant = models.ForeignKey(Restaurant)
 	rating_choices = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
 	rating = models.PositiveSmallIntegerField('Rating (stars)',
                                                   blank=False,
@@ -76,7 +76,7 @@ class Feedback(models.Model):
                                                   choices=rating_choices)
 	
 	def __str__(self):
-                return self.comment
+                return self.restaurant
 
 	class Meta:
                 verbose_name_plural = 'Feedback'
